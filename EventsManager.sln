@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventsManager", "EventsManager\EventsManager.csproj", "{974D001F-C0D0-46AA-B2C9-6F583C8AB86D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventsManagerServer", "EventsManagerServer\EventsManagerServer.csproj", "{974D001F-C0D0-46AA-B2C9-6F583C8AB86D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventsManagerModels", "EventsManagerModels\EventsManagerModels.csproj", "{81A2BE5B-E554-46DF-A344-15F3FB69F8B6}"
 EndProject
