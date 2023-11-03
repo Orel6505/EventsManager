@@ -1,0 +1,6 @@
+C:\Users\Orely\Desktop\EM2\EventsManagerModels\bin\Debug\EventsManagerModels.dll
+C:\Users\Orely\Desktop\EM2\EventsManagerModels\bin\Debug\EventsManagerModels.pdb
+C:\Users\Orely\Desktop\EM2\EventsManagerModels\obj\Debug\EventsManagerModels.csproj.AssemblyReference.cache
+C:\Users\Orely\Desktop\EM2\EventsManagerModels\obj\Debug\EventsManagerModels.csproj.CoreCompileInputs.cache
+C:\Users\Orely\Desktop\EM2\EventsManagerModels\obj\Debug\EventsManagerModels.dll
+C:\Users\Orely\Desktop\EM2\EventsManagerModels\obj\Debug\EventsManagerModels.pdb
