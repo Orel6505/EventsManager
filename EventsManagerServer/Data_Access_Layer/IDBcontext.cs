@@ -14,6 +14,9 @@ namespace EventsManager.Data_Access_Layer
         void CloseConnection();
 
         void CreateCommand();
+
+        void BeginTransaction();
+
         void DeleteCommand();
 
         //CRUD = Create Read Update Delete
