@@ -9,7 +9,7 @@ namespace EventsManagerModels
     public class Order
     {
         public int OrderId { get; set; }
-        public string OrderDate { get; set; }
+        public string OrderDate { get; set; } //timestamp
         public int MenuId { get; set; }
         public int HallId { get; set; }
         public int UserId { get; set; }

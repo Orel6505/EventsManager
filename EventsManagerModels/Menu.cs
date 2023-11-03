@@ -13,5 +13,7 @@ namespace EventsManagerModels
         public string HallDesc { get; set; }
         public int MenuPrice { get; set; }
         public string MenuImage { get; set; }
+
+        public List<Food> Foods { get; set; }
     }
 }
