@@ -6,7 +6,7 @@ using System.Web;
 
 namespace EventsManager.Data_Access_Layer
 {
-    public abstract class DBContext : IDBcontext
+    public abstract class DbContext : IDbContext
     {
         protected IDbConnection connection;
         public void BeginTransaction()
