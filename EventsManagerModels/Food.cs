@@ -13,5 +13,7 @@ namespace EventsManagerModels
         public string FoodDesc { get; set; }
         public int FoodPrice { get; set; }
         public string FoodImage { get; set; }
+
+        public List<Menu> Menus { get; set; }
     }
 }

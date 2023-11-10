@@ -13,5 +13,7 @@ namespace EventsManagerModels
         public string HallDesc { get; set; }
         public int MaxPeople { get; set; }
         public string HallImage { get; set; }
+
+        public List<Rating> Ratings { get; set; }
     }
 }
