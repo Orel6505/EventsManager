@@ -8,15 +8,21 @@ namespace EventsManager.Data_Access_Layer
 {
     public abstract class DbContext : IDbContext
     {
-        protected IDbConnection connection;
+        protected IDbConnection connection; // צינור לDATABASe
+        protected IDbCommand command; // faucet
+        protected IDbTransaction transaction; // send all sql command at once
         public void BeginTransaction()
         {
-            throw new NotImplementedException();
+            this.transaction = this.connection.BeginTransaction();
         }
 
         public void CloseConnection()
         {
-            throw new NotImplementedException();
+            if(this.connection.State == ConnectionState.Open)
+                this.connection.Close(); //close connection
+           // this.connection.Dispose(); //remove from memory
+            this.command.Dispose(); //remove from memory
+            this.transaction.Dispose(); //remove from memory
         }
 
         public bool Create(string sql)
@@ -26,7 +32,7 @@ namespace EventsManager.Data_Access_Layer
 
         public void CreateCommand()
         {
-            throw new NotImplementedException();
+            this.command = this.connection.CreateCommand();
         }
 
         public bool Delete(string sql)
@@ -46,7 +52,10 @@ namespace EventsManager.Data_Access_Layer
 
         public void OpenConnection()
         {
-            throw new NotImplementedException();
+            if (this.connection.State == ConnectionState.Closed)
+            {
+                this.connection.Open();
+            }
         }
 
         public IDataReader Read(string sql)
