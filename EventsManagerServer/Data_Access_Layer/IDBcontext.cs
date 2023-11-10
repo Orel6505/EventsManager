@@ -10,23 +10,33 @@ namespace EventsManager.Data_Access_Layer
 {
     public interface IDBcontext
     {
+        //Data Access Layer
+        //The layer that gets data from the Database 
+        //CRUD = Create Read Update Delete
+
+        //Create
+        bool Create(string sql); 
+
+        //Read
+        IDataReader Read(string sql);
+        object ReadValue(string sql);
+
+        //Update
+        bool Update(string sql);
+
+        //Delete
+        bool Delete(string sql);
+
+        //
         void OpenConnection();
         void CloseConnection();
 
         void CreateCommand();
 
         void BeginTransaction();
+        void EndTransaction();
 
         void DeleteCommand();
-
-        //CRUD = Create Read Update Delete
-        IDataReader Read(string sql);
-
-        bool Create(string sql);
-
-        bool update(string sql);
-
-        bool delete(string sql);
 
     }
 }
