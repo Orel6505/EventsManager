@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EventsManager.Data_Access_Layer
 {
-    public interface IDBcontext
+    public interface IDbContext
     {
         //Data Access Layer
         //The layer that gets data from the Database 
