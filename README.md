@@ -12,8 +12,6 @@ This Project is my final project in software engineering Bagrut (5 Units, Number
 
 ## Roadmap
 * Create website for it using HTML, CSS and JS
-* Fill database
-*  readme
 
 ## Schemes
 TBA
