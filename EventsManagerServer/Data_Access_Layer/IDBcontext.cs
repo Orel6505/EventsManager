@@ -15,17 +15,17 @@ namespace EventsManager.Data_Access_Layer
         //CRUD = Create Read Update Delete
 
         //Create
-        bool Create(string sql); 
+        int Create(string sql); 
 
         //Read
         IDataReader Read(string sql);
         object ReadValue(string sql);
 
         //Update
-        bool Update(string sql);
+        int Update(string sql);
 
         //Delete
-        bool Delete(string sql);
+        int Delete(string sql);
 
         //
         void OpenConnection();
