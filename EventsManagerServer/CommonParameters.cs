@@ -9,5 +9,6 @@ namespace EventsManager
 {
     public class CommonParameters
     {
+        string ConnectionString = "";
     }
 }
