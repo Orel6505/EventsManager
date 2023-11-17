@@ -86,6 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="CommonParameters.cs" />
     <Compile Include="Data_Access_Layer\DbContext.cs" />
     <Compile Include="Data_Access_Layer\IDbContext.cs" />
     <Compile Include="Data_Access_Layer\OleDbContext.cs" />
