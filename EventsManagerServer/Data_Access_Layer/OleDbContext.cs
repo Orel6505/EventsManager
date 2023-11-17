@@ -7,7 +7,12 @@ using System.Data.OleDb;
 
 namespace EventsManager.Data_Access_Layer
 {
-    public class OleDbContext
+    public class OleDbContext:DbContext
     {
+        OleDbContext()
+        {
+            this.connection = new OleDbConnection();
+            this.connection.ConnectionString = ""; // tells which type of sql we are connecting to and tell its directory
+        }
     }
 }
