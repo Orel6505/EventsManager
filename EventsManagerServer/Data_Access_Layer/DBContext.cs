@@ -54,23 +54,27 @@ namespace EventsManager.Data_Access_Layer
         {
             if (this.connection.State == ConnectionState.Closed)
             {
-                this.connection.Open();
+                this.connection.Open(); //if connection is closed, then open it
             }
         }
 
         public IDataReader Read(string sql)
         {
-            throw new NotImplementedException();
+            this.command.CommandText = sql;
+            return this.command.ExecuteReader(); //collects the data
         }
 
         public object ReadValue(string sql)
         {
-            throw new NotImplementedException();
+            this.command.CommandText = sql;
+            return this.command.ExecuteScalar(); //collects the single "drop" of data
         }
 
         public int Update(string sql)
         {
-            throw new NotImplementedException();
+            this.command.CommandText = sql;
+            return this.command.ExecuteNonQuery(); //Changes columms in the database, and returns the number of columms it changed
+
         }
     }
 }
