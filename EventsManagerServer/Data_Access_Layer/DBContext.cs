@@ -27,7 +27,13 @@ namespace EventsManager.Data_Access_Layer
 
         public int Create(string sql)
         {
-            throw new NotImplementedException();
+            return ChangeDb(sql);
+        }
+
+        private int ChangeDb(string sql)
+        {
+            this.command.CommandText = sql;
+            return this.command.ExecuteNonQuery(); //Changes columms in the database, and returns the number of columms it changed
         }
 
         public void CreateCommand()
@@ -37,7 +43,7 @@ namespace EventsManager.Data_Access_Layer
 
         public int Delete(string sql)
         {
-            throw new NotImplementedException();
+            return ChangeDb(sql);
         }
 
         public void DeleteCommand()
@@ -72,8 +78,7 @@ namespace EventsManager.Data_Access_Layer
 
         public int Update(string sql)
         {
-            this.command.CommandText = sql;
-            return this.command.ExecuteNonQuery(); //Changes columms in the database, and returns the number of columms it changed
+            return ChangeDb(sql);
 
         }
     }
