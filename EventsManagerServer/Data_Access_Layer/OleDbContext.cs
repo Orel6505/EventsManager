@@ -10,7 +10,7 @@ namespace EventsManager.Data_Access_Layer
     public class OleDbContext:DbContext
     {
         static OleDbContext oleDbContext;
-
+        static object blocker;
         private OleDbContext()
         {
             this.connection = new OleDbConnection();
@@ -19,11 +19,11 @@ namespace EventsManager.Data_Access_Layer
 
         public static OleDbContext GetInstance()
         {
-            if (oleDbContext == null)
-            {
-                oleDbContext = new OleDbContext();
+            lock (blocker) { 
+                if (oleDbContext == null)               
+                    oleDbContext = new OleDbContext(); //singleton design pattern
+                return oleDbContext;
             }
-            return oleDbContext;
         }
     }
 }
