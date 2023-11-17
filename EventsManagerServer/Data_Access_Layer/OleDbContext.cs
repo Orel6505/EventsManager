@@ -9,10 +9,21 @@ namespace EventsManager.Data_Access_Layer
 {
     public class OleDbContext:DbContext
     {
-        OleDbContext()
+        static OleDbContext oleDbContext;
+
+        private OleDbContext()
         {
             this.connection = new OleDbConnection();
             this.connection.ConnectionString = ""; // tells which type of sql we are connecting to and tell its directory
+        }
+
+        public static OleDbContext GetInstance()
+        {
+            if (oleDbContext == null)
+            {
+                oleDbContext = new OleDbContext();
+            }
+            return oleDbContext;
         }
     }
 }
