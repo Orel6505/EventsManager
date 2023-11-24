@@ -18,6 +18,6 @@ namespace EventsManagerModels
         public string PhoneNum { get; set; }
         public string CreationDate { get; set; } //timestamp
 
-        public List<Order> Order { get; set; }
+        public List<Order> Orders { get; set; }
     }
 }

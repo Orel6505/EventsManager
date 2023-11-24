@@ -24,7 +24,7 @@ namespace EventsManager.Data_Access_Layer
                 Address = Convert.ToString(source["Address"]),
                 PhoneNum = Convert.ToString(source["PhoneNum"]),
                 CreationDate = Convert.ToString(source["CreationDate"]),
-                Order = null
+                Orders = null
             };
             return user;
         }
