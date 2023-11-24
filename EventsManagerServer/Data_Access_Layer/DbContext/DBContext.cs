@@ -22,7 +22,8 @@ namespace EventsManager.Data_Access_Layer
                 this.connection.Close(); //close connection
            // this.connection.Dispose(); //removes from memory
             this.command.Dispose(); //removes from memory
-            this.transaction.Dispose(); //removes from memory
+            if(this.transaction != null )
+                this.transaction.Dispose(); //removes from memory
         }
 
         public int Create(string sql)
