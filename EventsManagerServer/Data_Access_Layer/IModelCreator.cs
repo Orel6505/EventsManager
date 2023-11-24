@@ -8,5 +8,6 @@ namespace EventsManager.Data_Access_Layer
 {
     public interface IModelCreator<T,TSource>
     {
+        T CreateModel(TSource source);
     }
 }
