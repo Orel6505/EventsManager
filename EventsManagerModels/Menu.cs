@@ -10,7 +10,7 @@ namespace EventsManagerModels
     {
         public int MenuId { get; set; }
         public string MenuName { get; set; }
-        public string HallDesc { get; set; }
+        public string MenuDesc { get; set; }
         public int MenuPrice { get; set; }
         public string MenuImage { get; set; }
 
