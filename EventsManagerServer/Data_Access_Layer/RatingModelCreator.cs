@@ -11,7 +11,16 @@ namespace EventsManager.Data_Access_Layer
     {
         public Rating CreateModel(IDataReader source)
         {
-            throw new NotImplementedException();
+            Rating rating = new Rating()
+            {
+                RatingId = Convert.ToInt16(source["RatingId"]),
+                RatingTitle = Convert.ToString(source["RatingTitle"]),
+                RatingDesc = Convert.ToString(source["RatingDesc"]),
+                RatingStars = Convert.ToInt16(source["RatingStars"]),
+                UserId = Convert.ToInt16(source["UserId"]),
+                RatingImages = Convert.ToInt16(source["RatingImages"])
+            };
+            return rating;
         }
     }
 }
