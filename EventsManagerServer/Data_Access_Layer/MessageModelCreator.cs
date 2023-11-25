@@ -7,11 +7,17 @@ using System.Web;
 
 namespace EventsManager.Data_Access_Layer
 {
-    public class MessageModelCreator : IOleDbModelCreator<Rating>
+    public class MessageModelCreator : IOleDbModelCreator<Message>
     {
-        public Rating CreateModel(IDataReader source)
+        public Message CreateModel(IDataReader source)
         {
-            throw new NotImplementedException();
+            Message message = new Message()
+            {
+                MessageId = Convert.ToInt16(source["MessageId"]),
+                MessageContent = Convert.ToString(source["MessageContent"]),
+                MessageDate = Convert.ToString(source["MessageDate"]),
+            };
+            return message;
         }
     }
 }
