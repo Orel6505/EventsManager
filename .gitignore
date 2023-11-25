@@ -12,6 +12,7 @@
 
 # Cache Files
 *.cache
+*/obj/Debug/*
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
