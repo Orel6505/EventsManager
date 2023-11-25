@@ -99,6 +99,7 @@
     <Compile Include="Data_Access_Layer\OrderModelCreator.cs" />
     <Compile Include="Data_Access_Layer\RatingModelCreator.cs" />
     <Compile Include="Data_Access_Layer\UserModelCreator.cs" />
+    <Compile Include="Data_Access_Layer\UserTypeModelCreator.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
