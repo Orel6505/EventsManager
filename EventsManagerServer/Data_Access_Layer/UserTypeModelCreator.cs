@@ -11,7 +11,12 @@ namespace EventsManager.Data_Access_Layer
     {
         public UserType CreateModel(IDataReader source)
         {
-            throw new NotImplementedException();
+            UserType userType = new UserType()
+            {
+                UserTypeId = Convert.ToInt16(source["UserTypeId"]),
+                UserTypeName = Convert.ToString(source["UserTypeName"]),
+            };
+            return userType;
         }
     }
 }
