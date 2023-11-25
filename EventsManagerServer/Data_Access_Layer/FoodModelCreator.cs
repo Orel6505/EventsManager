@@ -11,7 +11,16 @@ namespace EventsManager.Data_Access_Layer
     {
         public Food CreateModel(IDataReader source)
         {
-            throw new NotImplementedException();
+            Food food = new Food()
+            {
+                FoodId = Convert.ToInt16(source["UserId"]),
+                FoodName = Convert.ToString(source["FoodName"]),
+                FoodDesc = Convert.ToString(source["FoodDesc"]),
+                FoodPrice = Convert.ToInt16(source["FoodPrice"]),
+                FoodImage = Convert.ToString(source["FoodImage"]),
+                Menus = null
+            };
+            return food;
         }
     }
 }
