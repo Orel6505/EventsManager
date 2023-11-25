@@ -95,6 +95,7 @@
     <Compile Include="Data_Access_Layer\IModelCreator.cs" />
     <Compile Include="Data_Access_Layer\IOleDbModelCreator.cs" />
     <Compile Include="Data_Access_Layer\MenuModelCreator.cs" />
+    <Compile Include="Data_Access_Layer\MessageModelCreator.cs" />
     <Compile Include="Data_Access_Layer\OrderModelCreator.cs" />
     <Compile Include="Data_Access_Layer\RatingModelCreator.cs" />
     <Compile Include="Data_Access_Layer\UserModelCreator.cs" />
