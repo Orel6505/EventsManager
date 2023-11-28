@@ -13,7 +13,8 @@ namespace EventsManagerModels
         public int MenuId { get; set; }
         public int HallId { get; set; }
         public int UserId { get; set; }
-        public int RatingId { get; set; }
         public int NumOfPeople { get; set; }
+
+        public List<Rating> Ratings { get; set; }
     }
 }
