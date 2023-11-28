@@ -48,6 +48,7 @@
     <Compile Include="Order.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rating.cs" />
+    <Compile Include="RatingImage.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserType.cs" />
   </ItemGroup>
