@@ -12,7 +12,14 @@ namespace EventsManager.Data_Access_Layer
     {
         public RatingImage CreateModel(IDataReader source)
         {
-            throw new NotImplementedException();
+            RatingImage RatingImages = new RatingImage()
+            {
+                ImageId = Convert.ToInt16(source["RatingTitle"]),
+                ImageLocation = Convert.ToString(source["RatingDesc"]),
+                RatingId = Convert.ToInt16(source["RatingId"])
+
+            };
+            return RatingImages;
         }
     }
 }
