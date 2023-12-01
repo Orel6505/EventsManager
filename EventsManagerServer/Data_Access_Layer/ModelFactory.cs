@@ -75,5 +75,17 @@ namespace EventsManager.Data_Access_Layer
                 return orderModelCreator;
             }
         }
+
+        public RatingModelCreator RatingModelCreator
+        {
+            get
+            {
+                if (ratingModelCreator == null)
+                {
+                    this.ratingModelCreator = new RatingModelCreator();
+                }
+                return ratingModelCreator;
+            }
+        }
     }
 }
