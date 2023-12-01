@@ -87,5 +87,17 @@ namespace EventsManager.Data_Access_Layer
                 return ratingModelCreator;
             }
         }
+
+        public UserModelCreator UserModelCreator
+        {
+            get
+            {
+                if (userModelCreator == null)
+                {
+                    this.userModelCreator = new UserModelCreator();
+                }
+                return userModelCreator;
+            }
+        }
     }
 }
