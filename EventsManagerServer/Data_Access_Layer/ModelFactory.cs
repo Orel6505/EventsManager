@@ -51,5 +51,17 @@ namespace EventsManager.Data_Access_Layer
                 return menuModelCreator;
             }
         }
+
+        public MessageModelCreator MessageModelCreator
+        {
+            get
+            {
+                if (messageModelCreator == null)
+                {
+                    this.messageModelCreator = new MessageModelCreator();
+                }
+                return messageModelCreator;
+            }
+        }
     }
 }
