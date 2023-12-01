@@ -7,5 +7,13 @@ namespace EventsManager.Data_Access_Layer
 {
     public class ModelFactory
     {
+        FoodModelCreator foodModelCreator;
+        HallModelCreator hallModelCreator;
+        MenuModelCreator menuModelCreator;
+        MessageModelCreator messageModelCreator;
+        OrderModelCreator orderModelCreator;
+        RatingModelCreator ratingModelCreator;
+        UserModelCreator userModelCreator;
+        UserTypeModelCreator userTypeModelCreator;
     }
 }
