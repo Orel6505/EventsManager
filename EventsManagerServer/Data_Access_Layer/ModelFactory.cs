@@ -25,7 +25,19 @@ namespace EventsManager.Data_Access_Layer
                     this.foodModelCreator = new FoodModelCreator();
                 }
                 return foodModelCreator;
-            } 
+            }
+        }
+
+        public HallModelCreator HallModelCreator
+        {
+            get
+            {
+                if (hallModelCreator == null)
+                {
+                    this.hallModelCreator = new HallModelCreator();
+                }
+                return hallModelCreator;
+            }
         }
     }
 }
