@@ -15,7 +15,7 @@ namespace EventsManager.Data_Access_Layer
         bool Insert();
 
         //Read
-        List<T> GetAll(); //all set
+        List<T> GetAll(); //all sets that contains a specific value
         T Read(object id); //only a specific set
         object ReadValue(); //only a specific value
 

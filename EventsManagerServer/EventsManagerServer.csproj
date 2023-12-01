@@ -90,17 +90,19 @@
     <Compile Include="Data_Access_Layer\DbContext\DbContext.cs" />
     <Compile Include="Data_Access_Layer\DbContext\IDbContext.cs" />
     <Compile Include="Data_Access_Layer\DbContext\OleDbContext.cs" />
-    <Compile Include="Data_Access_Layer\FoodModelCreator.cs" />
-    <Compile Include="Data_Access_Layer\HallModelCreator.cs" />
-    <Compile Include="Data_Access_Layer\IModelCreator.cs" />
-    <Compile Include="Data_Access_Layer\IOleDbModelCreator.cs" />
-    <Compile Include="Data_Access_Layer\MenuModelCreator.cs" />
-    <Compile Include="Data_Access_Layer\MessageModelCreator.cs" />
-    <Compile Include="Data_Access_Layer\ModelFactory.cs" />
-    <Compile Include="Data_Access_Layer\OrderModelCreator.cs" />
-    <Compile Include="Data_Access_Layer\RatingModelCreator.cs" />
-    <Compile Include="Data_Access_Layer\UserModelCreator.cs" />
-    <Compile Include="Data_Access_Layer\UserTypeModelCreator.cs" />
+    <Compile Include="Data_Access_Layer\IRepository.cs" />
+    <Compile Include="Data_Access_Layer\ModelFactory\FoodModelCreator.cs" />
+    <Compile Include="Data_Access_Layer\ModelFactory\HallModelCreator.cs" />
+    <Compile Include="Data_Access_Layer\ModelFactory\IModelCreator.cs" />
+    <Compile Include="Data_Access_Layer\ModelFactory\IOleDbModelCreator.cs" />
+    <Compile Include="Data_Access_Layer\ModelFactory\MenuModelCreator.cs" />
+    <Compile Include="Data_Access_Layer\ModelFactory\MessageModelCreator.cs" />
+    <Compile Include="Data_Access_Layer\ModelFactory\ModelFactory.cs" />
+    <Compile Include="Data_Access_Layer\ModelFactory\OrderModelCreator.cs" />
+    <Compile Include="Data_Access_Layer\ModelFactory\RatingModelCreator.cs" />
+    <Compile Include="Data_Access_Layer\ModelFactory\UserModelCreator.cs" />
+    <Compile Include="Data_Access_Layer\ModelFactory\UserTypeModelCreator.cs" />
+    <Compile Include="Data_Access_Layer\Repository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
