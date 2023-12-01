@@ -99,5 +99,17 @@ namespace EventsManager.Data_Access_Layer
                 return userModelCreator;
             }
         }
+
+        public UserTypeModelCreator UserTypeModelCreator
+        {
+            get
+            {
+                if (userTypeModelCreator == null)
+                {
+                    this.userTypeModelCreator = new UserTypeModelCreator();
+                }
+                return userTypeModelCreator;
+            }
+        }
     }
 }
