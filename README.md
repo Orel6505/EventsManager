@@ -11,7 +11,7 @@ Bagrut - [Israeli graduation certificate](https://en.wikipedia.org/wiki/Bagrut_c
 This Project is my final project in software engineering Bagrut (5 Units, Number [883589](https://meyda.education.gov.il/files/CSIT/web-services-asynchronous-programming-and-databases.pdf))
 
 ## Roadmap
-* Create website for it using HTML, CSS and JS
+* See EventsManagerProjectManager, Issues and Pull Requests
 
 ## Schemes
 TBA
