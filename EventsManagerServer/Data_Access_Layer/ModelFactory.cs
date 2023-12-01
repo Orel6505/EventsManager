@@ -15,5 +15,17 @@ namespace EventsManager.Data_Access_Layer
         RatingModelCreator ratingModelCreator;
         UserModelCreator userModelCreator;
         UserTypeModelCreator userTypeModelCreator;
+
+        public FoodModelCreator FoodModelCreator 
+        {
+            get 
+            { 
+                if(foodModelCreator == null) 
+                {
+                    this.foodModelCreator = new FoodModelCreator();
+                }
+                return foodModelCreator;
+            } 
+        }
     }
 }
