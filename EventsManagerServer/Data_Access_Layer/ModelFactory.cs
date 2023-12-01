@@ -39,5 +39,17 @@ namespace EventsManager.Data_Access_Layer
                 return hallModelCreator;
             }
         }
+
+        public MenuModelCreator MenuModelCreator
+        {
+            get
+            {
+                if (menuModelCreator == null)
+                {
+                    this.menuModelCreator = new MenuModelCreator();
+                }
+                return menuModelCreator;
+            }
+        }
     }
 }
