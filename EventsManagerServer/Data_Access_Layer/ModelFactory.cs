@@ -63,5 +63,17 @@ namespace EventsManager.Data_Access_Layer
                 return messageModelCreator;
             }
         }
+
+        public OrderModelCreator OrderModelCreator
+        {
+            get
+            {
+                if (orderModelCreator == null)
+                {
+                    this.orderModelCreator = new OrderModelCreator();
+                }
+                return orderModelCreator;
+            }
+        }
     }
 }
