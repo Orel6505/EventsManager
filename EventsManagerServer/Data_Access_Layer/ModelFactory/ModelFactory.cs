@@ -13,6 +13,7 @@ namespace EventsManager.Data_Access_Layer
         MessageModelCreator messageModelCreator;
         OrderModelCreator orderModelCreator;
         RatingModelCreator ratingModelCreator;
+        RatingImageModelCreator ratingImageModelCreator;
         UserModelCreator userModelCreator;
         UserTypeModelCreator userTypeModelCreator;
 
@@ -85,6 +86,18 @@ namespace EventsManager.Data_Access_Layer
                     this.ratingModelCreator = new RatingModelCreator();
                 }
                 return ratingModelCreator;
+            }
+        }
+
+        public RatingImageModelCreator RatingImageModelCreator
+        {
+            get
+            {
+                if (ratingImageModelCreator == null)
+                {
+                    this.ratingImageModelCreator = new RatingImageModelCreator();
+                }
+                return ratingImageModelCreator;
             }
         }
 
