@@ -63,6 +63,7 @@ namespace EventsManager.Data_Access_Layer
             {
                 this.connection.Open(); //if connection is closed, then open it
             }
+            CreateCommand();
         }
 
         public IDataReader Read(string sql)
