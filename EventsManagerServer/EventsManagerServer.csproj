@@ -100,6 +100,7 @@
     <Compile Include="Data_Access_Layer\ModelFactory\ModelFactory.cs" />
     <Compile Include="Data_Access_Layer\ModelFactory\OrderModelCreator.cs" />
     <Compile Include="Data_Access_Layer\ModelFactory\RatingModelCreator.cs" />
+    <Compile Include="Data_Access_Layer\ModelFactory\RatingImagesModelCreator.cs" />
     <Compile Include="Data_Access_Layer\ModelFactory\UserModelCreator.cs" />
     <Compile Include="Data_Access_Layer\ModelFactory\UserTypeModelCreator.cs" />
     <Compile Include="Data_Access_Layer\Repository.cs" />
