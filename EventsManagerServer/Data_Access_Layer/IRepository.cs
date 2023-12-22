@@ -12,7 +12,7 @@ namespace EventsManager.Data_Access_Layer
         //CRUD - Create Read Update Delete
 
         //Create 
-        bool Insert();
+        bool Insert(T model);
 
         //Read
         List<T> GetAll(); //all sets that contains a specific value
@@ -20,9 +20,10 @@ namespace EventsManager.Data_Access_Layer
         object ReadValue(); //only a specific value
 
         //Update
-        bool Update();
+        bool Update(T model);
 
         //Delete
-        bool Delete();
+        bool Delete(int id);
+        bool Delete(string id);
     }
 }
