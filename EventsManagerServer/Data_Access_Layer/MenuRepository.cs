@@ -1,6 +1,7 @@
 ﻿using EventsManagerModels;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 
@@ -10,32 +11,49 @@ namespace EventsManager.Data_Access_Layer
     {
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            string sql = $"DELETE FROM Menus WHERE MenuId=@MenuId";
+            this.AddParameters("MenuId", id.ToString()); //prevents SQL Injection
+            return this.dbContext.Delete(sql) > 0;
         }
 
         public bool Delete(string id)
         {
-            throw new NotImplementedException();
+            return false;
         }
 
-        public bool Delete(EventsManagerModels.Menu model)
+        public bool Delete(Menu model)
         {
-            throw new NotImplementedException();
+            string sql = $"DELETE FROM Menus WHERE MenuId=@MenuId";
+            this.AddParameters("MenuId", model.MenuId.ToString()); //prevents SQL Injection
+            return this.dbContext.Delete(sql) > 0;
         }
 
-        public bool Insert(EventsManagerModels.Menu model)
+        public bool Insert(Menu model)
         {
-            throw new NotImplementedException();
+            string sql = $"INSERT INTO Menus(MenuName,MenuDesc,MenuImage,MenuPrice) VALUES('@MenuName','@MenuDesc','@MenuImage',@MenuPrice)";
+            this.AddParameters("MenuName", model.MenuName); //prevents SQL Injection
+            this.AddParameters("MenuDesc", model.MenuDesc); //prevents SQL Injection
+            this.AddParameters("MenuImage", model.MenuImage); //prevents SQL Injection
+            this.AddParameters("MenuPrice", model.MenuPrice.ToString()); //prevents SQL Injection
+            return this.dbContext.Create(sql) > 0;
         }
 
-        public EventsManagerModels.Menu Read(object id)
+        public Menu Read(object id)
         {
-            throw new NotImplementedException();
+            string sql = $"SELECT FROM Menus WHERE MenuId=@MenuId";
+            this.AddParameters("MenuId", id.ToString()); //prevents SQL Injection
+            return this.modelFactory.MenuModelCreator.CreateModel(this.dbContext.Read(sql));
+            //returns Menu
         }
 
-        public List<EventsManagerModels.Menu> ReadAll()
+        public List<Menu> ReadAll()
         {
-            throw new NotImplementedException();
+            List<Menu> Menus = new List<Menu>();
+            string sql = "SELECT * FROM Menus";
+            IDataReader dataReader = this.dbContext.Read(sql);
+            while (dataReader.Read() == true)
+                Menus.Add(this.modelFactory.MenuModelCreator.CreateModel(dataReader));
+            return Menus;
         }
 
         public object ReadValue()
@@ -43,9 +61,15 @@ namespace EventsManager.Data_Access_Layer
             throw new NotImplementedException();
         }
 
-        public bool Update(EventsManagerModels.Menu model)
+        public bool Update(Menu model)
         {
-            throw new NotImplementedException();
+            string sql = "UPDATE Menus SET MenuName=@MenuName, MenuDesc=@MenuDesc, MenuImage=@MenuImage, MenuPrice=@MenuPrice where MenuId=@MenuId";
+            this.AddParameters("MenuId", model.MenuId.ToString()); //prevents SQL Injection
+            this.AddParameters("MenuName", model.MenuName); //prevents SQL Injection
+            this.AddParameters("MenuDesc", model.MenuDesc); //prevents SQL Injection
+            this.AddParameters("MenuImage", model.MenuImage); //prevents SQL Injection
+            this.AddParameters("MenuPrice", model.MenuPrice.ToString()); //prevents SQL Injection
+            return this.dbContext.Update(sql) > 0;
         }
     }
 }
