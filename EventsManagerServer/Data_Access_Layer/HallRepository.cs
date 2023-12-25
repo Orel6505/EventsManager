@@ -43,7 +43,7 @@ namespace EventsManager.Data_Access_Layer
             string sql = $"SELECT FROM Halls WHERE HallId=@HallId";
             this.AddParameters("HallId", id.ToString()); //prevents SQL Injection
             return this.modelFactory.HallModelCreator.CreateModel(this.dbContext.Read(sql));
-            //returns food
+            //returns Hall
         }
 
         public List<Hall> ReadAll()
