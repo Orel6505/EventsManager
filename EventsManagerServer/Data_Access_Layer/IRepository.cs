@@ -25,5 +25,6 @@ namespace EventsManager.Data_Access_Layer
         //Delete
         bool Delete(int id);
         bool Delete(string id);
+        bool Delete(T model);
     }
 }
