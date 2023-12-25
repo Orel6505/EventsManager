@@ -18,11 +18,14 @@ namespace EventsManager.Data_Access_Layer
 
         public void CloseConnection()
         {
-            if(this.connection.State == ConnectionState.Open)
+            if (this.connection.State == ConnectionState.Open)
+            {
                 this.connection.Close(); //close connection
-           // this.connection.Dispose(); //removes from memory
+                this.command.Parameters.Clear(); //clears the parameters
+            }
+            // this.connection.Dispose(); //removes from memory
             this.command.Dispose(); //removes from memory
-            if(this.transaction != null )
+            if (this.transaction != null)
                 this.transaction.Dispose(); //removes from memory
         }
 
@@ -81,7 +84,11 @@ namespace EventsManager.Data_Access_Layer
         public int Update(string sql)
         {
             return ChangeDb(sql);
+        }
 
+        public void AddParameters(IDataParameter param)
+        {
+            this.command.Parameters.Add(param);
         }
     }
 }
