@@ -17,7 +17,7 @@ namespace EventsManager.Data_Access_Layer
             this.modelFactory = new ModelFactory();
         }
 
-        protected void AddParameters(string paramName, int paramValue)
+        protected void AddParameters(string paramName, string paramValue)
         {
             OleDbParameter oleDbParameter = new OleDbParameter(paramName, paramValue);
             this.dbContext.AddParameters(oleDbParameter);
