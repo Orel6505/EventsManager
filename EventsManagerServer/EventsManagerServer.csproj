@@ -91,6 +91,7 @@
     <Compile Include="Data_Access_Layer\DbContext\IDbContext.cs" />
     <Compile Include="Data_Access_Layer\DbContext\OleDbContext.cs" />
     <Compile Include="Data_Access_Layer\FoodRepository.cs" />
+    <Compile Include="Data_Access_Layer\HallRepository.cs" />
     <Compile Include="Data_Access_Layer\IRepository.cs" />
     <Compile Include="Data_Access_Layer\ModelFactory\FoodModelCreator.cs" />
     <Compile Include="Data_Access_Layer\ModelFactory\HallModelCreator.cs" />
