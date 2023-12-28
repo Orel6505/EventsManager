@@ -94,6 +94,7 @@
     <Compile Include="Data_Access_Layer\HallRepository.cs" />
     <Compile Include="Data_Access_Layer\IRepository.cs" />
     <Compile Include="Data_Access_Layer\MenuRepository.cs" />
+    <Compile Include="Data_Access_Layer\MessageRepository.cs" />
     <Compile Include="Data_Access_Layer\ModelFactory\FoodModelCreator.cs" />
     <Compile Include="Data_Access_Layer\ModelFactory\HallModelCreator.cs" />
     <Compile Include="Data_Access_Layer\ModelFactory\IModelCreator.cs" />
