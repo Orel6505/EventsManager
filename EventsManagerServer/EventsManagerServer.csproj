@@ -107,6 +107,7 @@
     <Compile Include="Data_Access_Layer\ModelFactory\RatingImageModelCreator.cs" />
     <Compile Include="Data_Access_Layer\ModelFactory\UserModelCreator.cs" />
     <Compile Include="Data_Access_Layer\ModelFactory\UserTypeModelCreator.cs" />
+    <Compile Include="Data_Access_Layer\OrderRepository.cs" />
     <Compile Include="Data_Access_Layer\Repository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
