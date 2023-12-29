@@ -90,11 +90,11 @@
     <Compile Include="Data_Access_Layer\DbContext\DbContext.cs" />
     <Compile Include="Data_Access_Layer\DbContext\IDbContext.cs" />
     <Compile Include="Data_Access_Layer\DbContext\OleDbContext.cs" />
-    <Compile Include="Data_Access_Layer\FoodRepository.cs" />
-    <Compile Include="Data_Access_Layer\HallRepository.cs" />
-    <Compile Include="Data_Access_Layer\IRepository.cs" />
-    <Compile Include="Data_Access_Layer\MenuRepository.cs" />
-    <Compile Include="Data_Access_Layer\MessageRepository.cs" />
+    <Compile Include="Data_Access_Layer\Repositories\FoodRepository.cs" />
+    <Compile Include="Data_Access_Layer\Repositories\HallRepository.cs" />
+    <Compile Include="Data_Access_Layer\Repositories\IRepository.cs" />
+    <Compile Include="Data_Access_Layer\Repositories\MenuRepository.cs" />
+    <Compile Include="Data_Access_Layer\Repositories\MessageRepository.cs" />
     <Compile Include="Data_Access_Layer\ModelFactory\FoodModelCreator.cs" />
     <Compile Include="Data_Access_Layer\ModelFactory\HallModelCreator.cs" />
     <Compile Include="Data_Access_Layer\ModelFactory\IModelCreator.cs" />
@@ -107,13 +107,13 @@
     <Compile Include="Data_Access_Layer\ModelFactory\RatingImageModelCreator.cs" />
     <Compile Include="Data_Access_Layer\ModelFactory\UserModelCreator.cs" />
     <Compile Include="Data_Access_Layer\ModelFactory\UserTypeModelCreator.cs" />
-    <Compile Include="Data_Access_Layer\OrderRepository.cs" />
-    <Compile Include="Data_Access_Layer\RatingImageRepository.cs" />
-    <Compile Include="Data_Access_Layer\RatingRepository.cs" />
-    <Compile Include="Data_Access_Layer\Repository.cs" />
+    <Compile Include="Data_Access_Layer\Repositories\OrderRepository.cs" />
+    <Compile Include="Data_Access_Layer\Repositories\RatingImageRepository.cs" />
+    <Compile Include="Data_Access_Layer\Repositories\RatingRepository.cs" />
+    <Compile Include="Data_Access_Layer\Repositories\Repository.cs" />
     <Compile Include="Data_Access_Layer\LibraryUnitOfWork.cs" />
-    <Compile Include="Data_Access_Layer\UserRepository.cs" />
-    <Compile Include="Data_Access_Layer\UserTypeRepository.cs" />
+    <Compile Include="Data_Access_Layer\Repositories\UserRepository.cs" />
+    <Compile Include="Data_Access_Layer\Repositories\UserTypeRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
