@@ -9,6 +9,6 @@ namespace EventsManager
 {
     public class CommonParameters
     {
-        string ConnectionString = "";
+         public static readonly string ConnectionString = "";
     }
 }
