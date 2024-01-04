@@ -35,9 +35,9 @@ namespace EventsManager.Data_Access_Layer
         {
             List<Food> Foods = new List<Food>();
             string sql = "SELECT * FROM Foods";
-            IDataReader dataReader = this.dbContext.Read(sql);
-            while (dataReader.Read() == true)
-                Foods.Add(this.modelFactory.FoodModelCreator.CreateModel(dataReader));
+            using (IDataReader dataReader = this.dbContext.Read(sql))
+                while (dataReader.Read() == true)
+                    Foods.Add(this.modelFactory.FoodModelCreator.CreateModel(dataReader));
             return Foods;
         }
 
@@ -55,7 +55,8 @@ namespace EventsManager.Data_Access_Layer
         {
             string sql = $"SELECT FROM Foods WHERE FoodId=@FoodId";
             this.AddParameters("FoodId", id.ToString()); //prevents SQL Injection
-            return this.modelFactory.FoodModelCreator.CreateModel(this.dbContext.Read(sql));
+            using (IDataReader dataReader = this.dbContext.Read(sql))
+                return this.modelFactory.FoodModelCreator.CreateModel(dataReader);
             //returns food
         }
 

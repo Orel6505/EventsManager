@@ -42,7 +42,8 @@ namespace EventsManager.Data_Access_Layer
         {
             string sql = $"SELECT FROM Ratings WHERE RatingId=@RatingId";
             this.AddParameters("RatingId", id.ToString()); //prevents SQL Injection
-            return this.modelFactory.RatingModelCreator.CreateModel(this.dbContext.Read(sql));
+            using (IDataReader dataReader = this.dbContext.Read(sql))
+                return this.modelFactory.RatingModelCreator.CreateModel(dataReader);
             //returns Rating
         }
 
@@ -50,9 +51,9 @@ namespace EventsManager.Data_Access_Layer
         {
             List<Rating> Ratings = new List<Rating>();
             string sql = "SELECT * FROM Ratings";
-            IDataReader dataReader = this.dbContext.Read(sql);
-            while (dataReader.Read() == true)
-                Ratings.Add(this.modelFactory.RatingModelCreator.CreateModel(dataReader));
+            using (IDataReader dataReader = this.dbContext.Read(sql))
+                while (dataReader.Read() == true)
+                    Ratings.Add(this.modelFactory.RatingModelCreator.CreateModel(dataReader));
             return Ratings;
         }
 

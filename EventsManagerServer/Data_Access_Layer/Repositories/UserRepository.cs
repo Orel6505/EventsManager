@@ -47,7 +47,8 @@ namespace EventsManager.Data_Access_Layer
         {
             string sql = $"SELECT FROM Users WHERE UserId=@UserId";
             this.AddParameters("UserId", id.ToString()); //prevents SQL Injection
-            return this.modelFactory.UserModelCreator.CreateModel(this.dbContext.Read(sql));
+            using (IDataReader dataReader = this.dbContext.Read(sql))
+                return this.modelFactory.UserModelCreator.CreateModel(dataReader);
             //returns User
         }
 
@@ -55,9 +56,9 @@ namespace EventsManager.Data_Access_Layer
         {
             List<User> Users = new List<User>();
             string sql = "SELECT * FROM Users";
-            IDataReader dataReader = this.dbContext.Read(sql);
-            while (dataReader.Read() == true)
-                Users.Add(this.modelFactory.UserModelCreator.CreateModel(dataReader));
+            using (IDataReader dataReader = this.dbContext.Read(sql))
+                while (dataReader.Read() == true)
+                    Users.Add(this.modelFactory.UserModelCreator.CreateModel(dataReader));
             return Users;
         }
 

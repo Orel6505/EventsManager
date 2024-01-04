@@ -40,7 +40,8 @@ namespace EventsManager.Data_Access_Layer
         {
             string sql = $"SELECT FROM UserTypes WHERE UserTypeId=@UserTypeId";
             this.AddParameters("UserTypeId", id.ToString()); //prevents SQL Injection
-            return this.modelFactory.UserTypeModelCreator.CreateModel(this.dbContext.Read(sql));
+            using (IDataReader dataReader = this.dbContext.Read(sql))
+                return this.modelFactory.UserTypeModelCreator.CreateModel(dataReader);
             //returns Menu
         }
 
@@ -48,9 +49,9 @@ namespace EventsManager.Data_Access_Layer
         {
             List<UserType> UserTypes = new List<UserType>();
             string sql = "SELECT * FROM UserTypes";
-            IDataReader dataReader = this.dbContext.Read(sql);
-            while (dataReader.Read() == true)
-                UserTypes.Add(this.modelFactory.UserTypeModelCreator.CreateModel(dataReader));
+            using (IDataReader dataReader = this.dbContext.Read(sql))
+                while (dataReader.Read() == true)
+                    UserTypes.Add(this.modelFactory.UserTypeModelCreator.CreateModel(dataReader));
             return UserTypes;
         }
 
