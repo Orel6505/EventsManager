@@ -14,7 +14,7 @@ namespace EventsManager.Data_Access_Layer
         private OleDbContext()
         {
             this.connection = new OleDbConnection();
-            this.connection.ConnectionString = ""; // tells which type of sql we are connecting to and tell its directory
+            this.connection.ConnectionString = CommonParameters.ConnectionString; // tells which type of sql we are connecting to and tell its directory
         }
 
         public static OleDbContext GetInstance()
