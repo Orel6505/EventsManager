@@ -87,6 +87,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="CommonParameters.cs" />
+    <Compile Include="Controllers\CatalogController.cs" />
     <Compile Include="Data_Access_Layer\DbContext\DbContext.cs" />
     <Compile Include="Data_Access_Layer\DbContext\IDbContext.cs" />
     <Compile Include="Data_Access_Layer\DbContext\OleDbContext.cs" />
@@ -128,9 +129,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\EventsManagerModels\EventsManagerModels.csproj">
       <Project>{81a2be5b-e554-46df-a344-15f3fb69f8b6}</Project>
