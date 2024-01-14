@@ -9,6 +9,8 @@ namespace EventsManager.Data_Access_Layer
 {
     public class RatingImageRepository : Repository, IRepository<RatingImage>
     {
+        public RatingImageRepository(DbContext dbContext) : base(dbContext) { }
+
         public bool Delete(int id)
         {
             string sql = $"DELETE FROM RatingImages WHERE ImageId=@ImageId";

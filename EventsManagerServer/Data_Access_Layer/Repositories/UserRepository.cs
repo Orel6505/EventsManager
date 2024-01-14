@@ -10,6 +10,8 @@ namespace EventsManager.Data_Access_Layer
 {
     public class UserRepository : Repository, IRepository<User>
     {
+        public UserRepository(DbContext dbContext) : base(dbContext) { }
+
         public bool Delete(int id)
         {
             string sql = $"DELETE FROM Users WHERE UserId=@UserId";

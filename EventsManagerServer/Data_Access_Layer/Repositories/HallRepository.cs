@@ -9,6 +9,8 @@ namespace EventsManager.Data_Access_Layer
 {
     public class HallRepository : Repository, IRepository<Hall>
     {
+        public HallRepository(DbContext dbContext) : base(dbContext) { }
+
         public bool Delete(int id)
         {
             string sql = $"DELETE FROM Halls WHERE HallId=@HallId";

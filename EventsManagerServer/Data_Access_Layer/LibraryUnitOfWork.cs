@@ -17,13 +17,19 @@ namespace EventsManager.Data_Access_Layer
         UserRepository userRepository;
         UserTypeRepository userTypeRepository;
 
+        DbContext dbContext;
+        public LibraryUnitOfWork(DbContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
+
         public FoodRepository FoodRepository
         {
             get
             {
                 if (foodRepository == null)
                 {
-                    this.foodRepository = new FoodRepository();
+                    this.foodRepository = new FoodRepository(dbContext);
                 }
                 return foodRepository;
             }
@@ -35,7 +41,7 @@ namespace EventsManager.Data_Access_Layer
             {
                 if (hallRepository == null)
                 {
-                    this.hallRepository = new HallRepository();
+                    this.hallRepository = new HallRepository(dbContext);
                 }
                 return hallRepository;
             }
@@ -47,7 +53,7 @@ namespace EventsManager.Data_Access_Layer
             {
                 if (menuRepository == null)
                 {
-                    this.menuRepository = new MenuRepository();
+                    this.menuRepository = new MenuRepository(dbContext);
                 }
                 return menuRepository;
             }
@@ -59,7 +65,7 @@ namespace EventsManager.Data_Access_Layer
             {
                 if (messageRepository == null)
                 {
-                    this.messageRepository = new MessageRepository();
+                    this.messageRepository = new MessageRepository(dbContext);
                 }
                 return messageRepository;
             }
@@ -71,7 +77,7 @@ namespace EventsManager.Data_Access_Layer
             {
                 if (orderRepository == null)
                 {
-                    this.orderRepository = new OrderRepository();
+                    this.orderRepository = new OrderRepository(dbContext);
                 }
                 return orderRepository;
             }
@@ -83,7 +89,7 @@ namespace EventsManager.Data_Access_Layer
             {
                 if (ratingRepository == null)
                 {
-                    this.ratingRepository = new RatingRepository();
+                    this.ratingRepository = new RatingRepository(dbContext);
                 }
                 return ratingRepository;
             }
@@ -95,7 +101,7 @@ namespace EventsManager.Data_Access_Layer
             {
                 if (ratingImageRepository == null)
                 {
-                    this.ratingImageRepository = new RatingImageRepository();
+                    this.ratingImageRepository = new RatingImageRepository(dbContext);
                 }
                 return ratingImageRepository;
             }
@@ -107,7 +113,7 @@ namespace EventsManager.Data_Access_Layer
             {
                 if (userRepository == null)
                 {
-                    this.userRepository = new UserRepository();
+                    this.userRepository = new UserRepository(dbContext);
                 }
                 return userRepository;
             }
@@ -119,7 +125,7 @@ namespace EventsManager.Data_Access_Layer
             {
                 if (userTypeRepository == null)
                 {
-                    this.userTypeRepository = new UserTypeRepository();
+                    this.userTypeRepository = new UserTypeRepository(dbContext);
                 }
                 return userTypeRepository;
             }

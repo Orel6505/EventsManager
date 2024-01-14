@@ -9,6 +9,8 @@ namespace EventsManager.Data_Access_Layer
 {
     public class MessageRepository : Repository, IRepository<Message>
     {
+        public MessageRepository(DbContext dbContext) : base(dbContext) { }
+
         public bool Delete(int id)
         {
             string sql = $"DELETE FROM Messages WHERE MessageId=@MessageId";

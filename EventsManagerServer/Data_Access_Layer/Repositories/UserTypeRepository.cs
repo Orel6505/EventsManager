@@ -9,6 +9,8 @@ namespace EventsManager.Data_Access_Layer
 {
     public class UserTypeRepository : Repository, IRepository<UserType>
     {
+        public UserTypeRepository(DbContext dbContext) : base(dbContext) { }
+
         public bool Delete(int id)
         {
             string sql = $"DELETE FROM UserTypes WHERE UserTypeId=@UserTypeId";

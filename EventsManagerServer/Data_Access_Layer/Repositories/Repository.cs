@@ -11,7 +11,7 @@ namespace EventsManager.Data_Access_Layer
         protected DbContext dbContext;
         protected ModelFactory modelFactory;
 
-        public Repository()
+        public Repository(DbContext dbContext)
         {
             this.dbContext = OleDbContext.GetInstance();
             this.modelFactory = new ModelFactory();

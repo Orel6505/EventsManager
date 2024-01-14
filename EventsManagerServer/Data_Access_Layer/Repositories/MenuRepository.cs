@@ -9,6 +9,8 @@ namespace EventsManager.Data_Access_Layer
 {
     public class MenuRepository : Repository, IRepository<Menu>
     {
+        public MenuRepository(DbContext dbContext) : base(dbContext) { }
+
         public bool Delete(int id)
         {
             string sql = $"DELETE FROM Menus WHERE MenuId=@MenuId";

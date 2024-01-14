@@ -9,6 +9,8 @@ namespace EventsManager.Data_Access_Layer
 {
     public class OrderRepository : Repository, IRepository<Order>
     {
+        public OrderRepository(DbContext dbContext) : base(dbContext) { }
+
         public bool Delete(int id)
         {
             string sql = $"DELETE FROM Orders WHERE OrderId=@OrderId";
