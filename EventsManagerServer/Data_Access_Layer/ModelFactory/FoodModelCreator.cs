@@ -13,10 +13,10 @@ namespace EventsManager.Data_Access_Layer
         {
             Food food = new Food()
             {
-                FoodId = Convert.ToInt16(source["UserId"]),
+                FoodId = Convert.ToInt16(source["FoodId"]),
                 FoodName = Convert.ToString(source["FoodName"]),
                 FoodDesc = Convert.ToString(source["FoodDesc"]),
-                FoodPrice = Convert.ToInt16(source["FoodPrice"]),
+                FoodPrice = Convert.ToDouble(source["FoodPrice"]),
                 FoodImage = Convert.ToString(source["FoodImage"]),
                 Menus = null
             };
