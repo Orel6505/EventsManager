@@ -30,7 +30,7 @@ namespace EventsManager.Data_Access_Layer
 
         public bool Insert(Message model)
         {
-            string sql = $"INSERT INTO Menus(MessageContent,MessageDate) VALUES('@MessageContent','@MessageDate')";
+            string sql = $"INSERT INTO Menus(MessageContent,MessageDate) VALUES(@MessageContent,@MessageDate)";
             this.AddParameters("MessageContent", model.MessageContent); //prevents SQL Injection
             this.AddParameters("MessageDate", model.MessageDate); //prevents SQL Injection
             return this.dbContext.Create(sql) > 0;

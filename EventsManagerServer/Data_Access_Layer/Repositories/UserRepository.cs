@@ -31,7 +31,7 @@ namespace EventsManager.Data_Access_Layer
 
         public bool Insert(User model)
         {
-            string sql = $"INSERT INTO Users(FirstName,LastName,UserName,PassWordHash,Email,Address,PhoneNum,CreationDate) VALUES('@FirstName','@LastName','@UserName','@UserName','@PassWordHash','@Email','@Address','@PhoneNum','@CreationDate')";
+            string sql = $"INSERT INTO Users(FirstName,LastName,UserName,PassWordHash,Email,Address,PhoneNum,CreationDate) VALUES(@FirstName,@LastName,@UserName,@UserName,@PassWordHash,@Email,@Address,@PhoneNum,@CreationDate)";
             this.AddParameters("FirstName", model.FirstName); //prevents SQL Injection
             this.AddParameters("LastName", model.LastName); //prevents SQL Injection
             this.AddParameters("UserName", model.UserName); //prevents SQL Injection

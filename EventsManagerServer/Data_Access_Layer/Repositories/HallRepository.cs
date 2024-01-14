@@ -30,7 +30,7 @@ namespace EventsManager.Data_Access_Layer
 
         public bool Insert(Hall model)
         {
-            string sql = $"INSERT INTO Halls(HallName,HallDesc,HallImage,MaxPeople) VALUES('@HallName','@HallDesc','@HallImage',@MaxPeople)";
+            string sql = $"INSERT INTO Halls(HallName,HallDesc,HallImage,MaxPeople) VALUES(@HallName,@HallDesc,@HallImage,@MaxPeople)";
             this.AddParameters("HallName", model.HallName); //prevents SQL Injection
             this.AddParameters("HallDesc", model.HallDesc); //prevents SQL Injection
             this.AddParameters("HallImage", model.HallImage); //prevents SQL Injection

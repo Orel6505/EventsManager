@@ -30,7 +30,7 @@ namespace EventsManager.Data_Access_Layer
 
         public bool Insert(RatingImage model)
         {
-            string sql = $"INSERT INTO RatingImages(ImageLocation,RatingId) VALUES('@ImageLocation','@RatingId')";
+            string sql = $"INSERT INTO RatingImages(ImageLocation,RatingId) VALUES(@ImageLocation,@RatingId)";
             this.AddParameters("ImageLocation", model.ImageLocation); //prevents SQL Injection
             this.AddParameters("RatingId", model.RatingId.ToString()); //prevents SQL Injection
             return this.dbContext.Create(sql) > 0;

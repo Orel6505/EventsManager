@@ -30,7 +30,7 @@ namespace EventsManager.Data_Access_Layer
 
         public bool Insert(Rating model)
         {
-            string sql = $"INSERT INTO Ratings(RatingTitle,RatingDesc,RatingStars,UserId) VALUES('@RatingTitle','@RatingDesc','@RatingStars',@UserId)";
+            string sql = $"INSERT INTO Ratings(RatingTitle,RatingDesc,RatingStars,UserId) VALUES(@RatingTitle,@RatingDesc,@RatingStars,@UserId)";
             this.AddParameters("RatingTitle", model.RatingTitle); //prevents SQL Injection
             this.AddParameters("RatingDesc", model.RatingDesc); //prevents SQL Injection
             this.AddParameters("RatingStars", model.RatingStars.ToString()); //prevents SQL Injection

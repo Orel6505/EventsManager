@@ -30,7 +30,7 @@ namespace EventsManager.Data_Access_Layer
 
         public bool Insert(UserType model)
         {
-            string sql = $"INSERT INTO UserTypes(UserTypeId,UserTypeName) VALUES('@UserTypeId','@UserTypeName')";
+            string sql = $"INSERT INTO UserTypes(UserTypeId,UserTypeName) VALUES(@UserTypeId,@UserTypeName)";
             this.AddParameters("UserTypeId", model.UserTypeId.ToString()); //prevents SQL Injection
             this.AddParameters("UserTypeName", model.UserTypeName); //prevents SQL Injection
             return this.dbContext.Create(sql) > 0;

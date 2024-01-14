@@ -43,7 +43,7 @@ namespace EventsManager.Data_Access_Layer
 
         public bool Insert(Food model)
         {
-            string sql = $"INSERT INTO Foods(FoodName,FoodDesc,FoodImage,FoodPrice) VALUES('@FoodName','@FoodDesc','@FoodImage','@FoodPrice')";
+            string sql = $"INSERT INTO Foods(FoodName,FoodDesc,FoodImage,FoodPrice) VALUES(@FoodName,@FoodDesc,@FoodImage,@FoodPrice)";
             this.AddParameters("FoodName", model.FoodName); //prevents SQL Injection
             this.AddParameters("FoodDesc", model.FoodDesc); //prevents SQL Injection
             this.AddParameters("FoodImage", model.FoodImage); //prevents SQL Injection
