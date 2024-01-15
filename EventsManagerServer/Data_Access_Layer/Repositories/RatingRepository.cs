@@ -32,10 +32,11 @@ namespace EventsManager.Data_Access_Layer
 
         public bool Insert(Rating model)
         {
-            string sql = $"INSERT INTO Ratings(RatingTitle,RatingDesc,RatingStars,UserId,HallId) VALUES(@RatingTitle,@RatingDesc,@RatingStars,@UserId,@HallId)";
+            string sql = $"INSERT INTO Ratings(RatingTitle,RatingDesc,RatingStars,RatingDate,UserId,HallId) VALUES(@RatingTitle,@RatingDesc,@RatingStars,@RatingDate,@UserId,@HallId)";
             this.AddParameters("RatingTitle", model.RatingTitle); //prevents SQL Injection
             this.AddParameters("RatingDesc", model.RatingDesc); //prevents SQL Injection
             this.AddParameters("RatingStars", model.RatingStars.ToString()); //prevents SQL Injection
+            this.AddParameters("RatingDate", model.RatingDate.ToString()); //prevents SQL Injection
             this.AddParameters("UserId", model.UserId.ToString()); //prevents SQL Injection
             this.AddParameters("HallId", model.HallId.ToString()); //prevents SQL Injection
             return this.dbContext.Create(sql) > 0;
@@ -67,11 +68,12 @@ namespace EventsManager.Data_Access_Layer
 
         public bool Update(Rating model)
         {
-            string sql = "UPDATE Ratings SET RatingTitle=@RatingTitle, RatingDesc=@RatingDesc, RatingStars=@RatingStars, UserId=@UserId, HallId=@HallId where RatingId=@RatingId";
+            string sql = "UPDATE Ratings SET RatingTitle=@RatingTitle, RatingDesc=@RatingDesc, RatingStars=@RatingStars, RatingDate=@RatingDate, UserId=@UserId, HallId=@HallId where RatingId=@RatingId";
             this.AddParameters("RatingId", model.RatingId.ToString()); //prevents SQL Injection
             this.AddParameters("RatingTitle", model.RatingTitle); //prevents SQL Injection
             this.AddParameters("RatingDesc", model.RatingDesc); //prevents SQL Injection
             this.AddParameters("RatingStars", model.RatingStars.ToString()); //prevents SQL Injection
+            this.AddParameters("RatingDate", model.RatingDate.ToString()); //prevents SQL Injection
             this.AddParameters("UserId", model.UserId.ToString()); //prevents SQL Injection
             this.AddParameters("HallId", model.HallId.ToString()); //prevents SQL Injection
             return this.dbContext.Update(sql) > 0;
