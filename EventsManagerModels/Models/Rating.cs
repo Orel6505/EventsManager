@@ -13,7 +13,7 @@ namespace EventsManagerModels
         public string RatingDesc { get; set; }
         public int RatingStars { get; set; }
         public int UserId { get; set; }
-
+        public int HallId { get; set; }
         public List<RatingImage> RatingImages { get; set; }
     }
 }
