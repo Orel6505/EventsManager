@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace EventsManagerModels
 {
-    internal class OrderCatalogViewModel
+    public class OrderCatalogViewModel
     {
+        public List<Order> Orders { get; set; }
+        public List<Hall> Halls { get; set; }
+
+
     }
 }
