@@ -52,6 +52,7 @@
     <Compile Include="Models\RatingImage.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserType.cs" />
+    <Compile Include="UserViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
