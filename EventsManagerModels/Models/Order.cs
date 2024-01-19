@@ -14,5 +14,9 @@ namespace EventsManagerModels
         public int HallId { get; set; }
         public int UserId { get; set; }
         public int NumOfPeople { get; set; }
+        public string EventDate { get; set; }
+        public int EventTypeId { get; set; }
+        public EventType EventType { get; set; }
+
     }
 }

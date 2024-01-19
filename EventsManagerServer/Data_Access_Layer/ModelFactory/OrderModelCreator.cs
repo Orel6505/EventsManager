@@ -20,6 +20,8 @@ namespace EventsManager.Data_Access_Layer
                 HallId = Convert.ToInt16(source["HallId"]),
                 UserId = Convert.ToInt16(source["UserId"]),
                 NumOfPeople = Convert.ToInt16(source["NumOfPeople"]),
+                EventDate = Convert.ToString(source["EventDate"]),
+                EventTypeId = Convert.ToInt16(source["EventTypeId"])
             };
             return order;
         }
