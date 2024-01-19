@@ -72,7 +72,9 @@ namespace EventsManager.Data_Access_Layer
         public IDataReader Read(string sql)
         {
             this.command.CommandText = sql;
-            return this.command.ExecuteReader(); //collects the data
+            IDataReader datareader = this.command.ExecuteReader(); //collects the data
+            command.Parameters.Clear();
+            return datareader;
         }
 
         public object ReadValue(string sql)
