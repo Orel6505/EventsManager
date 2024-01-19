@@ -43,15 +43,13 @@ namespace EventsManager.Data_Access_Layer
 
         public Order Read(object id)
         {
-            List<Order> Orders = ReadAll();
-            Order order1 = new Order();
-            foreach (Order order in Orders)
-                if (order.OrderId.ToString() == id.ToString())
-                {
-                    order1 = order;
-                    break;
-                }
-            return order1;
+            string sql = $"SELECT FROM Orders WHERE OrderId=@OrderId";
+            this.AddParameters("OrderId", id.ToString()); //prevents SQL Injection
+            using (IDataReader dataReader = this.dbContext.Read(sql))
+            {
+                dataReader.Read();
+                return this.modelFactory.OrderModelCreator.CreateModel(dataReader);
+            }
         }
 
         public List<Order> ReadAll()

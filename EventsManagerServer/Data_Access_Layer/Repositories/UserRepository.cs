@@ -47,10 +47,13 @@ namespace EventsManager.Data_Access_Layer
 
         public User Read(object id)
         {
-            string sql = $"SELECT FROM Users WHERE UserId=@UserId";
+            string sql = $"SELECT * FROM Users WHERE UserId=@UserId";
             this.AddParameters("UserId", id.ToString()); //prevents SQL Injection
             using (IDataReader dataReader = this.dbContext.Read(sql))
+            {
+                dataReader.Read();
                 return this.modelFactory.UserModelCreator.CreateModel(dataReader);
+            }
             //returns User
         }
 

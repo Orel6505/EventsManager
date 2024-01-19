@@ -43,7 +43,10 @@ namespace EventsManager.Data_Access_Layer
             string sql = $"SELECT FROM Messages WHERE MessageId=@MessageId";
             this.AddParameters("MessageId", id.ToString()); //prevents SQL Injection
             using (IDataReader dataReader = this.dbContext.Read(sql))
+            {
+                dataReader.Read();
                 return this.modelFactory.MessageModelCreator.CreateModel(dataReader);
+            }
             //returns Message
         }
 

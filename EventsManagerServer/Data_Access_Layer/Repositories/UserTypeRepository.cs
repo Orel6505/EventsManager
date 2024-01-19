@@ -43,7 +43,10 @@ namespace EventsManager.Data_Access_Layer
             string sql = $"SELECT FROM UserTypes WHERE UserTypeId=@UserTypeId";
             this.AddParameters("UserTypeId", id.ToString()); //prevents SQL Injection
             using (IDataReader dataReader = this.dbContext.Read(sql))
+            {
+                dataReader.Read();
                 return this.modelFactory.UserTypeModelCreator.CreateModel(dataReader);
+            }
             //returns Menu
         }
 

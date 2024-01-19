@@ -59,7 +59,10 @@ namespace EventsManager.Data_Access_Layer
             string sql = $"SELECT FROM Foods WHERE FoodId=@FoodId";
             this.AddParameters("FoodId", id.ToString()); //prevents SQL Injection
             using (IDataReader dataReader = this.dbContext.Read(sql))
+            {
+                dataReader.Read();
                 return this.modelFactory.FoodModelCreator.CreateModel(dataReader);
+            }
             //returns food
         }
 

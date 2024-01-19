@@ -47,7 +47,10 @@ namespace EventsManager.Data_Access_Layer
             string sql = $"SELECT FROM Ratings WHERE RatingId=@RatingId";
             this.AddParameters("RatingId", id.ToString()); //prevents SQL Injection
             using (IDataReader dataReader = this.dbContext.Read(sql))
+            {
+                dataReader.Read();
                 return this.modelFactory.RatingModelCreator.CreateModel(dataReader);
+            }
             //returns Rating
         }
 
