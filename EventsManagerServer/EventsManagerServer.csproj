@@ -91,6 +91,7 @@
     <Compile Include="Data_Access_Layer\DbContext\DbContext.cs" />
     <Compile Include="Data_Access_Layer\DbContext\IDbContext.cs" />
     <Compile Include="Data_Access_Layer\DbContext\OleDbContext.cs" />
+    <Compile Include="Data_Access_Layer\ModelFactory\EvenTypeModelCreator.cs" />
     <Compile Include="Data_Access_Layer\Repositories\FoodRepository.cs" />
     <Compile Include="Data_Access_Layer\Repositories\HallRepository.cs" />
     <Compile Include="Data_Access_Layer\Repositories\IRepository.cs" />

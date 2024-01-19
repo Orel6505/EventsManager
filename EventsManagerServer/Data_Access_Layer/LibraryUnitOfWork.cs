@@ -7,6 +7,7 @@ namespace EventsManager.Data_Access_Layer
 {
     public class LibraryUnitOfWork
     {
+        EventTypeRepository eventTypeRepository;
         FoodRepository foodRepository;
         HallRepository hallRepository;
         MenuRepository menuRepository;
@@ -21,6 +22,18 @@ namespace EventsManager.Data_Access_Layer
         public LibraryUnitOfWork(DbContext dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public EventTypeRepository EventTypeRepository
+        {
+            get
+            {
+                if (eventTypeRepository == null)
+                {
+                    this.eventTypeRepository = new EventTypeRepository(dbContext);
+                }
+                return eventTypeRepository;
+            }
         }
 
         public FoodRepository FoodRepository

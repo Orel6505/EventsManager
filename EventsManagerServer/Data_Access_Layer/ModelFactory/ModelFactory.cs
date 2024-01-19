@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EventsManager.Data_Access_Layer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,6 +8,7 @@ namespace EventsManager.Data_Access_Layer
 {
     public class ModelFactory
     {
+        EventTypeModelCreator eventTypeModelCreator;
         FoodModelCreator foodModelCreator;
         HallModelCreator hallModelCreator;
         MenuModelCreator menuModelCreator;
@@ -16,6 +18,18 @@ namespace EventsManager.Data_Access_Layer
         RatingImageModelCreator ratingImageModelCreator;
         UserModelCreator userModelCreator;
         UserTypeModelCreator userTypeModelCreator;
+
+        public EventTypeModelCreator EventTypeModelCreator
+        {
+            get
+            {
+                if (eventTypeModelCreator == null)
+                {
+                    this.eventTypeModelCreator = new EventTypeModelCreator();
+                }
+                return eventTypeModelCreator;
+            }
+        }
 
         public FoodModelCreator FoodModelCreator 
         {
