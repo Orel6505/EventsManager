@@ -61,6 +61,17 @@ namespace EventsManager.Data_Access_Layer
             return Ratings;
         }
 
+        public List<Rating> ReadRatingsByHallIdId(int HallId)
+        {
+            List<Rating> Ratings = new List<Rating>();
+            string sql = "SELECT * FROM Ratings WHERE HallId=@HallId";
+            this.AddParameters("HallId", HallId.ToString()); //prevents SQL Injection
+            using (IDataReader dataReader = this.dbContext.Read(sql))
+                while (dataReader.Read() == true)
+                    Ratings.Add(this.modelFactory.RatingModelCreator.CreateModel(dataReader));
+            return Ratings;
+        }
+
         public object ReadValue()
         {
             throw new NotImplementedException();

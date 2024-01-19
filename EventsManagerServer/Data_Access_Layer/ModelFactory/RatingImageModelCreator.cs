@@ -15,7 +15,7 @@ namespace EventsManager.Data_Access_Layer
             {
                 ImageId = Convert.ToInt16(source["ImageId"]),
                 ImageLocation = Convert.ToString(source["ImageLocation"]),
-                RatingId = Convert.ToInt16(source["ReviewId"])
+                RatingId = Convert.ToInt16(source["RatingId"])
 
             };
             return ratingImage;

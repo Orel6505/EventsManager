@@ -8,9 +8,6 @@ namespace EventsManagerModels
 {
     public class OrderCatalogViewModel
     {
-        public List<Order> Orders { get; set; }
         public List<Hall> Halls { get; set; }
-
-
     }
 }

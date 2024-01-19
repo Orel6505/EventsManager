@@ -14,13 +14,12 @@ namespace EventsManager.Data_Access_Layer
         {
             Order order = new Order()
             {
-                OrderId = Convert.ToInt16(source["UserId"]),
+                OrderId = Convert.ToInt16(source["OrderId"]),
                 OrderDate = Convert.ToString(source["OrderDate"]),
                 MenuId = Convert.ToInt16(source["MenuId"]),
                 HallId = Convert.ToInt16(source["HallId"]),
                 UserId = Convert.ToInt16(source["UserId"]),
                 NumOfPeople = Convert.ToInt16(source["NumOfPeople"]),
-                Ratings = null
             };
             return order;
         }

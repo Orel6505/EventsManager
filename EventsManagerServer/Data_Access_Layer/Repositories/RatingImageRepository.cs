@@ -57,6 +57,17 @@ namespace EventsManager.Data_Access_Layer
             return RatingImages;
         }
 
+        public List<RatingImage> ReadByRatingId(int id)
+        {
+            List<RatingImage> RatingImages = new List<RatingImage>();
+            string sql = $"SELECT * FROM RatingImages WHERE RatingId=@RatingId";
+            this.AddParameters("RatingId", id.ToString()); //prevents SQL Injection
+            using (IDataReader dataReader = this.dbContext.Read(sql))
+                while (dataReader.Read() == true)
+                    RatingImages.Add(this.modelFactory.RatingImageModelCreator.CreateModel(dataReader));
+            return RatingImages;
+        }
+
         public object ReadValue()
         {
             throw new NotImplementedException();

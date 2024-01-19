@@ -17,7 +17,7 @@ namespace EventsManager.Data_Access_Layer
                 RatingTitle = Convert.ToString(source["RatingTitle"]),
                 RatingDesc = Convert.ToString(source["RatingDesc"]),
                 RatingStars = Convert.ToInt16(source["RatingStars"]),
-                RatingDate = Convert.ToInt16(source["RatingDate"]),
+                RatingDate = Convert.ToString(source["RatingDate"]),
                 UserId = Convert.ToInt16(source["UserId"]),
                 HallId = Convert.ToInt16(source["HallId"]),
                 RatingImages = null
