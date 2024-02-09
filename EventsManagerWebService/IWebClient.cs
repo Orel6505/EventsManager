@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace EventsManagerWebService
 {
-    internal interface IWebClient
+    public interface IWebClient<T>
     {
+        //Represents the HTTP Get Method
+        T GetAsync();
+
+        //Represents the HTTP Post Method
+        //Using Overloading
+        Task<bool> PostAsync(T model);
+        Task<bool> PostAsync(T model, string FileName);
+        Task<bool> PostAsync(T model, List<string> FileNames);
     }
 }
