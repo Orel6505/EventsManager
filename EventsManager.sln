@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventsManagerTest", "Events
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventsManagerWebService", "EventsManagerWebService\EventsManagerWebService.csproj", "{0AFB3BFF-C8F0-4F7C-8B40-E348B6514F85}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventsManagerWeb", "EventsManagerWeb\EventsManagerWeb.csproj", "{2CE8BBBE-C11F-4B1A-8DF2-4093636B71FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{0AFB3BFF-C8F0-4F7C-8B40-E348B6514F85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AFB3BFF-C8F0-4F7C-8B40-E348B6514F85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AFB3BFF-C8F0-4F7C-8B40-E348B6514F85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CE8BBBE-C11F-4B1A-8DF2-4093636B71FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CE8BBBE-C11F-4B1A-8DF2-4093636B71FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CE8BBBE-C11F-4B1A-8DF2-4093636B71FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CE8BBBE-C11F-4B1A-8DF2-4093636B71FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
