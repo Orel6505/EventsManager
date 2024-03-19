@@ -10,7 +10,7 @@ namespace EventsManagerWebService
     {
         //Represents the HTTP Get Method
         T Get();
-        T GetAsync();
+        Task<T> GetAsync();
 
         //Represents the HTTP Post Method
         //Using Overloading
