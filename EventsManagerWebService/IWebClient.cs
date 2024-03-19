@@ -9,7 +9,14 @@ namespace EventsManagerWebService
     public interface IWebClient<T>
     {
         //Represents the HTTP Get Method
+        T Get();
         T GetAsync();
+
+        //Represents the HTTP Post Method
+        //Using Overloading
+        bool Post(T model);
+        bool Post(T model, string FileName);
+        bool Post(T model, List<string> FileNames);
 
         //Represents the HTTP Post Method
         //Using Overloading
