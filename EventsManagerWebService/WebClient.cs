@@ -84,9 +84,13 @@ namespace EventsManagerWebService
         {
             return new ObjectContent(typeof(T), model, new JsonMediaTypeFormatter());
         }
+        StreamContent ContentCreator(string FileName)
+        {
+            return new StreamContent(File.OpenRead(FileName));
+        }
         MultipartContent ContentCreator(T model, string FileName)
         {
-            return new MultipartContent { ContentCreator(model), new StreamContent(File.OpenRead(FileName)) };
+            return new MultipartContent { ContentCreator(model), ContentCreator(FileName) };
         }
 
         //Methods implemented from the interface IWebClient.cs
@@ -96,7 +100,7 @@ namespace EventsManagerWebService
         {
             RequstCreator(HttpMethod.Get, UrlString(KeyValues));
             this.Response = this.Client.SendAsync(this.Request).Result;
-            return Response.IsSuccessStatusCode ? Response.Content.ReadAsAsync<T>().Result : default;
+            return this.Response.IsSuccessStatusCode ? this.Response.Content.ReadAsAsync<T>().Result : default;
         }
 
         /// <summary> Takes Model and creates Json file from it's fields, then sends https request back </summary>
@@ -105,7 +109,7 @@ namespace EventsManagerWebService
         {
             RequstCreator(HttpMethod.Post, UrlString(), model);
             this.Response = this.Client.SendAsync(this.Request).Result;
-            return Response.IsSuccessStatusCode;
+            return this.Response.IsSuccessStatusCode;
         }
 
         /// <summary> creates Json file from it's fields, then sends https request back </summary>
@@ -114,7 +118,7 @@ namespace EventsManagerWebService
         {
             RequstCreator(HttpMethod.Post, UrlString(), model, FileName);
             this.Response = this.Client.SendAsync(this.Request).Result;
-            return Response.IsSuccessStatusCode;
+            return this.Response.IsSuccessStatusCode;
         }
 
         /// <summary> creates Json file from it's fields, then sends https request back </summary>
@@ -130,7 +134,7 @@ namespace EventsManagerWebService
         {
             RequstCreator(HttpMethod.Get, UrlString(KeyValues));
             this.Response = await this.Client.SendAsync(this.Request);
-            return Response.IsSuccessStatusCode ? await Response.Content.ReadAsAsync<T>() : default;
+            return this.Response.IsSuccessStatusCode ? await this.Response.Content.ReadAsAsync<T>() : default;
         }
 
         /// <summary> Creates Json file from it's fields, then sends https request back </summary>
@@ -138,8 +142,8 @@ namespace EventsManagerWebService
         public async Task<bool> PostAsync(T model)
         {
             RequstCreator(HttpMethod.Post, UrlString(), model);
-            this.Response = this.Client.SendAsync(this.Request).Result;
-            return Response.IsSuccessStatusCode ? await Response.Content.ReadAsAsync<bool>() : false;
+            this.Response = await this.Client.SendAsync(this.Request);
+            return this.Response.IsSuccessStatusCode ? await this.Response.Content.ReadAsAsync<bool>() : false;
         }
 
         /// <summary> Creates Json file from it's fields, then sends https request back </summary>
@@ -147,8 +151,8 @@ namespace EventsManagerWebService
         public async Task<bool> PostAsync(T model, string FileName)
         {
             RequstCreator(HttpMethod.Post, UrlString(), model, FileName);
-            this.Response = this.Client.SendAsync(this.Request).Result;
-            return Response.IsSuccessStatusCode ? await Response.Content.ReadAsAsync<bool>() : false;
+            this.Response = await this.Client.SendAsync(this.Request);
+            return this.Response.IsSuccessStatusCode ? await this.Response.Content.ReadAsAsync<bool>() : false;
         }
 
         /// <summary> Creates Json file from it's fields, then sends https request back </summary>
@@ -157,6 +161,5 @@ namespace EventsManagerWebService
         {
             throw new NotImplementedException();
         }
-
     }
 }
