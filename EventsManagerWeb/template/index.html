@@ -4,60 +4,29 @@
   <link rel="stylesheet" href="Style.css">
   <link rel="icon" type="image/x-icon" href="img/profile.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title> My Website </title>
-  <script>
-    function main(){
-      $( window ).resize(function(){
-        document.getElementById("nav-mobile").style.width = "100%";
-      }
-  </script>
+  <title> My Website </title>
 </head>
 
 <body>
-  <header class="main-header">
+  <header>
     <nav>
-      <span style="cursor:pointer" onclick="openNav()"><img class="opennav" src="img/mobile-menu-white.png"></span>
-      <div id="nav-mobile" class="nav-menu">
-        <ul class="nav">
-          <div class="nav-mobile-header" style="float:left;">
-            <a class="nav-img" href="Index1.html">
-              <img src="img/profile.png">
-            </a>
-            <a href="javascript:void(0)" class="closenav" onclick="closeNav()">&times;</a>
-            <a href="Index1.html"
-              <li class="nav_text"> Home </li>
-            </a>
-            <a href="Index2.html"
-             <li class="nav_text"> Features </li>
-            </a>
-            <a href="Index3.html"
-              <li class="nav_text"> Pricing </li>
-            </a>
-            <a href="Index4.html"
-              <li class="nav_text"> FAQ </li>
-            </a>
-            <a href="Index5.html"
-              <li class="nav_text"> Contact </li>
-            </a>
-            <a href="Index5.html"
-              <li class="nav_text nav-try-for-free-button"> Try For Free </li>
-            </a>
-          </div>
-          <div class="nav-content" id="nav-mobile1" style="float:left;">
-          </div>
-        </ul>
-      </div>
+      <ul class="nav">
+        <a class="cLogo" href="Index.html"><img class="logo" src="img/profile.png"></a>
+        <a class="navText" href="Index.html"> Home </a>
+        <a class="navText" href="Index1.html"> Test Foods </a>
+        <a class="navText" href="Index2.html"> Test </a>
+        <a class="cOpenNav" onclick="openNav()"><img class="mOpenNav" src="img/open-menu.png"></a>
+        <a class="mCloseNav" onclick="closeNav()" class="closeNav">&times;</a>
+      </ul>
     </nav>
   </header>
   <script>
     function openNav() {
       document.getElementById("nav-mobile").style.width = "100%";
-      document.getElementById("nav-mobile1").style.display = block;
     }
     
     function closeNav() {
-      document.getElementById("nav-mobile").style.width = "0%";
-      document.getElementById("nav-mobile1").style.display = none;
+      document.getElementById("nav-mobile").style.width = "100%";
     }
   </script>
   
@@ -68,13 +37,14 @@
     <table class="footer-table">
       <tr class="footer-table-contant">
         <td><img class="footer-table-logo" src="img/profile.png"></td>
-        <td class="footer-table-about">Hello, my name is Orel Yosupov. I am a 16 years old student and developer.
-        I am also known for developing and building Android custom roms for Redmi 8A (olivelite) and Galaxy S10 (beyond1lte).</td>
+        <td class="footer-table-about">Hello, my name is Orel Yosupov. I am 17 years old.
+        Currently I'm learning at 12th grade in Ort Lilienthal school in Ramla
+        This Project is my final project in software engineering bagrut</td>
       </tr>
     </table>
     <table class="footer-table-copy">
       <tr>
-        <td colspan="2" style="text-align: center;">&copy; Designed by Orel Yosupov (Orel6505)</td>
+        <td>&copy; Designed by Orel Yosupov (Orel6505)</td>
       </tr>
     </table>
   </footer>
