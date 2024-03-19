@@ -34,58 +34,7 @@ body {
 	}
 }
 
-/* navbar */
-
-/* table */
-.device-info {
-	width: 55%;
-	border-collapse: collapse;
-	padding: 20px;
-	margin-left: auto;
-	margin-right: auto;
-	border-radius: 25px;
-	margin-bottom: 10px ;
-}
-  
-.device-info th, .device-info td {
-	text-align: left;
-	padding: 5px 10px;
-	border-bottom: 1px solid #e5e5e5;
-}
-  
-.device-info th {
-	color:#444;
-}
-
-.device-info img{
-	display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-tr.border_bottom td {
-	border-bottom: transparent;
-}
-
-/* h1 {
-	font-size:55px;
-	font-style: initial;
-	text-align: center;
-}
-
-h3 {
-	text-align: right;
-}
-
-img#links {
-	float: right;
-    margin-right: auto;
-	width: 90px;
-	height: 70px;
-} */
-
-/* footer */
-
+/* page wrapper */
 .page-wrapper{
     min-height: 100%;
 }
@@ -143,17 +92,10 @@ tr.border_bottom td {
 	margin: 10px 0px 10px 1%;
 }
 
-.footer-table-copy{
-    width: 100%;
-	text-align: center;
-	grid-row: 3;
-	grid-column-start: 1;
-	grid-column-end: 3;
-	padding-top: 10px;
-}
 .main-header {
 	background-color: black;
 }
+
 @media screen and (max-width: 700px) {
 	.footer-table-section{
 		grid-row: 1;
