@@ -33,7 +33,7 @@ namespace EventsManagerWebService
         {
             string url = UrlString() + "?";
             foreach (KeyValuePair<string, string> KeyValue in KeyValues)
-                url += $"{KeyValue.Key}={KeyValue.Value}/&"; //It leaves one '&' at the end of the url
+                url += $"{KeyValue.Key}={KeyValue.Value}&"; //It leaves one '&' at the end of the url
             return url;
         }
 
@@ -168,7 +168,7 @@ namespace EventsManagerWebService
         /// <returns> <see langword="true"/> value if successful, else <see langword="false"/> </returns>
         public async Task<bool> PostAsync(T model, string FileName)
         {
-            RequestCreator(HttpMethod.Post, UrlString(), model, FileName);
+            RequestCreator(HttpMethod.Post, UrlString());
             this.Response = await this.Client.SendAsync(this.Request);
             return this.Response.IsSuccessStatusCode ? await this.Response.Content.ReadAsAsync<bool>() : false;
         }
