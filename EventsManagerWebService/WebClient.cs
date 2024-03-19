@@ -25,11 +25,11 @@ namespace EventsManagerWebService
         /// <summary> The Method Name </summary>
         public string Method { get; set; } //The Method we want to use
 
-        public string UrlString()
+        string UrlString()
         {
             return $"{this.Server}/{this.Controller}/{this.Method}/";
         }
-        public string UrlString(Dictionary<string, string> KeyValues)
+        string UrlString(Dictionary<string, string> KeyValues)
         {
             string url = UrlString() + "?";
             foreach (KeyValuePair<string, string> KeyValue in KeyValues)
@@ -80,6 +80,11 @@ namespace EventsManagerWebService
             RequestCreator(method, url);
             this.Request.Content = ContentCreator(model, FileName);
         }
+        void RequestCreator(HttpMethod method, string url, T model, List<string> FileNames)
+        {
+            RequestCreator(method, url);
+            this.Request.Content = ContentCreator(model, FileNames);
+        }
 
         ObjectContent ContentCreator(T model)
         {
@@ -92,6 +97,16 @@ namespace EventsManagerWebService
         MultipartContent ContentCreator(T model, string FileName)
         {
             return new MultipartContent { ContentCreator(model), ContentCreator(FileName) };
+        }
+        MultipartContent ContentCreator(T model, List<string> FileNames)
+        {
+            using (MultipartContent multipart = new MultipartContent())
+            {
+                multipart.Add(ContentCreator(model));
+                foreach (string FileName in FileNames)
+                    multipart.Add(ContentCreator(FileName));
+                return multipart;
+            }
         }
 
         //Methods implemented from the interface IWebClient.cs
@@ -126,7 +141,9 @@ namespace EventsManagerWebService
         /// <returns> <see langword="true"/> value if successful, else <see langword="false"/> </returns>
         public bool Post(T model, List<string> FileNames)
         {
-            throw new NotImplementedException();
+            RequestCreator(HttpMethod.Post, UrlString(), model, FileNames);
+            this.Response = this.Client.SendAsync(this.Request).Result;
+            return this.Response.IsSuccessStatusCode;
         }
 
         /// <summary> Represents the HTTP Get Method </summary>
@@ -158,9 +175,11 @@ namespace EventsManagerWebService
 
         /// <summary> Creates Json file from it's fields, then sends https request back </summary>
         /// <returns> <see langword="true"/> value if successful, else <see langword="false"/> </returns>
-        public Task<bool> PostAsync(T model, List<string> FileNames)
+        public async Task<bool> PostAsync(T model, List<string> FileNames)
         {
-            throw new NotImplementedException();
+            RequestCreator(HttpMethod.Post, UrlString(), model, FileNames);
+            this.Response = await this.Client.SendAsync(this.Request);
+            return this.Response.IsSuccessStatusCode ? await this.Response.Content.ReadAsAsync<bool>() : false;
         }
     }
 }
