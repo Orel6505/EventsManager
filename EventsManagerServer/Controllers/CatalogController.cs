@@ -16,24 +16,42 @@ namespace EventsManager.Controllers
     public class CatalogController : ApiController
     {
         [HttpGet]
-        public OrderCatalogViewModel GetCatalogViewModel()
+        public List<Hall> GetHalls()
         {
-            OrderCatalogViewModel orderCatalogViewModel = new OrderCatalogViewModel();
+            List<Hall> Halls;
             DbContext dbContext = OleDbContext.GetInstance();
             LibraryUnitOfWork libraryUnitOfWork = new LibraryUnitOfWork(dbContext);
             try
             {
                 dbContext.OpenConnection();
-                orderCatalogViewModel.Halls = libraryUnitOfWork.HallRepository.ReadAll();
-                foreach(Hall hall in orderCatalogViewModel.Halls)
+                Halls = libraryUnitOfWork.HallRepository.ReadAll();
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+                return null;
+            }
+            finally
+            {
+                dbContext.CloseConnection();
+            }
+            return Halls;
+        }
+
+        [HttpGet]
+        public Hall GetHallById(int id)
+        {
+            DbContext dbContext = OleDbContext.GetInstance();
+            LibraryUnitOfWork libraryUnitOfWork = new LibraryUnitOfWork(dbContext);
+            Hall hall;
+            try
+            {
+                dbContext.OpenConnection();
+                hall = libraryUnitOfWork.HallRepository.Read(id);
+                hall.Ratings = libraryUnitOfWork.RatingRepository.ReadRatingsByHallIdId(hall.HallId);
+                foreach (Rating rating in hall.Ratings)
                 {
-                    hall.Ratings = libraryUnitOfWork.RatingRepository.ReadRatingsByHallIdId(hall.HallId);
-                    foreach(Rating rating in hall.Ratings)
-                    {
-                        
-                        rating.RatingImages = libraryUnitOfWork.RatingImageRepository.ReadByRatingId(rating.RatingId);
-                    }
-                    hall.Dates = libraryUnitOfWork.DateRepository.ReadByHallId(hall.HallId);
+                    rating.RatingImages = libraryUnitOfWork.RatingImageRepository.ReadByRatingId(rating.RatingId);
                 }
             }
             catch (Exception ex)
@@ -45,7 +63,31 @@ namespace EventsManager.Controllers
             {
                 dbContext.CloseConnection();
             }
-            return orderCatalogViewModel;
+            return hall;
         }
+
+        [HttpGet]
+        public Food GetFoodById(int id)
+        {
+            DbContext dbContext = OleDbContext.GetInstance();
+            LibraryUnitOfWork libraryUnitOfWork = new LibraryUnitOfWork(dbContext);
+            Food food;
+            try
+            {
+                dbContext.OpenConnection();
+                food = libraryUnitOfWork.FoodRepository.Read(id);
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+                return null;
+            }
+            finally
+            {
+                dbContext.CloseConnection();
+            }
+            return food;
+        }
+
     }
 }
