@@ -48,6 +48,7 @@ namespace EventsManagerWebService
         {
             this.Client = new HttpClient();
             this.Request = new HttpRequestMessage();
+            this.KeyValues = new Dictionary<string, string>();
         }
 
         //Dictionary
@@ -64,19 +65,19 @@ namespace EventsManagerWebService
             this.KeyValues.Clear();
         }
 
-        void RequstCreator(HttpMethod method, string url)
+        void RequestCreator(HttpMethod method, string url)
         {
             this.Request.Method = method;
             this.Request.RequestUri = new Uri(url);
         }
-        void RequstCreator(HttpMethod method, string url, T model)
+        void RequestCreator(HttpMethod method, string url, T model)
         {
-            RequstCreator(method, url);
+            RequestCreator(method, url);
             this.Request.Content = ContentCreator(model);
         }
-        void RequstCreator(HttpMethod method, string url, T model, string FileName)
+        void RequestCreator(HttpMethod method, string url, T model, string FileName)
         {
-            RequstCreator(method, url);
+            RequestCreator(method, url);
             this.Request.Content = ContentCreator(model, FileName);
         }
 
@@ -98,7 +99,7 @@ namespace EventsManagerWebService
         /// <returns> <see langword="true"/> value if successful, else <see langword="false"/> </returns>
         public T Get()
         {
-            RequstCreator(HttpMethod.Get, UrlString(KeyValues));
+            RequestCreator(HttpMethod.Get, UrlString(KeyValues));
             this.Response = this.Client.SendAsync(this.Request).Result;
             return this.Response.IsSuccessStatusCode ? this.Response.Content.ReadAsAsync<T>().Result : default;
         }
@@ -107,7 +108,7 @@ namespace EventsManagerWebService
         /// <returns> <see langword="true"/> value if successful, else <see langword="false"/> </returns>
         public bool Post(T model)
         {
-            RequstCreator(HttpMethod.Post, UrlString(), model);
+            RequestCreator(HttpMethod.Post, UrlString(), model);
             this.Response = this.Client.SendAsync(this.Request).Result;
             return this.Response.IsSuccessStatusCode;
         }
@@ -116,7 +117,7 @@ namespace EventsManagerWebService
         /// <returns> <see langword="true"/> value if successful, else <see langword="false"/> </returns>
         public bool Post(T model, string FileName)
         {
-            RequstCreator(HttpMethod.Post, UrlString(), model, FileName);
+            RequestCreator(HttpMethod.Post, UrlString(), model, FileName);
             this.Response = this.Client.SendAsync(this.Request).Result;
             return this.Response.IsSuccessStatusCode;
         }
@@ -132,7 +133,7 @@ namespace EventsManagerWebService
         /// <returns> <see langword="true"/> value if successful, else <see langword="default"/> </returns>
         public async Task<T> GetAsync()
         {
-            RequstCreator(HttpMethod.Get, UrlString(KeyValues));
+            RequestCreator(HttpMethod.Get, UrlString(KeyValues));
             this.Response = await this.Client.SendAsync(this.Request);
             return this.Response.IsSuccessStatusCode ? await this.Response.Content.ReadAsAsync<T>() : default;
         }
@@ -141,7 +142,7 @@ namespace EventsManagerWebService
         /// <returns> <see langword="true"/> value if successful, else <see langword="false"/> </returns>
         public async Task<bool> PostAsync(T model)
         {
-            RequstCreator(HttpMethod.Post, UrlString(), model);
+            RequestCreator(HttpMethod.Post, UrlString(), model);
             this.Response = await this.Client.SendAsync(this.Request);
             return this.Response.IsSuccessStatusCode ? await this.Response.Content.ReadAsAsync<bool>() : false;
         }
@@ -150,7 +151,7 @@ namespace EventsManagerWebService
         /// <returns> <see langword="true"/> value if successful, else <see langword="false"/> </returns>
         public async Task<bool> PostAsync(T model, string FileName)
         {
-            RequstCreator(HttpMethod.Post, UrlString(), model, FileName);
+            RequestCreator(HttpMethod.Post, UrlString(), model, FileName);
             this.Response = await this.Client.SendAsync(this.Request);
             return this.Response.IsSuccessStatusCode ? await this.Response.Content.ReadAsAsync<bool>() : false;
         }
