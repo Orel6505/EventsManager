@@ -42,7 +42,7 @@ namespace EventsManager.Data_Access_Layer
 
         public Hall Read(object id)
         {
-            string sql = $"SELECT FROM Halls WHERE HallId=@HallId";
+            string sql = $"SELECT * FROM Halls WHERE HallId=@HallId";
             this.AddParameters("HallId", id.ToString()); //prevents SQL Injection
             using (IDataReader dataReader = this.dbContext.Read(sql))
             {

@@ -56,7 +56,7 @@ namespace EventsManager.Data_Access_Layer
 
         public Food Read(object id)
         {
-            string sql = $"SELECT FROM Foods WHERE FoodId=@FoodId";
+            string sql = $"SELECT * FROM Foods WHERE FoodId=@FoodId";
             this.AddParameters("FoodId", id.ToString()); //prevents SQL Injection
             using (IDataReader dataReader = this.dbContext.Read(sql))
             {
