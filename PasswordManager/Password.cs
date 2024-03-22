@@ -12,11 +12,11 @@ namespace PasswordManager
         public string HashPassword { get; }
         public int SaltLength = 64;
 
-        /// <summary> Creates object of password which contains <see cref="Salt"/> and <see cref="HashPassword"/></summary>
+        /// <summary> Creates object of password which generates new Password and Salt from inserting new <see cref="EnteredPassword"/></summary>
         public Password(string EnteredPassword)
         {
-            this.Salt = this.GenerateSalt(SaltLength);
-            this.HashPassword = this.GenerateHash(EnteredPassword, this.Salt);
+            this.Salt = GenerateSalt(SaltLength);
+            this.HashPassword = GenerateHash(EnteredPassword, this.Salt);
         }
 
         /// <summary> Creates object of password which contains <see cref="Salt"/> and <see cref="HashPassword"/></summary>
@@ -28,7 +28,7 @@ namespace PasswordManager
 
         public bool IsSamePassword(string EnteredPassword)
         {
-            return this.IsSamePassword(this.HashPassword, this.Salt, EnteredPassword);
+            return IsSamePassword(this.HashPassword, this.Salt, EnteredPassword);
         }
     }
 }

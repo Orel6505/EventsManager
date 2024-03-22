@@ -48,9 +48,7 @@ namespace PasswordManager
 
         public bool IsSamePassword(string HashedPassword, string Salt, string EnteredPassword)
         {
-            if (HashedPassword == GenerateHash(EnteredPassword, Salt))
-                return true;
-            return false;
+            return HashedPassword == GenerateHash(EnteredPassword, Salt);
         }
     }
 }
