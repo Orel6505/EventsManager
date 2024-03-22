@@ -11,19 +11,6 @@ namespace PasswordManager
 {
     public class SecurityHelper : ISecurityHelper
     {
-        static SecurityHelper instance;
-        private SecurityHelper() {}
-        public static SecurityHelper GetInstance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new SecurityHelper();
-                }
-                return instance;
-            }
-        }
         /// <summary>Creates Random Salt for hashing password</summary>
         /// <returns>Returns random array of letters with length of the value given</returns>
         public string GenerateSalt(int Length)

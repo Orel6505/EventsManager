@@ -6,31 +6,28 @@ using System.Threading.Tasks;
 
 namespace PasswordManager
 {
-    public class Password
+    public class Password : SecurityHelper
     {
-        readonly private SecurityHelper Instance;
         public string Salt { get; }
         public string HashPassword { get; }
 
         /// <summary> Creates object of password which contains <see cref="Salt"/> and <see cref="HashPassword"/></summary>
-        public Password(SecurityHelper Instance, string EnteredPassword, int SaltLength)
+        public Password(string EnteredPassword, int SaltLength)
         {
-            this.Instance = Instance;
-            this.Salt = Instance.GenerateSalt(SaltLength);
-            this.HashPassword = Instance.GenerateHash(EnteredPassword, this.Salt);
+            this.Salt = this.GenerateSalt(SaltLength);
+            this.HashPassword = this.GenerateHash(EnteredPassword, this.Salt);
         }
 
         /// <summary> Creates object of password which contains <see cref="Salt"/> and <see cref="HashPassword"/></summary>
-        public Password(SecurityHelper Instance, string Salt, string HashPassword)
+        public Password(string Salt, string HashPassword)
         {
-            this.Instance = Instance;
             this.Salt = Salt;
             this.HashPassword = HashPassword;
         }
 
         public bool IsSamePassword(string EnteredPassword)
         {
-            return Instance.IsSamePassword(this.HashPassword, this.Salt, EnteredPassword);
+            return this.IsSamePassword(this.HashPassword, this.Salt, EnteredPassword);
         }
     }
 }
