@@ -10,9 +10,10 @@ namespace PasswordManager
     {
         public string Salt { get; }
         public string HashPassword { get; }
+        public int SaltLength = 64;
 
         /// <summary> Creates object of password which contains <see cref="Salt"/> and <see cref="HashPassword"/></summary>
-        public Password(string EnteredPassword, int SaltLength)
+        public Password(string EnteredPassword)
         {
             this.Salt = this.GenerateSalt(SaltLength);
             this.HashPassword = this.GenerateHash(EnteredPassword, this.Salt);
