@@ -45,10 +45,5 @@ namespace PasswordManager
             }
             return result;
         }
-
-        public bool IsSamePassword(string HashedPassword, string Salt, string EnteredPassword)
-        {
-            return HashedPassword == GenerateHash(EnteredPassword, Salt);
-        }
     }
 }

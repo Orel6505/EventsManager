@@ -9,7 +9,7 @@ namespace PasswordManager
     public class Password : SecurityHelper
     {
         public string Salt { get; }
-        public string HashPassword { get; }
+        public string HashPassword { get; set; }
         public int SaltLength = 64;
 
         /// <summary> Creates object of password which generates new Password and Salt from inserting new <see cref="EnteredPassword"/></summary>
@@ -26,9 +26,14 @@ namespace PasswordManager
             this.Salt = Salt;
         }
 
+        public void ApplyNewPassword(string EnteredPassword)
+        {
+            this.HashPassword = GenerateHash(EnteredPassword, this.Salt);
+        }
+
         public bool IsSamePassword(string EnteredPassword)
         {
-            return IsSamePassword(this.HashPassword, this.Salt, EnteredPassword);
+            return this.HashPassword == GenerateHash(EnteredPassword, this.Salt);
         }
     }
 }
