@@ -18,8 +18,8 @@ namespace EventsManagerModels
         public string Address { get; set; }
         public string PhoneNum { get; set; }
         public string CreationDate { get; set; } //timestamp
-        public UserType userType { get; set; }
-        public Password password { get; set; }
+        public UserType Type { get; set; }
+        public Password UserPassword { get; set; }
 
         public List<Order> Orders { get; set; }
     }

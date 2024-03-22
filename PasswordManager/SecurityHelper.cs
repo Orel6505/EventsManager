@@ -23,7 +23,7 @@ namespace PasswordManager
             }
         }
 
-        /// <summary>Takes <paramref name="Password"/> and <paramref name="Salt"/> and Hashes it with SHA256 Hash Alghoritm</summary>
+        /// <summary>Takes <paramref name="Password"/> and <paramref name="Salt"/> and Hashes it with SHA256 Hash Algorithm</summary>
         /// <returns>Returns a hashed string</returns>
         public string GenerateHash(string Password, string Salt)
         {
