@@ -55,5 +55,11 @@
     <Compile Include="Models\UserType.cs" />
     <Compile Include="UserViewModel.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PasswordManager\PasswordManager.csproj">
+      <Project>{cf21b46a-558e-446c-862b-9623dae654db}</Project>
+      <Name>PasswordManager</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

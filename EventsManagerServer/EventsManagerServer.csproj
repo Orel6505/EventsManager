@@ -154,6 +154,10 @@
       <Project>{81a2be5b-e554-46df-a344-15f3fb69f8b6}</Project>
       <Name>EventsManagerModels</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PasswordManager\PasswordManager.csproj">
+      <Project>{cf21b46a-558e-446c-862b-9623dae654db}</Project>
+      <Name>PasswordManager</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
