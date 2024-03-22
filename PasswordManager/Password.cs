@@ -19,10 +19,10 @@ namespace PasswordManager
         }
 
         /// <summary> Creates object of password which contains <see cref="Salt"/> and <see cref="HashPassword"/></summary>
-        public Password(string Salt, string HashPassword)
+        public Password(string HashPassword, string Salt)
         {
-            this.Salt = Salt;
             this.HashPassword = HashPassword;
+            this.Salt = Salt;
         }
 
         public bool IsSamePassword(string EnteredPassword)

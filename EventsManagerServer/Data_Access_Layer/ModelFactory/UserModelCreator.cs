@@ -1,4 +1,5 @@
 ﻿using EventsManagerModels;
+using PasswordManager;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -19,11 +20,11 @@ namespace EventsManager.Data_Access_Layer
                 FirstName = Convert.ToString(source["FirstName"]),
                 LastName = Convert.ToString(source["LastName"]),
                 UserName = Convert.ToString(source["UserName"]),
-                PassWordHash = Convert.ToString(source["Password"]),
                 Email = Convert.ToString(source["Email"]),
                 Address = Convert.ToString(source["Address"]),
                 PhoneNum = Convert.ToString(source["PhoneNum"]),
                 CreationDate = Convert.ToString(source["CreationDate"]),
+                password = new Password(Convert.ToString(source["PasswordHash"]), Convert.ToString(source["Salt"])),
                 userType = null,
                 Orders = null
             };
