@@ -13,18 +13,18 @@ using System.Web.UI.WebControls.WebParts;
 
 namespace EventsManager.Controllers
 {
-    public class CatalogController : ApiController
+    public class FoodController : ApiController
     {
         [HttpGet]
-        public List<Hall> GetHalls()
+        public List<Food> GetFoods()
         {
-            List<Hall> Halls;
+            List<Food> Foods;
             DbContext dbContext = OleDbContext.GetInstance();
             LibraryUnitOfWork libraryUnitOfWork = new LibraryUnitOfWork(dbContext);
             try
             {
                 dbContext.OpenConnection();
-                Halls = libraryUnitOfWork.HallRepository.ReadAll();
+                Foods = libraryUnitOfWork.FoodRepository.ReadAll();
             }
             catch (Exception ex)
             {
@@ -35,35 +35,7 @@ namespace EventsManager.Controllers
             {
                 dbContext.CloseConnection();
             }
-            return Halls;
-        }
-
-        [HttpGet]
-        public Hall GetHallById(int id)
-        {
-            DbContext dbContext = OleDbContext.GetInstance();
-            LibraryUnitOfWork libraryUnitOfWork = new LibraryUnitOfWork(dbContext);
-            Hall hall;
-            try
-            {
-                dbContext.OpenConnection();
-                hall = libraryUnitOfWork.HallRepository.Read(id);
-                hall.Ratings = libraryUnitOfWork.RatingRepository.ReadRatingsByHallIdId(hall.HallId);
-                foreach (Rating rating in hall.Ratings)
-                {
-                    rating.RatingImages = libraryUnitOfWork.RatingImageRepository.ReadByRatingId(rating.RatingId);
-                }
-            }
-            catch (Exception ex)
-            {
-                Trace.WriteLine(ex);
-                return null;
-            }
-            finally
-            {
-                dbContext.CloseConnection();
-            }
-            return hall;
+            return Foods;
         }
 
         [HttpGet]
