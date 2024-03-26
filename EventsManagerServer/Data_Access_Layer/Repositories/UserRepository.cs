@@ -33,11 +33,12 @@ namespace EventsManager.Data_Access_Layer
 
         public bool Insert(User model)
         {
-            string sql = $"INSERT INTO Users(FirstName,LastName,UserName,PassWordHash,Email,Address,PhoneNum,CreationDate) VALUES(@FirstName,@LastName,@UserName,@UserName,@PassWordHash,@Email,@Address,@PhoneNum,@CreationDate)";
+            string sql = $"INSERT INTO Users(FirstName,LastName,UserName,PassWordHash,Email,Address,PhoneNum,CreationDate,Salt) VALUES(@FirstName,@LastName,@UserName,@UserName,@PassWordHash,@Email,@Address,@PhoneNum,@CreationDate,@Salt)";
             this.AddParameters("FirstName", model.FirstName); //prevents SQL Injection
             this.AddParameters("LastName", model.LastName); //prevents SQL Injection
             this.AddParameters("UserName", model.UserName); //prevents SQL Injection
-            this.AddParameters("PassWordHash", model.PassWordHash); //prevents SQL Injection
+            this.AddParameters("PassWordHash", model.UserPassword.HashPassword); //prevents SQL Injection
+            this.AddParameters("Salt", model.UserPassword.Salt); //prevents SQL Injection
             this.AddParameters("Email", model.Email); //prevents SQL Injection
             this.AddParameters("Address", model.Address); //prevents SQL Injection
             this.AddParameters("PhoneNum", model.PhoneNum); //prevents SQL Injection
@@ -74,12 +75,13 @@ namespace EventsManager.Data_Access_Layer
 
         public bool Update(User model)
         {
-            string sql = "UPDATE Users SET FirstName=@FirstName, LastName=@LastName, UserName=@UserName, PassWordHash=@PassWordHash, Email=@Email, Address=@Address, PhoneNum=@PhoneNum,CreationDate=@CreationDate where UserId=@UserId";
+            string sql = "UPDATE Users SET FirstName=@FirstName, LastName=@LastName, UserName=@UserName, PassWordHash=@PassWordHash, Email=@Email, Address=@Address, PhoneNum=@PhoneNum,CreationDate=@CreationDate, Salt=@Salt where UserId=@UserId";
             this.AddParameters("UserId", model.UserId.ToString()); //prevents SQL Injection
             this.AddParameters("FirstName", model.FirstName); //prevents SQL Injection
             this.AddParameters("LastName", model.LastName); //prevents SQL Injection
             this.AddParameters("UserName", model.UserName); //prevents SQL Injection
-            this.AddParameters("PassWordHash", model.PassWordHash); //prevents SQL Injection
+            this.AddParameters("PassWordHash", model.UserPassword.HashPassword); //prevents SQL Injection
+            this.AddParameters("Salt", model.UserPassword.Salt); //prevents SQL Injection
             this.AddParameters("Email", model.Email); //prevents SQL Injection
             this.AddParameters("Address", model.Address); //prevents SQL Injection
             this.AddParameters("PhoneNum", model.PhoneNum); //prevents SQL Injection
