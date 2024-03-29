@@ -1,0 +1,45 @@
+﻿@using EventsManagerModels;
+
+@model MenuListVIewModel
+@{
+    ViewBag.Title = "ViewMenus";
+    Layout = "~/Views/Master/MasterPage.cshtml";
+}
+
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+@if (Model != null)
+{
+    int pages = Model.Menus.Count / Model.ItemsPerPage;
+    if (Model.Menus.Count % Model.ItemsPerPage > 0)
+    {
+        pages++;
+    }
+
+    <div class="MenuWraper">
+        @foreach (Menu menu in Model.Menus)
+        {
+            if (Model.Menus.IndexOf(menu) < (Model.ItemsPerPage * Model.PageNumber) && Model.Menus.IndexOf(menu) > (Model.ItemsPerPage * (Model.PageNumber - 1)) - 1)
+            {
+                <section class="Menu">
+                    <h2 class="MenuTitle">
+                        <a class="menulink" href="~/menu/Viewmenu/?menuId=@menu.MenuId">
+                            @menu.MenuName
+                        </a>
+                    </h2>
+                </section>
+            }
+        }
+    </div>
+
+    <div class="pageof">
+        <h1 class="pageofTitle">This is page @Model.PageNumber of @pages pages </h1>
+    </div>
+
+}
+else
+{
+    <section class="errorSection">
+        <h1 class="errorTitle">There was connection issue. Try later</h1>
+        <img class="errorMessage" src="~/Content/images/ConnectionError.png" />
+    </section>
+}

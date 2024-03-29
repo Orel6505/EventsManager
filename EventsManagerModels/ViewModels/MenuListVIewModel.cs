@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace EventsManagerModels
 {
-    public class FoodListViewModel
+    public class MenuListVIewModel
     {
-        public List<Food> Foods { get; set; }
+        public List<Menu> Menus { get; set; }
         public int PageNumber { get; set; }
         public int ItemsPerPage { get; set; }
     }

@@ -9,6 +9,6 @@ namespace EventsManager
 {
     public class CommonParameters
     {
-         public static readonly string ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\Orely\\Desktop\\EM-main\\EventsManagerServer\\App_Data\\Database.accdb";
+         public static readonly string ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\Orely\\DesktopStorage\\EventsManager\\EventsManagerServer\\App_Data\\Database.accdb";
     }
 }

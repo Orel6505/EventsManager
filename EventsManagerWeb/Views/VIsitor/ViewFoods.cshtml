@@ -1,6 +1,4 @@
 ﻿@using EventsManagerModels;
-@using PagedList;
-@using PagedList.Mvc;
 
 @model FoodListViewModel
 @{
@@ -11,21 +9,16 @@
 <link href="~/Content/PagedList.css" rel="stylesheet" />
 @if (Model != null)
 {
-    IPagedList<Food> Foods = Model.Foods.ToPagedList<Food>(Model.PageNumber, Model.ItemsPerpage);
-
-    int pages = Model.Foods.Count / Model.ItemsPerpage;
-    if (Model.Foods.Count % Model.ItemsPerpage > 0)
+    int pages = Model.Foods.Count / Model.ItemsPerPage;
+    if (Model.Foods.Count % Model.ItemsPerPage > 0)
     {
         pages++;
     }
-    <div class="pageof">
-        <h1 class="pageofTitle">This is page @Model.PageNumber of @pages pages </h1>
-    </div>
 
     <div class="foodWraper">
         @foreach (Food food in Model.Foods)
         {
-            if (Model.Foods.IndexOf(food) < (Model.ItemsPerpage * Model.PageNumber) && Model.Foods.IndexOf(food) > (Model.ItemsPerpage * (Model.PageNumber-1))-1)
+            if (Model.Foods.IndexOf(food) < (Model.ItemsPerPage * Model.PageNumber) && Model.Foods.IndexOf(food) > (Model.ItemsPerPage * (Model.PageNumber - 1)) - 1)
             {
                 <section class="food">
                     <h2 class="foodTitle">
@@ -35,8 +28,17 @@
                     </h2>
                 </section>
             }
+            else if ((Model.ItemsPerPage * (Model.PageNumber - 1) - 1) < Model.Foods.IndexOf(food))
+            {
+                break;
+            }
         }
     </div>
+
+    <div class="pageof">
+        <h1 class="pageofTitle">This is page @Model.PageNumber of @pages pages </h1>
+    </div>
+
 }
 else
 {
