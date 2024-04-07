@@ -14,7 +14,13 @@
         function GetMenus() {
             const xhttp = new XMLHttpRequest();
             xhttp.onload = function () {
-                document.getElementById("MenusWrapper").innerHTML = this.responseText;
+                let response = JSON.parse(this.responseText);
+                console.log(response.Menus);
+                for (let menu in Response.Menus) {
+                    let menuitem = Response.Menus[menu]
+                    console.log(menuitem);
+                }
+
             }
             xhttp.open("GET", "@CommonParameters.Location.WebService/Visitor/GetMenus", true);
             xhttp.send();
