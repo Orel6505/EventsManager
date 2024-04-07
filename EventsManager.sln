@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventsManagerWeb", "EventsM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PasswordManager", "PasswordManager\PasswordManager.csproj", "{CF21B46A-558E-446C-862B-9623DAE654DB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonParameters", "CommonParameters\CommonParameters.csproj", "{29497655-8CED-4085-A92A-707383D8AF45}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{CF21B46A-558E-446C-862B-9623DAE654DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF21B46A-558E-446C-862B-9623DAE654DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF21B46A-558E-446C-862B-9623DAE654DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29497655-8CED-4085-A92A-707383D8AF45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29497655-8CED-4085-A92A-707383D8AF45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29497655-8CED-4085-A92A-707383D8AF45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29497655-8CED-4085-A92A-707383D8AF45}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
