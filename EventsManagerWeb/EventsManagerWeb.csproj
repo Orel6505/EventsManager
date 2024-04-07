@@ -133,7 +133,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="CommonParam.cs" />
     <Compile Include="Controllers\VisitorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -159,6 +158,10 @@
     <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CommonParameters\CommonParameters.csproj">
+      <Project>{29497655-8ced-4085-a92a-707383d8af45}</Project>
+      <Name>CommonParameters</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EventsManagerModels\EventsManagerModels.csproj">
       <Project>{81a2be5b-e554-46df-a344-15f3fb69f8b6}</Project>
       <Name>EventsManagerModels</Name>

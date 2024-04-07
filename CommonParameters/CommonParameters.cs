@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace CommonParameters
 {
-    public class CommonParameters
+    public class Location
     {
+        public static readonly string Db = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\Orely\\DesktopStorage\\EM-Main\\EventsManagerServer\\App_Data\\Database.accdb";
+        public static readonly string WebService = "http://localhost:58238/";
     }
 }

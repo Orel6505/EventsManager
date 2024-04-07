@@ -14,7 +14,7 @@ namespace EventsManagerWeb.Controllers
         {
             WebClient<FoodListViewModel> client = new WebClient<FoodListViewModel>
             {
-                Server = CommonParam.ServerLocation,
+                Server = CommonParameters.Location.WebService,
                 Controller = "Visitor",
                 Method = "GetFoods"
             };
@@ -31,7 +31,7 @@ namespace EventsManagerWeb.Controllers
         {
             WebClient<Food> client = new WebClient<Food>
             {
-                Server = CommonParam.ServerLocation,
+                Server = CommonParameters.Location.WebService,
                 Controller = "Food",
                 Method = "GetFoodById"
             };
@@ -44,7 +44,7 @@ namespace EventsManagerWeb.Controllers
         {
             WebClient<MenuListVIewModel> client = new WebClient<MenuListVIewModel>
             {
-                Server = CommonParam.ServerLocation,
+                Server = CommonParameters.Location.WebService,
                 Controller = "Visitor",
                 Method = "GetMenus"
             };
@@ -61,7 +61,7 @@ namespace EventsManagerWeb.Controllers
         {
             WebClient<Menu> client = new WebClient<Menu>
             {
-                Server = CommonParam.ServerLocation,
+                Server = CommonParameters.Location.WebService,
                 Controller = "Visitor",
                 Method = "GetMenuById"
             };
