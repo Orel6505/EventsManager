@@ -6,21 +6,24 @@
     Layout = "~/Views/Master/MasterPage.cshtml";
 }
 
-<link href="~/Content/PagedList.css" rel="stylesheet" />
 @if (Model != null)
 {
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
     <script>
-        window.onload = GetMenus();
+        window.onload = function () {
+            GetMenus()
+            setInterval(GetMenus, 10000);
+        };
         function GetMenus() {
+            $("#MenusWrapper").empty();
             const xhttp = new XMLHttpRequest();
             xhttp.onload = function () {
                 let response = JSON.parse(this.responseText);
-                console.log(response.Menus);
-                for (let menu in Response.Menus) {
-                    let menuitem = Response.Menus[menu]
-                    console.log(menuitem);
-                }
-
+                response.Menus.forEach((menu) => {
+                    $("#MenusWrapper").append('<div id="MenuItem">' +
+                        '<a href="@CommonParameters.Location.WebService/Visitor/GetMenuById/?id=' + menu.MenuId + '">' + menu.MenuName + '</a>' +
+                        '</div>')
+                });
             }
             xhttp.open("GET", "@CommonParameters.Location.WebService/Visitor/GetMenus", true);
             xhttp.send();
