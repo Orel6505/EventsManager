@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
+using System.Web.Http.Cors;
 
 namespace EventsManager.Controllers
 {
@@ -39,6 +40,7 @@ namespace EventsManager.Controllers
         }
 
         [HttpGet]
+        [EnableCors(origins: "https://localhost:44365", headers: "*", methods: "*")]
         public MenuListVIewModel GetMenus()
         {
             MenuListVIewModel model = new MenuListVIewModel();

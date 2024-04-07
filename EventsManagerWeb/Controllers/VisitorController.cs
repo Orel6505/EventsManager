@@ -57,6 +57,23 @@ namespace EventsManagerWeb.Controllers
             return View(Menus);
         }
 
+        public ActionResult ViewMenues(int PageNumber = 1, int ItemsPerPage = 3)
+        {
+            WebClient<MenuListVIewModel> client = new WebClient<MenuListVIewModel>
+            {
+                Server = CommonParameters.Location.WebService,
+                Controller = "Visitor",
+                Method = "GetMenus"
+            };
+            MenuListVIewModel Menus = client.Get();
+            if (Menus != null)
+            {
+                Menus.PageNumber = PageNumber;
+                Menus.ItemsPerPage = ItemsPerPage;
+            }
+            return View(Menus);
+        }
+
         public ActionResult ViewMenu(int MenuId)
         {
             WebClient<Menu> client = new WebClient<Menu>

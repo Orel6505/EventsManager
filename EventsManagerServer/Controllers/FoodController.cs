@@ -60,6 +60,55 @@ namespace EventsManager.Controllers
             }
             return food;
         }
+        [HttpGet]
+        public List<Hall> GetHalls()
+        {
+            List<Hall> Halls;
+            DbContext dbContext = OleDbContext.GetInstance();
+            LibraryUnitOfWork libraryUnitOfWork = new LibraryUnitOfWork(dbContext);
+            try
+            {
+                dbContext.OpenConnection();
+                Halls = libraryUnitOfWork.HallRepository.ReadAll();
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+                return null;
+            }
+            finally
+            {
+                dbContext.CloseConnection();
+            }
+            return Halls;
+        }
 
+        [HttpGet]
+        public Hall GetHallById(int id)
+        {
+            DbContext dbContext = OleDbContext.GetInstance();
+            LibraryUnitOfWork libraryUnitOfWork = new LibraryUnitOfWork(dbContext);
+            Hall hall;
+            try
+            {
+                dbContext.OpenConnection();
+                hall = libraryUnitOfWork.HallRepository.Read(id);
+                hall.Ratings = libraryUnitOfWork.RatingRepository.ReadRatingsByHallIdId(hall.HallId);
+                foreach (Rating rating in hall.Ratings)
+                {
+                    rating.RatingImages = libraryUnitOfWork.RatingImageRepository.ReadByRatingId(rating.RatingId);
+                }
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+                return null;
+            }
+            finally
+            {
+                dbContext.CloseConnection();
+            }
+            return hall;
+        }
     }
 }
