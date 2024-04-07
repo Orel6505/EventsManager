@@ -42,7 +42,7 @@ namespace EventsManager.Data_Access_Layer
 
         public Menu Read(object id)
         {
-            string sql = $"SELECT FROM Menus WHERE MenuId=@MenuId";
+            string sql = $"SELECT * FROM Menus WHERE MenuId=@MenuId";
             this.AddParameters("MenuId", id.ToString()); //prevents SQL Injection
             using (IDataReader dataReader = this.dbContext.Read(sql))
             {

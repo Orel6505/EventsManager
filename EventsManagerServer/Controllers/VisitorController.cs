@@ -17,15 +17,15 @@ namespace EventsManager.Controllers
     public class VisitorController : ApiController
     {
         [HttpGet]
-        public FoodListViewModel GetFoods()
+        public List<Food> GetFoods()
         {
-            FoodListViewModel model = new FoodListViewModel();
+            List<Food> Foods;
             DbContext dbContext = OleDbContext.GetInstance();
             LibraryUnitOfWork libraryUnitOfWork = new LibraryUnitOfWork(dbContext);
             try
             {
                 dbContext.OpenConnection();
-                model.Foods = libraryUnitOfWork.FoodRepository.ReadAll();
+                Foods = libraryUnitOfWork.FoodRepository.ReadAll();
             }
             catch (Exception ex)
             {
@@ -36,7 +36,80 @@ namespace EventsManager.Controllers
             {
                 dbContext.CloseConnection();
             }
-            return model;
+            return Foods;
+        }
+
+        [HttpGet]
+        public Food GetFoodById(int id)
+        {
+            DbContext dbContext = OleDbContext.GetInstance();
+            LibraryUnitOfWork libraryUnitOfWork = new LibraryUnitOfWork(dbContext);
+            Food food;
+            try
+            {
+                dbContext.OpenConnection();
+                food = libraryUnitOfWork.FoodRepository.Read(id);
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+                return null;
+            }
+            finally
+            {
+                dbContext.CloseConnection();
+            }
+            return food;
+        }
+        [HttpGet]
+        public List<Hall> GetHalls()
+        {
+            List<Hall> Halls;
+            DbContext dbContext = OleDbContext.GetInstance();
+            LibraryUnitOfWork libraryUnitOfWork = new LibraryUnitOfWork(dbContext);
+            try
+            {
+                dbContext.OpenConnection();
+                Halls = libraryUnitOfWork.HallRepository.ReadAll();
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+                return null;
+            }
+            finally
+            {
+                dbContext.CloseConnection();
+            }
+            return Halls;
+        }
+
+        [HttpGet]
+        public Hall GetHallById(int id)
+        {
+            DbContext dbContext = OleDbContext.GetInstance();
+            LibraryUnitOfWork libraryUnitOfWork = new LibraryUnitOfWork(dbContext);
+            Hall hall;
+            try
+            {
+                dbContext.OpenConnection();
+                hall = libraryUnitOfWork.HallRepository.Read(id);
+                hall.Ratings = libraryUnitOfWork.RatingRepository.ReadRatingsByHallIdId(hall.HallId);
+                foreach (Rating rating in hall.Ratings)
+                {
+                    rating.RatingImages = libraryUnitOfWork.RatingImageRepository.ReadByRatingId(rating.RatingId);
+                }
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+                return null;
+            }
+            finally
+            {
+                dbContext.CloseConnection();
+            }
+            return hall;
         }
 
         [HttpGet]
@@ -61,6 +134,29 @@ namespace EventsManager.Controllers
                 dbContext.CloseConnection();
             }
             return model;
+        }
+
+        [HttpGet]
+        public EventsManagerModels.Menu GetMenuById(int id)
+        {
+            DbContext dbContext = OleDbContext.GetInstance();
+            LibraryUnitOfWork libraryUnitOfWork = new LibraryUnitOfWork(dbContext);
+            EventsManagerModels.Menu menu;
+            try
+            {
+                dbContext.OpenConnection();
+                menu = libraryUnitOfWork.MenuRepository.Read(id);
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+                return null;
+            }
+            finally
+            {
+                dbContext.CloseConnection();
+            }
+            return menu;
         }
     }
 }

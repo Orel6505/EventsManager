@@ -21,7 +21,7 @@
                 let response = JSON.parse(this.responseText);
                 response.Menus.forEach((menu) => {
                     $("#MenusWrapper").append('<div id="MenuItem">' +
-                        '<a href="@CommonParameters.Location.WebService/Visitor/GetMenuById/?id=' + menu.MenuId + '">' + menu.MenuName + '</a>' +
+                        '<a href="@CommonParameters.Location.WebServer/Visitor/ViewMenu/?id=' + menu.MenuId + '">' + menu.MenuName + '</a>' +
                         '</div>')
                 });
             }

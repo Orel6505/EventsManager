@@ -16,21 +16,34 @@
     <header>
         <nav class="nav">
             <a class="cLogo" href="Index.html"><img class="logo" src="~/Content/img/profile.png"></a>
-            <a class="navText" href="Index.html"> Home </a>
-            <a class="navText" href="Index1.html"> Test Foods </a>
-            <a class="navText" href="Index2.html"> Test </a>
-            <a class="cOpenNav" onclick="openNav()"><img class="mOpenNav" src="~/Content/img/open-menu.png"></a>
-            <a class="mCloseNav closeNav" onclick="closeNav()" >&times;</a>
+            <a class="cOpenNav" onclick="openNav()"><img class="mOpenNav" id="mOpenNav" src="~/Content/img/open-menu.png"></a>
+            <div id="navMobileMenu" class="navMobileMenu">
+                <a class="navText" id="navText" href="Index.html"> Home </a>
+                <a class="navText" id="navText" href="Index.html"> Test Foods </a>
+                <a class="navText" id="navText" href="Index.html"> Test </a>
+            </div>
         </nav>
     </header>
     <script>
-    function openNav() {
-        document.getElementById("nav-mobile").style.width = "100%";
-    }
+        window.addEventListener('resize', resetChanges);
+        function resetChanges() {
 
-    function closeNav() {
-        document.getElementById("nav-mobile").style.width = "100%";
-    }
+            if (window.innerWidth > 700) {
+                document.getElementById("navMobileMenu").style.width = "100%";
+            }
+        }
+
+        let click = 0;
+        function openNav() {
+            if (click % 2 == 0) {
+                document.getElementById("navMobileMenu").style.width = "100%";
+                document.getElementById("mOpenNav").style.position = "fixed";
+            } else {
+                document.getElementById("navMobileMenu").style.width = "0%";
+                document.getElementById("mOpenNav").style.position = "inherit";
+            }
+            click++
+        }
     </script>
 
     <div class="DataBody">

@@ -86,16 +86,34 @@ html, body {
 	border-radius: 20%;
 }
 
-.nav .mCloseNav {
-	display: none;
-}
-
 @media screen and (max-width: 700px) {
 	.nav .mOpenNav {
 		display: block;
+		z-index: 10;
+		right: 12px;
+		overflow: hidden
 	}
-	.nav .navText{
-		display: none;
+	.navMobileMenu {
+		width: 0;
+		display: block;
+		height: 100%;
+		position: fixed;
+		z-index: 1;
+		overflow: hidden;
+		background-color: #111;
+		transition: 0.5s;
+		right: 0;
+	}
+
+	.navMobileMenu .navText {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		float: none;
+		overflow: hidden;
+		text-align: center;
+		font-size: 2rem;
+		transition: 0.3s;
 	}
 }
 

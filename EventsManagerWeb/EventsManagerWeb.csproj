@@ -154,7 +154,6 @@
   <ItemGroup>
     <Content Include="Content\img\open-menu.png" />
     <Content Include="Content\img\profile.png" />
-    <Content Include="Content\PagedList.css" />
     <Content Include="Content\Style.css" />
     <Content Include="Global.asax" />
     <Content Include="template\img\open-menu.png" />
@@ -175,10 +174,11 @@
     <Content Include="Views\web.config" />
     <None Include="packages.config" />
     <Content Include="Views\Master\MasterPage.cshtml" />
-    <Content Include="Views\VIsitor\ViewFoods.cshtml" />
-    <Content Include="Views\VIsitor\ViewFood.cshtml" />
-    <Content Include="Views\VIsitor\ViewMenus.cshtml" />
-    <Content Include="Views\VIsitor\ViewMenues.cshtml" />
+    <Content Include="Views\Visitor\ViewFoods.cshtml" />
+    <Content Include="Views\Visitor\ViewFood.cshtml" />
+    <Content Include="Views\Visitor\ViewMenus.cshtml" />
+    <Content Include="Views\Visitor\ViewMenues.cshtml" />
+    <Content Include="Views\Visitor\ViewMenu.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

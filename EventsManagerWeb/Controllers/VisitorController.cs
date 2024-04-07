@@ -74,7 +74,7 @@ namespace EventsManagerWeb.Controllers
             return View(Menus);
         }
 
-        public ActionResult ViewMenu(int MenuId)
+        public ActionResult ViewMenu(int id)
         {
             WebClient<Menu> client = new WebClient<Menu>
             {
@@ -82,7 +82,7 @@ namespace EventsManagerWeb.Controllers
                 Controller = "Visitor",
                 Method = "GetMenuById"
             };
-            client.AddKeyValue("id", MenuId.ToString());
+            client.AddKeyValue("id", id.ToString());
             Menu menu = client.Get();
             return View(menu);
         }

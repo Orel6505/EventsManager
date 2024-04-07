@@ -1,0 +1,17 @@
+﻿@using EventsManagerModels;
+
+@model Menu
+@{
+    ViewBag.Title = "ViewMenu";
+    Layout = "~/Views/Master/MasterPage.cshtml";
+}
+<div class="Menuwraper">
+    <div class="MenuImage">
+        <img class="MenuImg" src="@Model.MenuId" />
+    </div>
+    <div class="MenuData">
+        <h1 class="MenuName">@Model.MenuName</h1>
+        <p class="MenuDescription">@Model.MenuDesc</p>
+    </div>
+</div>
+
