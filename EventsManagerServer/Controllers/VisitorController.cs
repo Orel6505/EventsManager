@@ -137,7 +137,7 @@ namespace EventsManager.Controllers
         }
 
         [HttpGet]
-        public EventsManagerModels.Menu GetMenuById(int id = 0)
+        public EventsManagerModels.Menu GetMenuById(int id = 1)
         {
             DbContext dbContext = OleDbContext.GetInstance();
             LibraryUnitOfWork libraryUnitOfWork = new LibraryUnitOfWork(dbContext);

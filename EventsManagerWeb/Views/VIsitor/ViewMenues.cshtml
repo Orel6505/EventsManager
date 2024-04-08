@@ -14,21 +14,33 @@
             GetMenus()
             setInterval(GetMenus, 10000);
         };
+        window.addEventListener('input', GetMenus);
         function GetMenus() {
             $("#MenusWrapper").empty();
             const xhttp = new XMLHttpRequest();
             xhttp.onload = function () {
                 let response = JSON.parse(this.responseText);
                 response.Menus.forEach((menu) => {
-                    $("#MenusWrapper").append('<div id="MenuItem">' +
-                        '<a href="@CommonParameters.Location.WebServer/Visitor/ViewMenu/?id=' + menu.MenuId + '">' + menu.MenuName + '</a>' +
-                        '</div>')
+                    let SearchVal = document.getElementById("MenuSearch").value ?? '';;
+                    if (SearchVal !== null) { // strict not-equal operator
+                        if (menu.MenuName.includes(SearchVal)) {
+                            $("#MenusWrapper").append('<div id="MenuItem">' +
+                                '<a href="@CommonParameters.Location.WebServer/Visitor/ViewMenu/?id=' + menu.MenuId + '">' + menu.MenuName + '</a>' +
+                                '</div>')
+                        }
+                    }
+                    else {
+                        $("#MenusWrapper").append('<div id="MenuItem">' +
+                            '<a href="@CommonParameters.Location.WebServer/Visitor/ViewMenu/?id=' + menu.MenuId + '">' + menu.MenuName + '</a>' +
+                            '</div>')
+                    }
                 });
             }
             xhttp.open("GET", "@CommonParameters.Location.WebService/Visitor/GetMenus", true);
             xhttp.send();
         }
     </script>
+    <input type="search" id="MenuSearch" name="MenuSearch">
     <div id="MenusWrapper"></div>
 }
 else

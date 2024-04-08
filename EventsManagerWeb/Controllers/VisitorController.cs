@@ -74,7 +74,7 @@ namespace EventsManagerWeb.Controllers
             return View(Menus);
         }
 
-        public ActionResult ViewMenu(int id)
+        public ActionResult ViewMenu(int id = 1)
         {
             WebClient<Menu> client = new WebClient<Menu>
             {
