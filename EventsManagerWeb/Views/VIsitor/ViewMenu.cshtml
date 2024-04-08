@@ -13,5 +13,26 @@
         <h1 class="MenuName">@Model.MenuName</h1>
         <p class="MenuDescription">@Model.MenuDesc</p>
     </div>
+    <div class="foodWraper">
+         @if (Model.Foods.Count > 0)
+         {
+             foreach (Food food in Model.Foods)
+             {
+                <section class="food">
+                    <h2 class="foodTitle">
+                        <a class="foodlink" href="~/Visitor/ViewFood/?FoodId=@food.FoodId">
+                            @food.FoodName
+                        </a>
+                    </h2>
+                </section>
+             }
+         } 
+         else
+         {
+            <section class="nullSection">
+                <h1 class="errorTitle"> אין מאכלים בתפריט הזה כרגע, אנא נסו מאוחר יותר</h1>
+            </section>
+         }
+    </div>
 </div>
 

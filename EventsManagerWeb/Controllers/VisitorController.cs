@@ -32,7 +32,7 @@ namespace EventsManagerWeb.Controllers
             WebClient<Food> client = new WebClient<Food>
             {
                 Server = CommonParameters.Location.WebService,
-                Controller = "Food",
+                Controller = "Visitor",
                 Method = "GetFoodById"
             };
             client.AddKeyValue("id", FoodId.ToString());

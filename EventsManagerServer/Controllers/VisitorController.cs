@@ -137,7 +137,7 @@ namespace EventsManager.Controllers
         }
 
         [HttpGet]
-        public EventsManagerModels.Menu GetMenuById(int id)
+        public EventsManagerModels.Menu GetMenuById(int id = 0)
         {
             DbContext dbContext = OleDbContext.GetInstance();
             LibraryUnitOfWork libraryUnitOfWork = new LibraryUnitOfWork(dbContext);
@@ -146,6 +146,7 @@ namespace EventsManager.Controllers
             {
                 dbContext.OpenConnection();
                 menu = libraryUnitOfWork.MenuRepository.Read(id);
+                menu.Foods = libraryUnitOfWork.FoodRepository.GetFoodsByMenuId(menu.MenuId);
             }
             catch (Exception ex)
             {

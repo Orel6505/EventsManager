@@ -66,6 +66,18 @@ namespace EventsManager.Data_Access_Layer
             //returns food
         }
 
+        public List<Food> GetFoodsByMenuId(object id)
+        {
+            List<Food> Foods = new List<Food>();
+            string sql = $"SELECT * FROM Foods INNER JOIN FoodMenu ON Foods.FoodId = FoodMenu.FoodId WHERE FoodMenu.MenuId=@MenuId;";
+            this.AddParameters("MenuId", id.ToString()); //prevents SQL Injection
+            using (IDataReader dataReader = this.dbContext.Read(sql))
+                while (dataReader.Read() == true)
+                    Foods.Add(this.modelFactory.FoodModelCreator.CreateModel(dataReader));
+            return Foods;
+            //returns food
+        }
+
         public object ReadValue()
         {
             throw new NotImplementedException();

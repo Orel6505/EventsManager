@@ -16,7 +16,7 @@ namespace EventsManagerWeb
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Visitor", action = "ViewFoods", id = UrlParameter.Optional }
+                defaults: new { controller = "Visitor", action = "ViewMenues", id = UrlParameter.Optional }
             );
         }
     }

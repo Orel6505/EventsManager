@@ -31,6 +31,7 @@ namespace PasswordManager
             this.HashPassword = GenerateHash(EnteredPassword, this.Salt);
         }
 
+        //TODO: Fix vulnerability to Timing attack
         public bool IsSamePassword(string EnteredPassword)
         {
             return this.HashPassword == GenerateHash(EnteredPassword, this.Salt);
