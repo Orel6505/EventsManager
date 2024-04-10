@@ -123,6 +123,9 @@ namespace EventsManager.Controllers
             {
                 dbContext.OpenConnection();
                 model.Menus = libraryUnitOfWork.MenuRepository.ReadAll();
+                model.Foods = libraryUnitOfWork.FoodRepository.ReadAll();
+                model.FoodTypes = libraryUnitOfWork.FoodTypeRepository.ReadAll();
+                model.Halls = libraryUnitOfWork.HallRepository.ReadAll();
             }
             catch (Exception ex)
             {

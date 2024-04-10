@@ -27,22 +27,15 @@
     <script>
         window.addEventListener('resize', resetChanges);
         function resetChanges() {
-
-            if (window.innerWidth > 700) {
-                document.getElementById("navMobileMenu").style.width = "100%";
-            }
+            let element = document.getElementById("navMobileMenu")
+            element.style.width = window.innerWidth > 700 ? "100%" : "0";
         }
 
-        let click = 0;
         function openNav() {
-            if (click % 2 == 0) {
-                document.getElementById("navMobileMenu").style.width = "100%";
-                document.getElementById("mOpenNav").style.position = "fixed";
-            } else {
-                document.getElementById("navMobileMenu").style.width = "0%";
-                document.getElementById("mOpenNav").style.position = "inherit";
-            }
-            click++
+            let element = document.getElementById("navMobileMenu")
+            element.style.width = element.style.width == "100%" ? "0" : "100%";
+            element = document.getElementById("mOpenNav")
+            element.style.position = element.style.position == "inherit" ? "fixed" : "inherit";
         }
     </script>
 

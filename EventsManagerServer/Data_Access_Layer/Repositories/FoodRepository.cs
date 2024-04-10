@@ -46,11 +46,12 @@ namespace EventsManager.Data_Access_Layer
 
         public bool Insert(Food model)
         {
-            string sql = $"INSERT INTO Foods(FoodName,FoodDesc,FoodImage,FoodPrice) VALUES(@FoodName,@FoodDesc,@FoodImage,@FoodPrice)";
+            string sql = $"INSERT INTO Foods(FoodName,FoodDesc,FoodImage,FoodPrice,FoodTypeId) VALUES(@FoodName,@FoodDesc,@FoodImage,@FoodPrice,@FoodTypeId)";
             this.AddParameters("FoodName", model.FoodName); //prevents SQL Injection
             this.AddParameters("FoodDesc", model.FoodDesc); //prevents SQL Injection
             this.AddParameters("FoodImage", model.FoodImage); //prevents SQL Injection
             this.AddParameters("FoodPrice", model.FoodPrice.ToString()); //prevents SQL Injection
+            this.AddParameters("FoodTypeId", model.FoodPrice.ToString()); //prevents SQL Injection
             return this.dbContext.Create(sql) > 0;
         }
 
@@ -85,11 +86,12 @@ namespace EventsManager.Data_Access_Layer
 
         public bool Update(Food model)
         {
-            string sql = "UPDATE Foods SET FoodName=@FoodName, FoodDesc=@FoodDesc, FoodImage=@FoodId where FoodId=@FoodId";
+            string sql = "UPDATE Foods SET FoodName=@FoodName, FoodDesc=@FoodDesc, FoodImage=@FoodId, FoodTypeId=@FoodTypeId where FoodId=@FoodId";
             this.AddParameters("FoodId", model.FoodId.ToString()); //prevents SQL Injection
             this.AddParameters("FoodName", model.FoodName); //prevents SQL Injection
             this.AddParameters("FoodDesc", model.FoodDesc); //prevents SQL Injection
             this.AddParameters("FoodImage", model.FoodImage); //prevents SQL Injection
+            this.AddParameters("FoodTypeId", model.FoodPrice.ToString()); //prevents SQL Injection
             return this.dbContext.Update(sql) > 0;
         }
     }

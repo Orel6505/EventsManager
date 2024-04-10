@@ -2,64 +2,70 @@
 
 @model MenuListVIewModel
 @{
-    ViewBag.Title = "ViewMenues";
+    ViewBag.Title = "ViewMenus";
     Layout = "~/Views/Master/MasterPage.cshtml";
 }
 
 @if (Model != null)
 {
+    <link rel="stylesheet" href="~/Content/Menus.css" />
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script src="~/Content/Menus.js"></script>
+    <div class="ShowMenu">
+        <div id="MenusWrapper"></div>
+    </div>
+    <div class="SortMenu" id="SortMenu">
+        <input type="search" id="MenuSearch" class="MenuSearch" name="MenuSearch">
+        @if (Model.Halls.Count > 0)
+        {
+            <button class="SortMenuOptions" onclick="ShowHallsOptions()">סוגי אולמות</button>
+            <div class="OptionItems" id="HallOptions">
+                @foreach (Hall hall in Model.Halls)
+                {
+                    <div class="OptionItem HallOption">
+                        <input type="checkbox" id="HallCheckBox" name="HallCheckBox" value="@hall.HallId">
+                        <h4>@hall.HallName</h4>
+                    </div>
+                }
+            </div>
+        }
+        @if (Model.FoodTypes.Count > 0)
+        {
+            <button class="SortMenuOptions" onclick="ShowFoodTypeOptions()">סוגי מנות</button>
+            <div class="OptionItems" id="FoodTypeOptions">
+                @foreach (FoodType foodType in Model.FoodTypes)
+                {
+                    <div class="OptionItem FoodTypeOption">
+                        <input type="checkbox" id="FoodTypeCheckBox" name="FoodTypeCheckBox" value="@foodType.FoodTypeId">
+                        <h4>@foodType.FoodTypeName</h4>
+                    </div>
+                }
+            </div>
+        }
+        @if (Model.Foods.Count > 0)
+        {
+            <button class="SortMenuOptions" onclick="ShowFoodOptions()">סוגי מאכלים</button>
+            <div class="OptionItems" id="FoodOptions">
+                @foreach (Food food in Model.Foods)
+                {
+                    <div class="OptionItem FoodOption">
+                        <input type="checkbox" id="FoodCheckBox" name="FoodCheckBox" value="@food.FoodId">
+                        <h4>@food.FoodName</h4>
+                    </div>
+                }
+            </div>
+        }
+    </div>
     <script>
-        var MenuResponse;
+        const CheckBox = document.getElementById("SortMenu");
+        const Listener = document.getElementById("MenuSearch");
+        CheckBox.addEventListener('change', LoadMenus);
+        Listener.addEventListener('input', LoadMenus);
         window.onload = function () {
             GetMenus();
             setInterval(GetMenus, 100000); // 100 seconds interval
         };
-        function GetMenus() {
-            const xhttp = new XMLHttpRequest();
-            xhttp.onload = function () {
-            try {
-                globalThis.MenuResponse = JSON.parse(this.responseText);
-                LoadMenus();
-            } catch (error) {
-                console.error("Error fetching menus:", error);
-            }
-            };
-            xhttp.onerror = function () {
-            console.error("Error during XHR request for menus.");
-            };
-            xhttp.open("GET", "@CommonParameters.Location.WebService/Visitor/GetMenus", true);
-            xhttp.send();
-        }
-        function LoadMenus() {
-            $("#MenusWrapper").empty();
-            let ResultCouner = 0;
-            let SearchVal = document.getElementById("MenuSearch").value ?? '';
-            MenuResponse.Menus.forEach((menu) => {
-            if (SearchVal !== null) { // strict not-equal operator
-                if (menu.MenuName.includes(SearchVal)) {
-                    $("#MenusWrapper").append('<div id="MenuItem">' +
-                        '<a href="@CommonParameters.Location.WebServer/ViewMenu/?id=' + menu.MenuId + '">' + menu.MenuName + '</a>' +
-                        '</div>');
-                    ResultCouner++;
-                }
-            } else {
-                $("#MenusWrapper").append('<div id="MenuItem">' +
-                '<a href="@CommonParameters.Location.WebServer/ViewMenu/?id=' + menu.MenuId + '">' + menu.MenuName + '</a>' +
-                '</div>');
-            }
-            });
-            if (!ResultCouner && SearchVal) {
-                $("#MenusWrapper").append('<div id="MenuItem">' + 'לא נמצאו תפריטים עם השם הזה.' + '</div>');
-            }
-        }
     </script>
-    <input type="search" id="MenuSearch" name="MenuSearch">
-    <script>
-        const el = document.getElementById("MenuSearch");
-        el.addEventListener('input', LoadMenus);
-    </script>
-    <div id="MenusWrapper"></div>
 }
 else
 {

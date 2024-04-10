@@ -9,5 +9,9 @@ namespace EventsManagerModels
     public class MenuListVIewModel
     {
         public List<Menu> Menus { get; set; }
+        public List<FoodType> FoodTypes { get; set; }
+        public List<Food> Foods { get; set; }
+        public List<Hall> Halls { get; set; }
+
     }
 }

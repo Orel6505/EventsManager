@@ -20,6 +20,7 @@ namespace EventsManager.Data_Access_Layer
                     FoodDesc = Convert.ToString(source["FoodDesc"]),
                     FoodPrice = Convert.ToDouble(source["FoodPrice"]),
                     FoodImage = Convert.ToString(source["FoodImage"]),
+                    FoodTypeId = Convert.ToInt16(source["FoodTypeId"]),
                     Menus = null
                 };
                 return food;
