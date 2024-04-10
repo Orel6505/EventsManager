@@ -9,7 +9,5 @@ namespace EventsManagerModels
     public class MenuListVIewModel
     {
         public List<Menu> Menus { get; set; }
-        public int PageNumber { get; set; }
-        public int ItemsPerPage { get; set; }
     }
 }

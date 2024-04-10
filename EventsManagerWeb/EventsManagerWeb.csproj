@@ -177,7 +177,6 @@
     <Content Include="Views\Visitor\ViewFoods.cshtml" />
     <Content Include="Views\Visitor\ViewFood.cshtml" />
     <Content Include="Views\Visitor\ViewMenus.cshtml" />
-    <Content Include="Views\Visitor\ViewMenues.cshtml" />
     <Content Include="Views\Visitor\ViewMenu.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
