@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\FoodType.cs" />
     <Compile Include="ViewModels\MenuListVIewModel.cs" />
     <Compile Include="Models\EventType.cs" />
     <Compile Include="Models\Food.cs" />

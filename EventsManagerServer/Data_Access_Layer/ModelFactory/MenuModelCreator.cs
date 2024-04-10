@@ -16,7 +16,6 @@ namespace EventsManager.Data_Access_Layer
                 MenuId = Convert.ToInt16(source["MenuId"]),
                 MenuName = Convert.ToString(source["MenuName"]),
                 MenuDesc = Convert.ToString(source["MenuDesc"]),
-                MenuPrice = Convert.ToInt16(source["MenuPrice"]),
                 MenuImage = Convert.ToString(source["MenuImage"]),
                 Foods = null
             };
