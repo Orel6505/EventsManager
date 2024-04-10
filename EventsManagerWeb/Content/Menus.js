@@ -37,17 +37,15 @@ function LoadMenus() {
     let ResultCouner = 0;
     let SearchVal = document.getElementById("MenuSearch").value ?? '';
     MenuResponse.Menus.forEach((menu) => {
-        if (SearchVal !== null) { // strict not-equal operator
-            if (menu.MenuName.includes(SearchVal)) {
-                $("#MenusWrapper").append('<div id="MenuItem">' +
-                    '<a href="/ViewMenu/?id=' + menu.MenuId + '">' + menu.MenuName + '</a>' +
-                    '</div>');
-                ResultCouner++;
-            }
+        if (!isSearched(SearchVal, menu)) {
+            //pass
+        } else if (!isChecked(".HallCheckBox", menu.HallId)) {
+            //pass
         } else {
             $("#MenusWrapper").append('<div id="MenuItem">' +
                 '<a href="/ViewMenu/?id=' + menu.MenuId + '">' + menu.MenuName + '</a>' +
                 '</div>');
+            ResultCouner++;
         }
     });
     if (!ResultCouner && SearchVal) {
@@ -55,19 +53,27 @@ function LoadMenus() {
     }
 }
 
-function binarySearch(arr, num) {
-    let m = 0;
-    let n = arr.length - 1;
-    while (m <= n) {
-        let k = (n + m) >> 1;
-        let cmp = num - arr[k];
-        if (cmp > 0) {
-            m = k + 1;
-        } else if (cmp < 0) {
-            n = k - 1;
+function isSearched(SearchVal, menu) {
+    if (SearchVal !== null) { // strict not-equal operator
+        if (menu.MenuName.includes(SearchVal)) {
+            return true;
         } else {
-            return k;
+            return false;
         }
     }
-    return ~m;
+    return true;
+}
+
+function isChecked(element, num) {
+    const checkboxes = document.querySelectorAll(element);
+    let isTouched = true;
+    for (const checkbox of checkboxes) {
+        if (checkbox.checked) {
+            isTouched = false;
+            if (checkbox.value == num) {
+                return true;
+            }
+        }
+    }
+    return isTouched;
 }
