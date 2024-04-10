@@ -10,23 +10,6 @@ namespace EventsManagerWeb.Controllers
 {
     public class VisitorController : Controller
     {
-        public ActionResult ViewFoods(int PageNumber=1, int ItemsPerPage=3)
-        {
-            WebClient<FoodListViewModel> client = new WebClient<FoodListViewModel>
-            {
-                Server = CommonParameters.Location.WebService,
-                Controller = "Visitor",
-                Method = "GetFoods"
-            };
-            FoodListViewModel Foods = client.Get();
-            if (Foods != null)
-            {
-                Foods.PageNumber = PageNumber;
-                Foods.ItemsPerPage = ItemsPerPage;
-            }
-            return View(Foods);
-        }
-
         public ActionResult ViewFood(int FoodId)
         {
             WebClient<Food> client = new WebClient<Food>
