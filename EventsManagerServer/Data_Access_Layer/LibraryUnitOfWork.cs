@@ -9,6 +9,7 @@ namespace EventsManager.Data_Access_Layer
     {
         EventTypeRepository eventTypeRepository;
         FoodRepository foodRepository;
+        FoodTypeRepository foodTypeRepository;
         HallRepository hallRepository;
         MenuRepository menuRepository;
         MessageRepository messageRepository;
@@ -45,6 +46,18 @@ namespace EventsManager.Data_Access_Layer
                     this.foodRepository = new FoodRepository(dbContext);
                 }
                 return foodRepository;
+            }
+        }
+
+        public FoodTypeRepository FoodTypeRepository
+        {
+            get
+            {
+                if (foodTypeRepository == null)
+                {
+                    this.foodTypeRepository = new FoodTypeRepository(dbContext);
+                }
+                return foodTypeRepository;
             }
         }
 

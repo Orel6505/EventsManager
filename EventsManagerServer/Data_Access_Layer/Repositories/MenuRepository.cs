@@ -32,11 +32,10 @@ namespace EventsManager.Data_Access_Layer
 
         public bool Insert(Menu model)
         {
-            string sql = $"INSERT INTO Menus(MenuName,MenuDesc,MenuImage,MenuPrice) VALUES(@MenuName,@MenuDesc,@MenuImage,@MenuPrice)";
+            string sql = $"INSERT INTO Menus(MenuName,MenuDesc,MenuImage) VALUES(@MenuName,@MenuDesc,@MenuImage)";
             this.AddParameters("MenuName", model.MenuName); //prevents SQL Injection
             this.AddParameters("MenuDesc", model.MenuDesc); //prevents SQL Injection
             this.AddParameters("MenuImage", model.MenuImage); //prevents SQL Injection
-            this.AddParameters("MenuPrice", model.MenuPrice.ToString()); //prevents SQL Injection
             return this.dbContext.Create(sql) > 0;
         }
 
@@ -69,12 +68,11 @@ namespace EventsManager.Data_Access_Layer
 
         public bool Update(Menu model)
         {
-            string sql = "UPDATE Menus SET MenuName=@MenuName, MenuDesc=@MenuDesc, MenuImage=@MenuImage, MenuPrice=@MenuPrice where MenuId=@MenuId";
+            string sql = "UPDATE Menus SET MenuName=@MenuName, MenuDesc=@MenuDesc, MenuImage=@MenuImage where MenuId=@MenuId";
             this.AddParameters("MenuId", model.MenuId.ToString()); //prevents SQL Injection
             this.AddParameters("MenuName", model.MenuName); //prevents SQL Injection
             this.AddParameters("MenuDesc", model.MenuDesc); //prevents SQL Injection
             this.AddParameters("MenuImage", model.MenuImage); //prevents SQL Injection
-            this.AddParameters("MenuPrice", model.MenuPrice.ToString()); //prevents SQL Injection
             return this.dbContext.Update(sql) > 0;
         }
     }

@@ -10,6 +10,7 @@ namespace EventsManager.Data_Access_Layer
     {
         EventTypeModelCreator eventTypeModelCreator;
         FoodModelCreator foodModelCreator;
+        FoodTypeModelCreator foodTypeModelCreator;
         HallModelCreator hallModelCreator;
         MenuModelCreator menuModelCreator;
         MessageModelCreator messageModelCreator;
@@ -40,6 +41,17 @@ namespace EventsManager.Data_Access_Layer
                     this.foodModelCreator = new FoodModelCreator();
                 }
                 return foodModelCreator;
+            }
+        }
+        public FoodTypeModelCreator FoodTypeModelCreator
+        {
+            get
+            {
+                if (foodTypeModelCreator == null)
+                {
+                    this.foodTypeModelCreator = new FoodTypeModelCreator();
+                }
+                return foodTypeModelCreator;
             }
         }
 
