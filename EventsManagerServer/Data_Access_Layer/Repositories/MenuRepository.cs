@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 
 namespace EventsManager.Data_Access_Layer
@@ -60,6 +61,17 @@ namespace EventsManager.Data_Access_Layer
                 while (dataReader.Read() == true)
                     Menus.Add(this.modelFactory.MenuModelCreator.CreateModel(dataReader));
             return Menus;
+        }
+
+        public List<int> GetFoodIdsBy(object id)
+        {
+            List<int> Foods = new List<int>();
+            string sql = "SELECT FoodMenu.FoodId FROM Foods INNER JOIN FoodMenu ON Foods.FoodId = FoodMenu.FoodId WHERE FoodMenu.MenuId=@MenuId";
+            this.AddParameters("MenuId", id.ToString()); //prevents SQL Injection
+            using (IDataReader dataReader = this.dbContext.Read(sql))
+                while (dataReader.Read() == true)
+                    Foods.Add(Convert.ToInt16(dataReader["FoodId"]));
+            return Foods;
         }
 
         public object ReadValue()

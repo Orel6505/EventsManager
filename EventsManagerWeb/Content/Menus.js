@@ -41,6 +41,8 @@ function LoadMenus() {
             //pass
         } else if (!isChecked(".HallCheckBox", menu.HallId)) {
             //pass
+        } else if (isCheckedArray(".FoodCheckBox", menu.FoodIds)) {
+            //pass
         } else {
             $("#MenusWrapper").append('<div id="MenuItem">' +
                 '<a href="/ViewMenu/?id=' + menu.MenuId + '">' + menu.MenuName + '</a>' +
@@ -71,6 +73,23 @@ function isChecked(element, num) {
         if (checkbox.checked) {
             isTouched = false;
             if (checkbox.value == num) {
+                return true;
+            }
+        }
+    }
+    return isTouched;
+}
+
+function isCheckedArray(element, arr) {
+    const checkboxes = document.querySelectorAll(element);
+    let isTouched = true;
+    console.log("Hi");
+    for (const checkbox of checkboxes) {
+        console.log(checkbox.checked);
+        if (checkbox.checked) {
+            isTouched = false;
+            console.log("Hi");
+            if (arr.includes(checkbox.value)) {
                 return true;
             }
         }

@@ -126,6 +126,10 @@ namespace EventsManager.Controllers
                 model.Foods = libraryUnitOfWork.FoodRepository.ReadAll();
                 model.FoodTypes = libraryUnitOfWork.FoodTypeRepository.ReadAll();
                 model.Halls = libraryUnitOfWork.HallRepository.ReadAll();
+                foreach (EventsManagerModels.Menu menu in model.Menus)
+                {
+                    menu.FoodIds = libraryUnitOfWork.MenuRepository.GetFoodIdsBy(menu.MenuId);
+                }
             }
             catch (Exception ex)
             {
