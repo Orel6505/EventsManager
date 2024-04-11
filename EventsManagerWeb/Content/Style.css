@@ -224,3 +224,17 @@ tr.border_bottom td {
 		text-align: center;
 	}
 }
+
+/*@media screen and (max-width: 350px) {
+	.footer-table-about {
+		grid-row: 4;
+		grid-column-start: 1;
+		grid-column-end: 3;
+	}
+
+	img.footer-table-logo {
+		grid-row: 3;
+		grid-column-start: 1;
+		grid-column-end: 3;
+	}
+}*/

@@ -2,7 +2,7 @@
 
 function ShowOptions(elements) {
     const ex = document.getElementById(elements);
-    ex.style.maxHeight = ex.style.maxHeight === "600px" ? "0" : "600px";
+    ex.style.maxHeight = (ex.style.maxHeight === "0px") ? "600px" : "0px";
 }
 function ShowHallsOptions() {
     ShowOptions("HallOptions");
@@ -35,20 +35,20 @@ function GetMenus() {
 function LoadMenus() {
     $("#MenusWrapper").empty();
     let ResultCouner = 0;
-    let SearchVal = document.getElementById("MenuSearch").value ?? '';
-    MenuResponse.Menus.forEach((menu) => {
-        if (!isSearched(SearchVal, menu)) {
-            //pass
-        } else if (!isChecked(".HallCheckBox", menu.HallId)) {
-            //pass
-        } else if (!isCheckedLong(".ShowNoFood", menu.FoodIds)) {
-            //pass
-        } else if (!isCheckedArray(".FoodCheckBox", menu.FoodIds)) {
-            //pass
-        } else {
-            $("#MenusWrapper").append('<div id="MenuItem">' +
-                '<a href="/ViewMenu/?id=' + menu.MenuId + '">' + menu.MenuName + '</a>' +
-                '</div>');
+    const SearchVal = document.getElementById("MenuSearch").value ?? '';
+
+    MenuResponse.Menus.forEach(menu => {
+        if (
+            isSearched(SearchVal, menu) &&
+            isChecked(".HallCheckBox", menu.HallId) &&
+            isCheckedLong(".ShowNoFood", menu.FoodIds) &&
+            isCheckedArray(".FoodCheckBox", menu.FoodIds)
+        ) {
+            $("#MenusWrapper").append(
+                '<div id="MenuItem">' +
+                    '<a href="/ViewMenu/?id=' + menu.MenuId + '">' + menu.MenuName + '</a>' +
+                '</div>'
+            );
             ResultCouner++;
         }
     });

@@ -9,7 +9,7 @@
 
 .SortMenuOptions {
     display: block;
-    background-color: #04AA6D;
+    background-color: blue;
     color: white;
     padding: 16px;
     font-size: 1rem;
@@ -22,8 +22,8 @@
 }
 
 .OptionItems {
-    max-height: 0px;
-    transition: 0.5s ease-in-out;
+    max-height: 600px;
+    transition: 0.4s ease-in-out;
     display: block;
     overflow: hidden;
 }
@@ -31,7 +31,6 @@
 .OptionItem {
     display: block;
     direction: rtl;
-    transition: 0.5s;
     min-width: 160px;
     background-color: cyan;
 }
