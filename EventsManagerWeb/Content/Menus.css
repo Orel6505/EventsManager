@@ -1,5 +1,6 @@
-﻿.SortMenu{
+﻿.SortMenu {
     float: right;
+    padding: 10px;
 }
 
 .ShowMenu {

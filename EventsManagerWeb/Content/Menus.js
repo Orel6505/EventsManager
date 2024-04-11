@@ -41,7 +41,9 @@ function LoadMenus() {
             //pass
         } else if (!isChecked(".HallCheckBox", menu.HallId)) {
             //pass
-        } else if (isCheckedArray(".FoodCheckBox", menu.FoodIds)) {
+        } else if (!isCheckedLong(".ShowNoFood", menu.FoodIds)) {
+            //pass
+        } else if (!isCheckedArray(".FoodCheckBox", menu.FoodIds)) {
             //pass
         } else {
             $("#MenusWrapper").append('<div id="MenuItem">' +
@@ -83,15 +85,27 @@ function isChecked(element, num) {
 function isCheckedArray(element, arr) {
     const checkboxes = document.querySelectorAll(element);
     let isTouched = true;
-    console.log("Hi");
     for (const checkbox of checkboxes) {
-        console.log(checkbox.checked);
         if (checkbox.checked) {
             isTouched = false;
-            console.log("Hi");
-            if (arr.includes(checkbox.value)) {
+            if (arr.includes(parseInt(checkbox.value))) {
                 return true;
             }
+        }
+    }
+    return isTouched;
+}
+
+function isCheckedLong(element, arr) {
+    const checkboxes = document.querySelectorAll(element);
+    let isTouched = false;
+    for (const checkbox of checkboxes) {
+        if (checkbox.checked) {
+            if (arr.length > 0) {
+                isTouched = true;
+            }
+        } else {
+            isTouched = true;
         }
     }
     return isTouched;
