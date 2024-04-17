@@ -89,7 +89,7 @@ function isCheckedArray(element, arr) {
         if (checkbox.checked) {
             isTouched = false;
             if (arr.includes(parseInt(checkbox.value))) {
-                return true;
+                isTouched = true;
             }
         }
     }
