@@ -47,5 +47,10 @@ namespace EventsManagerWeb.Controllers
             Menu menu = client.Get();
             return View(menu);
         }
+
+        public ActionResult ViewHome(int id = 1)
+        {
+            return View();
+        }
     }
 }

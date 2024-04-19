@@ -17,7 +17,7 @@ namespace EventsManagerWeb
             routes.MapRoute(
                 name: "Default",
                 url: "{action}/{id}",
-                defaults: new { controller = "Visitor", action = "ViewMenus", id = UrlParameter.Optional }
+                defaults: new { controller = "Visitor", action = "ViewHome", id = UrlParameter.Optional }
             );
         }
         public static void Register(HttpConfiguration config)
@@ -29,7 +29,7 @@ namespace EventsManagerWeb
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "{controller}/{action}/{id}",
+                routeTemplate: "api/{controller}/{action}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
         }

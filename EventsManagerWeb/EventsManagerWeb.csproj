@@ -158,8 +158,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Home.css" />
+    <Content Include="Content\img\bag_icon.png" />
+    <Content Include="Content\img\cart_image.png" />
+    <Content Include="Content\img\coding_image.png" />
+    <Content Include="Content\img\correct_icon.png" />
+    <Content Include="Content\img\heart_icon.png" />
+    <Content Include="Content\img\message_image.png" />
+    <Content Include="Content\img\mouse_icon.png" />
     <Content Include="Content\img\open-menu.png" />
+    <Content Include="Content\img\pencil_icon.png" />
+    <Content Include="Content\img\phone_image.png" />
     <Content Include="Content\img\profile.png" />
+    <Content Include="Content\img\wallbrush_image.png" />
     <Content Include="Content\Menus.js" />
     <Content Include="Content\Style.css" />
     <Content Include="Content\Menus.css" />
@@ -186,6 +197,7 @@
     <Content Include="Views\Visitor\ViewFood.cshtml" />
     <Content Include="Views\Visitor\ViewMenus.cshtml" />
     <Content Include="Views\Visitor\ViewMenu.cshtml" />
+    <Content Include="Views\Visitor\ViewHome.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -195,7 +207,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommonParameters\CommonParameters.csproj">

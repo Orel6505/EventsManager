@@ -29,7 +29,7 @@ function GetMenus() {
     xhttp.onerror = function () {
         console.error("Error during XHR request for menus.");
     };
-    xhttp.open("GET", "/Data/GetMenus", true);
+    xhttp.open("GET", "/api/Data/GetMenus", true);
     xhttp.send();
 }
 function LoadMenus() {

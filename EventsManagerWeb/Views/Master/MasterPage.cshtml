@@ -15,19 +15,19 @@
 <body>
     <header>
         <nav class="nav">
-            <a class="cLogo" href="Index.html"><img class="logo" src="~/Content/img/profile.png"></a>
+            <a class="cLogo" href="~/"><img class="logo" src="~/Content/img/profile.png"></a>
             <a class="cOpenNav" onclick="openNav()"><img class="mOpenNav" id="mOpenNav" src="~/Content/img/open-menu.png"></a>
             <div id="navMobileMenu" class="navMobileMenu">
-                <a class="navText" id="navText" href="Index.html"> Home </a>
-                <a class="navText" id="navText" href="Index.html"> Test Foods </a>
-                <a class="navText" id="navText" href="Index.html"> Test </a>
+                <a class="navText" id="navText" href="~/"> Home </a>
+                <a class="navText" id="navText" href="/ViewMenus"> Test Foods </a>
+                <a class="navText" id="navText" href="/ViewMenus"> Test </a>
             </div>
         </nav>
     </header>
     <script>
         window.addEventListener('resize', resetChanges);
         function resetChanges() {
-            let element = document.getElementById("navMobileMenu")
+            let element = document.getElementById("navMobileMenu");
             element.style.width = window.innerWidth > 700 ? "100%" : "0";
         }
 

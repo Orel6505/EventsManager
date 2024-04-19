@@ -1,0 +1,225 @@
+.part1{
+	min-height: 91vh;
+	width: 100%;
+	background-color: blue;
+	color: black;
+}
+
+.center {
+	align-items: center;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	margin-top: 40px;
+	display: flex;
+	justify-content: center;
+}
+
+.part1-text h1 {
+	font-size: 45px;
+	display: flex;
+	justify-content: center;
+	text-align: center;
+}
+
+.part1 h3 {
+	text-align: center;
+	font-size: 15px;
+	color: white;
+	margin: 20px 35% 0px 35%;
+}
+
+.part1 button{
+	width: 100%;
+	background-color: transparent;
+	color: black;
+	padding: 14px 20px;
+	cursor: pointer;
+	text-align: center;
+	border-radius: 20px;
+	border: 2px solid white;
+	width: 200px;
+}
+.center h4 {
+	font-size: 16px;
+	margin: 5px 0px 5px 0px;
+	text-align: center;
+	width: 100%;
+}
+
+.part1 button, .part1 button:focus {
+	font-size: 17px;
+	white-space: nowrap;
+	transition: 0.3s;
+	display: flex;
+	justify-content: center;
+}
+
+.part1 button:hover, .part1 button:hover > button {
+	background-color: black;
+	color: black;
+	border-radius: 20px;
+	transition: 0.8s;
+}
+
+
+
+
+
+
+.part2{
+	background-color: wheat;
+	background-size: cover;
+	width: 100%;
+	height: 100vh;
+	display: grid;
+    grid-template-columns: 40% 30% 30%;
+    /* grid-template-rows: ; */
+	grid-column: full;
+	padding: 200px 100px 100px 150px;
+	position: relative;
+}
+.explain {
+	width: 22vw;
+	height: 300px;
+	background-color: black;
+	margin: auto;
+	border-radius: 20px;
+}
+.explain h3 {
+	font-size: 14px;
+	text-align: center;
+	color: white;
+}
+.explain h4 {
+	font-size: 14px;
+	text-align: center;
+	color: white;
+}
+.explain img{
+	margin: 50px auto auto auto;
+	height: 60px;
+	display: inline-block;
+	position: relative;
+	left: 50%; 
+	transform: translateX(-50%);
+}
+
+.exp1 { grid-area: 1 / 3 / 2 / 4; }
+.exp2 { grid-area: 2 / 3 / 3 / 4; }
+.exp3 { grid-area: 1 / 2 / 2 / 3; }
+.exp4 { grid-area: 2 / 2 / 3 / 3; }
+
+.phoneimage1 {
+	position: relative;
+	bottom: -74px;
+	margin:  auto auto auto 100px;
+	grid-area: 1 / 1 / 3 / 2;
+	width: 110%;
+}
+
+.phoneapp1{
+	width: 43.6%;
+	height: 100%;
+	border-radius: 25px;
+	display: block;
+	max-width: none;
+	min-width:none
+}
+.phoneframe1 {
+	position: absolute;
+	height: 104%;
+	bottom: -20px ;
+	display: block;
+	max-width: none;
+	min-width:none
+}
+
+
+
+
+#body.contact ul {
+    list-style-type: none;
+}
+#body.contact {
+    background-color: cyan;
+    padding: 30px 30px 30px 30px;
+    height: 50%;
+    width: 40%;
+    margin-top: 100px;
+    margin-left:27%;
+	border-radius: 25px;
+}
+#body.contact li{
+    margin-top:30px;
+}
+#body.contact .title {
+	color: black;
+	text-align: center;
+}
+#body.contact .text {
+    margin-top: 10px;
+    height: 40px;
+    width: 90%;
+	font-size: 18px;
+    border-radius: 5px;
+    border-color: #e2e2e2;
+}
+#body.contact .button {
+    color: black;
+    background-color: #43ccec;
+    padding: 15px 30px;
+    border-color: #009bc9;
+    border-radius: 4px;
+    font-size:16px;
+	width: 90%;
+}
+
+
+
+
+
+
+
+.part3 {
+	background-color: wheat;
+	display: grid;
+	grid-template-columns: 50% 50%;
+    grid-template-rows: 400px 25%;
+	grid-column: full;
+	position: relative;
+
+}
+
+.part4 {
+	background-color: magenta;
+}
+.part5 {
+	background-color: salmon;
+}
+
+
+
+.part3 button{
+	display: block;
+	background-color: transparent;
+	color: black;
+	padding: 5px 200px;
+	cursor: pointer;
+	border-radius: 20px;
+	border: 2px solid white;
+	width: 20px;
+	height: 60px;
+	margin: 5px 20px 5px 0px;
+}
+.part3 h2{
+	text-align: left;
+}
+.part3 img{
+	margin-right: auto;
+	position: relative;
+}
+
+.part4 img {
+	width: 10px;
+}
