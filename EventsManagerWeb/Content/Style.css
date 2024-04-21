@@ -28,6 +28,12 @@ html, body {
 }
 
 /* NavBar */
+header {
+	z-index: 100;
+	position: sticky;
+	top: 0;
+	overflow: hidden;
+}
 .nav {
 	background-color: black;
 	font-size: 1rem;

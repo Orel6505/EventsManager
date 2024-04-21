@@ -3,22 +3,25 @@
     Layout = "~/Views/Master/MasterPage.cshtml";
 }
 <link rel="stylesheet" href="~/Content/Home.css" />
+<script src="~/Content/Home.js"></script>
+<script>
+    window.addEventListener("scroll", NavBarStatus);
+</script>
 <div class="part1">
     <div class="part1-text">
         <h1>Choose a better way to represent your app</h1>
         <h3>Yeah, it's really the best way to represent your app</h3>
-    </div>
-    <div class="center">
-        <button>
-            <h4>Download</h4>
-        </button>
-        <button>
-            <h4>Contact Us</h4>
-        </button>
+        <div class="center">
+            <button><h4>Download</h4></button>
+            <button><h4>Contact Us</h4></button>
+        </div>
     </div>
 </div>
 
 <div class="part2">
+    <div class="part2-text">
+        <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet risus magna. Phasellus sem est, viverra non iaculis nec, consequat ut nisl. Mauris tristique sit amet purus et sagittis. Praesent vitae urna rutrum, vehicula nisl fermentum, aliquam urna. Nulla commodo risus id lorem aliquet, ut aliquet quam varius. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas eros tellus, sagittis et commodo tempor, aliquet a neque. Aenean eget nisl sit amet lacus egestas imperdiet. Curabitur quis nisi vehicula sem consequat fringilla. Duis metus purus, pulvinar et convallis in, iaculis id ex.</h4>
+    </div>
     <div class="explain exp1">
         <img src="~/Content/img/cart_image.png">
         <h3>First 7 Days Free</h3>
@@ -50,19 +53,19 @@
     </div>
     <div>
         <button>
-            <img src="~/Content/imgheart_icon.png">
+            <img src="~/Content/img/heart_icon.png">
             <h2>Made With Love</h2>
         </button>
         <button>
-            <img src="~/Content/imgmouse_icon.png">
+            <img src="~/Content/img/mouse_icon.png">
             <h2>Easy To Use</h2>
         </button>
         <button>
-            <img src="~/Content/imgbag_icon.png">
+            <img src="~/Content/img/bag_icon.png">
             <h2>Fully Support Available</h2>
         </button>
         <button>
-            <img src="~/Content/imgpencil_icon.png">
+            <img src="~/Content/img/pencil_icon.png">
             <h2>Modern UI & UX</h2>
         </button>
     </div>
@@ -77,13 +80,4 @@
     <img src="~/Content/img/correct_icon.png">
     <h4>iPhone</h4>
     <h3>Cras ultricies ligula sed magna dictum porta. Nulla porttitor accumsan tincidunt. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Curabitur aliquet quam id dui posuere blandit. Curabitur aliquet quam id dui posuere blandit. Vestibulum ac diam sit amet quam.</h3>
-</div>
-
-<!--5th part-->
-<div class="part5">
-    <h2>Now Available</h2>
-    <h3>Cras ultricies ligula sed magna dictum porta. Nulla porttitor accumsan tincidunt. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Curabitur aliquet quam id dui posuere blandit. Curabitur aliquet quam id dui posuere blandit. Vestibulum ac diam sit amet quam.</h3>
-    <img src="~/Content/imgdownloadplay_image.png">
-    <img src="~/Content/imgdownloadapple_image.png">
-    <h2>Get The App Today!</h2>
 </div>

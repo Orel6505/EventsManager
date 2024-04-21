@@ -159,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Home.css" />
+    <Content Include="Content\Home.js" />
     <Content Include="Content\img\bag_icon.png" />
     <Content Include="Content\img\cart_image.png" />
     <Content Include="Content\img\coding_image.png" />
