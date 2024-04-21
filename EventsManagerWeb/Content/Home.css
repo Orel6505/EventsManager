@@ -7,7 +7,7 @@
 }
 
 .part1 {
-	min-height: 111vh;
+	min-height: 120vh;
 	width: 100%;
 	background-color: blue;
 	color: black;
@@ -88,15 +88,22 @@
 	width: 100%;
 	height: 100vh;
 	display: grid;
-	grid-template-columns: repeat(3, 33%);
+	grid-template-columns: repeat(4, 25%);
 	grid-template-rows: repeat(2, 50%);
 	grid-column: full;
-	padding: 100px 100px 100px 150px;
+	padding: 100px 100px 200px 100px;
 }
-.explain { 
+.part2-text {
+	margin: 5px;
+	grid-area: 1 / 3 / 3 / 1;
+}
+.explain {
 	background-color: black;
 	margin: auto;
 	border-radius: 20px;
+	height: 30vh;
+	width: 18vw;
+	margin: 10px
 }
 .explain h3 {
 	font-size: 1rem;
@@ -107,6 +114,7 @@
 	font-size: 0.8rem;
 	text-align: center;
 	color: white;
+	margin: 5px;
 }
 .explain img{
 	margin: 50px auto auto auto;
@@ -117,15 +125,23 @@
 	transform: translateX(-50%);
 }
 
-.exp1 { grid-area: 1 / 3 / 2 / 4; }
-.exp2 { grid-area: 2 / 3 / 3 / 4; }
-.exp3 { grid-area: 1 / 2 / 2 / 3; }
-.exp4 { grid-area: 2 / 2 / 3 / 3; }
+.exp1 { 
+	grid-area: 1 / 3 / 2 / 4; 
+}
+.exp2 {
+	grid-area: 1 / 4 / 2 / 4;
+}
+.exp3 {
+	grid-area: 2 / 3 / 2 / 3;
+}
+.exp4 {
+	grid-area: 2 / 4 / 2 / 4;
+}
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width:1000px) {
 	.part2 {
 		padding: 50px;
-		grid-template-columns: repeat(4, 25%);
+		grid-template-columns: 50%, repeat(4, 17.5%);
 		grid-template-rows: repeat(5, 20%);
 	}
 	.explain {

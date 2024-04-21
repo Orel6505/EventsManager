@@ -30,9 +30,10 @@ html, body {
 /* NavBar */
 header {
 	z-index: 100;
-	position: sticky;
+	position: fixed;
 	top: 0;
 	overflow: hidden;
+	width: 100%;
 }
 .nav {
 	background-color: black;
