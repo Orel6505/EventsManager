@@ -34,8 +34,7 @@
         function openNav() {
             let element = document.getElementById("navMobileMenu")
             element.style.width = element.style.width == "100%" ? "0" : "100%";
-            element = document.getElementById("mOpenNav")
-            element.style.position = element.style.position == "inherit" ? "fixed" : "inherit";
+            document.body.style.position = document.body.style.position == "fixed" ? "inherit" : "fixed"
         }
     </script>
 

@@ -30,7 +30,7 @@ html, body {
 /* NavBar */
 header {
 	z-index: 100;
-	position: fixed;
+	position: sticky;
 	top: 0;
 	overflow: hidden;
 	width: 100%;
