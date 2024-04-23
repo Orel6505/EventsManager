@@ -1,14 +1,13 @@
-﻿
-@{
-    ViewBag.Title = "ViewLogin";
-    Layout = "~/Views/Master/MasterPage.cshtml";
+﻿@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/MasterPage.cshtml";
 }
-<link href="~/Content/Login.css" rel="stylesheet" />
+<link href="~/Content/Styles/Login.css" rel="stylesheet" />
 <div class="wraper base">
     <div class="header">
         <h1 class="sign">Register</h1>
     </div>
-    <hr />
+    <hr/>
     <form>
         <ul>
             <li class="item cName">
@@ -41,7 +40,7 @@
                 <button class="button" type="button" value="Register" onclick="create();">Register</button>
             </li>
             <li class="item">
-                <a href="/ViewLogin"><h4>If you already have an account, sign in instead</h4></a>
+                <a href="/Login"><h4>If you already have an account, sign in instead</h4></a>
             </li>
         </ul>
     </form>

@@ -10,7 +10,7 @@ namespace EventsManagerWeb.Controllers
 {
     public class VisitorController : Controller
     {
-        public ActionResult ViewFood(int FoodId)
+        public ActionResult Food(int FoodId)
         {
             WebClient<Food> client = new WebClient<Food>
             {
@@ -23,7 +23,7 @@ namespace EventsManagerWeb.Controllers
             return View(food);
         }
 
-        public ActionResult ViewMenus()
+        public ActionResult Menus()
         {
             WebClient<MenuListVIewModel> client = new WebClient<MenuListVIewModel>
             {
@@ -35,7 +35,7 @@ namespace EventsManagerWeb.Controllers
             return View(Menus);
         }
 
-        public ActionResult ViewMenu(int id = 1)
+        public ActionResult Menu(int id = 1)
         {
             WebClient<Menu> client = new WebClient<Menu>
             {
@@ -48,15 +48,15 @@ namespace EventsManagerWeb.Controllers
             return View(menu);
         }
 
-        public ActionResult ViewHome()
+        public ActionResult Home()
         {
             return View();
         }
-        public ActionResult ViewLogin()
+        public ActionResult Login()
         {
             return View();
         }
-        public ActionResult ViewRegister()
+        public ActionResult Register()
         {
             return View();
         }

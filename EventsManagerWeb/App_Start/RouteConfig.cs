@@ -17,7 +17,7 @@ namespace EventsManagerWeb
             routes.MapRoute(
                 name: "Default",
                 url: "{action}/{id}",
-                defaults: new { controller = "Visitor", action = "ViewHome", id = UrlParameter.Optional }
+                defaults: new { controller = "Visitor", action = "Home", id = UrlParameter.Optional }
             );
         }
         public static void Register(HttpConfiguration config)

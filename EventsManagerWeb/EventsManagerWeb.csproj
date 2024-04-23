@@ -158,8 +158,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Home.css" />
-    <Content Include="Content\Home.js" />
+    <Content Include="Content\Styles\Home.css" />
+    <Content Include="Content\Scripts\Home.js" />
     <Content Include="Content\img\bag_icon.png" />
     <Content Include="Content\img\cart_image.png" />
     <Content Include="Content\img\coding_image.png" />
@@ -172,11 +172,10 @@
     <Content Include="Content\img\phone_image.png" />
     <Content Include="Content\img\profile.png" />
     <Content Include="Content\img\wallbrush_image.png" />
-    <Content Include="Content\Login.css" />
-    <Content Include="Content\Menus.js" />
-    <Content Include="Content\Site.css" />
-    <Content Include="Content\Style.css" />
-    <Content Include="Content\Menus.css" />
+    <Content Include="Content\Styles\Login.css" />
+    <Content Include="Content\Scripts\Menus.js" />
+    <Content Include="Content\Styles\Style.css" />
+    <Content Include="Content\Styles\Menus.css" />
     <Content Include="Global.asax" />
     <Content Include="template\img\open-menu.png" />
     <Content Include="template\img\profile.png" />
@@ -196,15 +195,15 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <None Include="packages.config" />
-    <Content Include="Views\Master\MasterPage.cshtml" />
-    <Content Include="Views\Visitor\ViewFood.cshtml" />
-    <Content Include="Views\Visitor\ViewMenus.cshtml" />
-    <Content Include="Views\Visitor\ViewMenu.cshtml" />
-    <Content Include="Views\Visitor\ViewHome.cshtml" />
+    <Content Include="Views\Shared\MasterPage.cshtml" />
+    <Content Include="Views\Visitor\Food.cshtml" />
+    <Content Include="Views\Visitor\Menus.cshtml" />
+    <Content Include="Views\Visitor\Menu.cshtml" />
+    <Content Include="Views\Visitor\Home.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Visitor\ViewRegister.cshtml" />
-    <Content Include="Views\Visitor\ViewLogin.cshtml" />
+    <Content Include="Views\Visitor\Register.cshtml" />
+    <Content Include="Views\Visitor\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -214,6 +213,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Master\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommonParameters\CommonParameters.csproj">
