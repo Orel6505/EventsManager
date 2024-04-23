@@ -172,7 +172,9 @@
     <Content Include="Content\img\phone_image.png" />
     <Content Include="Content\img\profile.png" />
     <Content Include="Content\img\wallbrush_image.png" />
+    <Content Include="Content\Login.css" />
     <Content Include="Content\Menus.js" />
+    <Content Include="Content\Site.css" />
     <Content Include="Content\Style.css" />
     <Content Include="Content\Menus.css" />
     <Content Include="Global.asax" />
@@ -199,6 +201,10 @@
     <Content Include="Views\Visitor\ViewMenus.cshtml" />
     <Content Include="Views\Visitor\ViewMenu.cshtml" />
     <Content Include="Views\Visitor\ViewHome.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Visitor\ViewRegister.cshtml" />
+    <Content Include="Views\Visitor\ViewLogin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

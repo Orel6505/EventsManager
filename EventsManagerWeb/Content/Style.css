@@ -14,19 +14,6 @@ html, body {
 	width: 100%;
 }
 
-/* blur */
-@supports (backdrop-filter: blur(10px)) {
-	.device-info {
-		backdrop-filter: blur(10px);
-		background-color: rgba(255, 255, 255, 0.5);
-	}
-}
-  @supports not (backdrop-filter: blur(10px)) {
-	.device-info {
-		background-color: grey;
-	}
-}
-
 /* NavBar */
 header {
 	z-index: 100;
@@ -43,6 +30,10 @@ header {
 	overflow: hidden;
 }
 
+.cLogin {
+	float: right !important;
+}
+
 .nav a{
 	display: flex;
 	text-align: center;
@@ -57,7 +48,7 @@ header {
 	margin: 16px 0px 10px 0px;
 }
 
-.nav img.logo:focus, .nav img.logo:hover {
+.logo:focus, .logo:hover {
 	transition: 0.8s;
 	border-radius: 20px;
 }
@@ -68,11 +59,11 @@ header {
 	transition: 0.8s;
 }
 
-.nav img.logo {
+.mLogo {
 	border-radius: 50%;
 }
 
-.nav img {
+.logo {
 	width: 50px;
 	height: 50px;
 }
@@ -83,6 +74,10 @@ header {
 
 .nav .cOpenNav{
 	float: right;
+}
+
+.bLogo {
+	display: none;
 }
 
 .nav .mOpenNav {
@@ -98,8 +93,9 @@ header {
 		display: block;
 		z-index: 10;
 		right: 12px;
-		overflow: hidden
+		overflow: hidden;
 	}
+
 	.navMobileMenu {
 		width: 0;
 		display: block;
@@ -112,15 +108,31 @@ header {
 		right: 0;
 	}
 
-	.navMobileMenu .navText {
-		display: block;
-		margin-left: auto;
-		margin-right: auto;
-		float: none;
+	.navMobileMenu {
+		display: flex;
+		justify-content: center;
 		overflow: hidden;
+		transition: 0.5s;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.nav .navText:focus, .nav .navText:hover {
+		background-color: rgba(210, 215, 211, 0.3);
+		border-radius: 20px;
+		transition: 0.8s;
+		height: fit-content;
+	}
+
+	.navText {
 		text-align: center;
 		font-size: 2rem;
-		transition: 0.3s;
+	}
+
+	.bLogo {
+		display: block;
+		border-radius: 50%;
+		width: 30vw;
 	}
 }
 

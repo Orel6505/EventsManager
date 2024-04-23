@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "ViewLogin";
+    Layout = "~/Views/Master/MasterPage.cshtml";
+}
+<link href="~/Content/Login.css" rel="stylesheet" />
+<div class="base">
+    <div class="header">
+        <h1 class="sign">Sign in</h1>
+    </div>
+    <hr />
+    <form>
+        <ul>
+            <li class="item">
+                <label class="lable">Username</label><br>
+                <input class="text" autocomplete="username" type="text" id="Username" />
+            </li>
+            <li class="item">
+                <label class="lable">Password</label><br>
+                <input class="text" autocomplete="current-password" type="password" id="Password" />
+            </li>
+            <li class="item cButton">
+                <button class="button" type="button" value="Login" onclick="auth();">Login</button>
+            </li>
+            <li class="item">
+                <a href="/ViewRegister"><h4>If don't have an account, Register Here</h4></a>
+            </li>
+        </ul>
+    </form>
+    <p id="ResultLogin" />
+</div>

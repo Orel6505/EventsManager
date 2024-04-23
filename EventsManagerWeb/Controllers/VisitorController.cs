@@ -48,7 +48,15 @@ namespace EventsManagerWeb.Controllers
             return View(menu);
         }
 
-        public ActionResult ViewHome(int id = 1)
+        public ActionResult ViewHome()
+        {
+            return View();
+        }
+        public ActionResult ViewLogin()
+        {
+            return View();
+        }
+        public ActionResult ViewRegister()
         {
             return View();
         }

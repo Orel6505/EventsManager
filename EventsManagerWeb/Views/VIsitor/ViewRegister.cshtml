@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "ViewLogin";
+    Layout = "~/Views/Master/MasterPage.cshtml";
+}
+<link href="~/Content/Login.css" rel="stylesheet" />
+<div class="wraper base">
+    <div class="header">
+        <h1 class="sign">Register</h1>
+    </div>
+    <hr />
+    <form>
+        <ul>
+            <li class="item cName">
+                <div class="halfName firstName">
+                    <label class="lable">First Name</label><br>
+                    <input class="text name" autocomplete="given-name" type="text" id="FirstName" />
+                </div>
+                <div class="halfName">
+                    <label class="lable">Last Name</label><br>
+                    <input class="text name" autocomplete="family-name" type="text" id="LastName" />
+                </div>
+            </li>
+            <li class="item">
+                <label class="lable">Username</label><br>
+                <input class="text" autocomplete="username" type="text" id="UserName" />
+            </li>
+            <li class="item">
+                <label class="lable">Email</label><br>
+                <input class="text" autocomplete="email" type="text" id="Email" />
+            </li>
+            <li class="item">
+                <label class="lable">Password</label><br>
+                <input class="text" autocomplete="new-password" type="password" id="Password" />
+            </li>
+            <li class="item">
+                <label class="lable">Confirm password</label><br>
+                <input class="text" type="password" id="Password-again" />
+            </li>
+            <li class="item cButton">
+                <button class="button" type="button" value="Register" onclick="create();">Register</button>
+            </li>
+            <li class="item">
+                <a href="/ViewLogin"><h4>If you already have an account, sign in instead</h4></a>
+            </li>
+        </ul>
+    </form>
+    <p id="ResultLogin" />
+</div>
