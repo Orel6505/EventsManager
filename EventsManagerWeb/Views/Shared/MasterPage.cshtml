@@ -21,8 +21,9 @@
                 <a href="~/"><img class="bLogo" src="~/Content/img/profile.png"></a>
                 <a class="navText" id="navText" href="~/"> Home </a>
                 <a class="navText" id="navText" href="/Menus"> Test Foods </a>
-                <a class="navText cLogin" id="navText" href="/Login"> Login </a>
-
+                <div class="cLogin">
+                    @Html.Partial("_LoginPartial")
+                </div>
             </div>
         </nav>
     </header>

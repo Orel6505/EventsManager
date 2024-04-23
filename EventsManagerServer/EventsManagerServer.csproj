@@ -167,6 +167,8 @@
     <Compile Include="Data_Access_Layer\DbContext\OleDbContext.cs" />
     <Compile Include="Data_Access_Layer\ModelFactory\FoodTypeModelCreator.cs" />
     <Compile Include="Data_Access_Layer\ModelFactory\EventTypeModelCreator.cs" />
+    <Compile Include="Data_Access_Layer\ModelFactory\User2FAModelCreator.cs" />
+    <Compile Include="Data_Access_Layer\ModelFactory\LoginUserModelCreator.cs" />
     <Compile Include="Data_Access_Layer\Repositories\FoodTypeRepository.cs" />
     <Compile Include="Data_Access_Layer\Repositories\EventTypeRepository.cs" />
     <Compile Include="Data_Access_Layer\Repositories\FoodRepository.cs" />

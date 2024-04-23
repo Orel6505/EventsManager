@@ -11,6 +11,7 @@ using System.Web.Http;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.Http.Cors;
+using PasswordManager;
 
 namespace EventsManager.Controllers
 {
@@ -165,6 +166,37 @@ namespace EventsManager.Controllers
                 dbContext.CloseConnection();
             }
             return menu;
+        }
+        [HttpGet]
+        public User CheckLogin(string userName, string password)
+        {
+            DbContext dbContext = OleDbContext.GetInstance();
+            LibraryUnitOfWork libraryUnitOfWork = new LibraryUnitOfWork(dbContext);
+            User user;
+            try
+            {
+                dbContext.OpenConnection();
+                user = libraryUnitOfWork.UserRepository.GetLoginByUserName(userName);
+                if (user == null)
+                {
+                    return null;
+                }
+                if (!user.UserPassword.IsSamePassword(password))
+                {
+                    return null;
+                }
+                user = libraryUnitOfWork.UserRepository.GetUser2FAByUserName(userName);
+                return user;
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+            }
+            finally
+            {
+                dbContext.CloseConnection();
+            }
+            return null;
         }
     }
 }

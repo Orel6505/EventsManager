@@ -3,6 +3,8 @@ using EventsManagerWebService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 
@@ -55,6 +57,27 @@ namespace EventsManagerWeb.Controllers
         public ActionResult Login()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(string UserName, string Password)
+        {
+            WebClient<User> client = new WebClient<User>
+            {
+                Server = CommonParameters.Location.WebService,
+                Controller = "Visitor",
+                Method = "CheckLogin"
+            };
+            client.AddKeyValue("userName", UserName);
+            client.AddKeyValue("password", Password);
+            User user = client.Get();
+            if (user != null)
+            {
+                Session["UserName"] = "Orel6505";
+                return RedirectToAction("Home", "Visitor");
+            }
+            else
+                return RedirectToAction("Menus", "Visitor");
         }
         public ActionResult Register()
         {

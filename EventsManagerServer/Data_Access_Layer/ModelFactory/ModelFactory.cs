@@ -18,6 +18,8 @@ namespace EventsManager.Data_Access_Layer
         RatingModelCreator ratingModelCreator;
         RatingImageModelCreator ratingImageModelCreator;
         UserModelCreator userModelCreator;
+        LoginUserModelCreator loginUserModelCreator;
+        User2FAModelCreator user2FAModelCreator;
         UserTypeModelCreator userTypeModelCreator;
 
         public EventTypeModelCreator EventTypeModelCreator
@@ -136,6 +138,29 @@ namespace EventsManager.Data_Access_Layer
                     this.userModelCreator = new UserModelCreator();
                 }
                 return userModelCreator;
+            }
+        }
+
+        public LoginUserModelCreator LoginUserModelCreator
+        {
+            get
+            {
+                if (loginUserModelCreator == null)
+                {
+                    this.loginUserModelCreator = new LoginUserModelCreator();
+                }
+                return loginUserModelCreator;
+            }
+        }
+        public User2FAModelCreator User2FAModelCreator
+        {
+            get
+            {
+                if (user2FAModelCreator == null)
+                {
+                    this.user2FAModelCreator = new User2FAModelCreator();
+                }
+                return user2FAModelCreator;
             }
         }
 

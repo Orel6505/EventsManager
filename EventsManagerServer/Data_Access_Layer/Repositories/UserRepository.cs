@@ -57,6 +57,29 @@ namespace EventsManager.Data_Access_Layer
             }
             //returns User
         }
+        public User GetLoginByUserName(string UserName)
+        {
+            string sql = $"SELECT Users.UserName, Users.PasswordHash, Users.Salt FROM Users WHERE Users.UserName=@UserName;";
+            this.AddParameters("UserName", UserName); //prevents SQL Injection
+            using (IDataReader dataReader = this.dbContext.Read(sql))
+            {
+                dataReader.Read();
+                return this.modelFactory.LoginUserModelCreator.CreateModel(dataReader);
+            }
+            //returns User
+        }
+
+        public User GetUser2FAByUserName(string UserName)
+        {
+            string sql = $"SELECT Users.UserName, Users.FirstName, Users.LastName, Users.UserId, Users.Email FROM Users WHERE Users.UserName=@UserName;";
+            this.AddParameters("UserName", UserName); //prevents SQL Injection
+            using (IDataReader dataReader = this.dbContext.Read(sql))
+            {
+                dataReader.Read();
+                return this.modelFactory.User2FAModelCreator.CreateModel(dataReader);
+            }
+            //returns User
+        }
 
         public List<User> ReadAll()
         {

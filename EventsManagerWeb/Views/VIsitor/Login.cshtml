@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/MasterPage.cshtml";
 }
@@ -9,18 +8,19 @@
         <h1 class="sign">Sign in</h1>
     </div>
     <hr />
-    <form>
+    <form method="post" action="/Login">
         <ul>
+            @Html.AntiForgeryToken()
             <li class="item">
-                <label class="lable">Username</label><br>
-                <input class="text" autocomplete="username" type="text" id="Username" />
+                <label class="lable" for="Username">Username</label><br>
+                <input class="text" autocomplete="username" type="text" id="Username" name="UserName"/>
             </li>
             <li class="item">
-                <label class="lable">Password</label><br>
-                <input class="text" autocomplete="current-password" type="password" id="Password" />
+                <label class="lable" for="Password">Password</label><br>
+                <input class="text" autocomplete="current-password" type="password" id="Password" name="Password"/>
             </li>
             <li class="item cButton">
-                <button class="button" type="button" value="Login" onclick="auth();">Login</button>
+                <button class="button" type="submit" value="Proceed">Login</button>
             </li>
             <li class="item">
                 <a href="/Register"><h4>If don't have an account, Register Now</h4></a>
