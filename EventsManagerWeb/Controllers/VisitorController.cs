@@ -79,6 +79,12 @@ namespace EventsManagerWeb.Controllers
             else
                 return RedirectToAction("Menus", "Visitor");
         }
+        [HttpPost]
+        public ActionResult LogOut()
+        {
+            Session["UserName"] = null;
+            return RedirectToAction("Home", "Visitor");
+        }
         public ActionResult Register()
         {
             return View();
