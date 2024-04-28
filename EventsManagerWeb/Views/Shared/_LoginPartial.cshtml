@@ -3,7 +3,7 @@
     using (Html.BeginForm("LogOut", "Visitor", FormMethod.Post, new { id = "logoutForm", @class = "" }))
     {
         @Html.AntiForgeryToken()
-        <a class="navText" href="#">Welcome : @Session["UserName"]</a>
+        <a class="navText" href="#">Welcome: @Session["UserName"]</a>
         <a class="navText" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
     }
 }

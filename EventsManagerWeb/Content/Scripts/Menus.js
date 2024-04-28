@@ -46,7 +46,7 @@ function LoadMenus() {
         ) {
             $("#MenusWrapper").append(
                 '<div id="MenuItem">' +
-                    '<a href="/ViewMenu/?id=' + menu.MenuId + '">' + menu.MenuName + '</a>' +
+                    '<a href="/Menu/?id=' + menu.MenuId + '">' + menu.MenuName + '</a>' +
                 '</div>'
             );
             ResultCouner++;

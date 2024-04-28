@@ -89,5 +89,9 @@ namespace EventsManagerWeb.Controllers
         {
             return View();
         }
+        public ActionResult Login2FA()
+        {
+            return View();
+        }
     }
 }

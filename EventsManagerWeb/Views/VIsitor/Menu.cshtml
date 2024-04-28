@@ -14,25 +14,29 @@
         <p class="MenuDescription">@Model.MenuDesc</p>
     </div>
     <div class="foodWraper">
-         @if (Model.Foods.Count > 0)
-         {
-             foreach (Food food in Model.Foods)
-             {
+        @if (Model.Foods.Count > 0)
+        {
+            double counter = 0;
+            foreach (Food food in Model.Foods)
+            {
+                counter= counter + food.FoodPrice;
                 <section class="food">
-                    <h2 class="foodTitle">
-                        <a class="foodlink" href="@CommonParameters.Location.WebServer/ViewFood/?FoodId=@food.FoodId">
-                            @food.FoodName
-                        </a>
-                    </h2>
+                    <img src="">
+                    <h2 class="foodTitle">@food.FoodName</h2>
+                    <h3 class="foodTitle">@food.FoodDesc</h3>
+                    <h4 class="">מחיר המנה: @food.FoodPrice </h4>
                 </section>
-             }
-         } 
-         else
-         {
+            }
+            <section class="SumOfMenu">
+                <h1 class="">הסכום הכולל של כל המנות: @counter ש"ח</h1>
+            </section>
+        }
+        else
+        {
             <section class="nullSection">
                 <h1 class="errorTitle"> אין מאכלים בתפריט הזה כרגע, אנא נסו מאוחר יותר</h1>
             </section>
-         }
+        }
     </div>
 </div>
 
