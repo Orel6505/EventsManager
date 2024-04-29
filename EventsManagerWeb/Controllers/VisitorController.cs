@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace EventsManagerWeb.Controllers
 {
+    [OutputCache(Duration = 0)]
     public class VisitorController : Controller
     {
         public ActionResult Food(int FoodId)

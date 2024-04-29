@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace EventsManagerWeb.Controllers
 {
+    [OutputCache(Duration = 0)]
     public class DataController : ApiController
     {
         [System.Web.Http.HttpGet]
