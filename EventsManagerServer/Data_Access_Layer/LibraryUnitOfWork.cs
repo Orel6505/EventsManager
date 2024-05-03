@@ -12,7 +12,6 @@ namespace EventsManager.Data_Access_Layer
         FoodTypeRepository foodTypeRepository;
         HallRepository hallRepository;
         MenuRepository menuRepository;
-        MessageRepository messageRepository;
         OrderRepository orderRepository;
         RatingRepository ratingRepository;
         RatingImageRepository ratingImageRepository;
@@ -85,18 +84,7 @@ namespace EventsManager.Data_Access_Layer
             }
         }
 
-        public MessageRepository MessageRepository
-        {
-            get
-            {
-                if (messageRepository == null)
-                {
-                    this.messageRepository = new MessageRepository(dbContext);
-                }
-                return messageRepository;
-            }
-        }
-
+        
         public OrderRepository OrderRepository
         {
             get

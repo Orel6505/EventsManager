@@ -13,7 +13,6 @@ namespace EventsManager.Data_Access_Layer
         FoodTypeModelCreator foodTypeModelCreator;
         HallModelCreator hallModelCreator;
         MenuModelCreator menuModelCreator;
-        MessageModelCreator messageModelCreator;
         OrderModelCreator orderModelCreator;
         RatingModelCreator ratingModelCreator;
         RatingImageModelCreator ratingImageModelCreator;
@@ -78,18 +77,6 @@ namespace EventsManager.Data_Access_Layer
                     this.menuModelCreator = new MenuModelCreator();
                 }
                 return menuModelCreator;
-            }
-        }
-
-        public MessageModelCreator MessageModelCreator
-        {
-            get
-            {
-                if (messageModelCreator == null)
-                {
-                    this.messageModelCreator = new MessageModelCreator();
-                }
-                return messageModelCreator;
             }
         }
 
