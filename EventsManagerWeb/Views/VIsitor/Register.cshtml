@@ -1,4 +1,6 @@
-﻿@{
+﻿@using EventsManagerModels;
+@model User
+@{
     ViewBag.Title = "Register";
     Layout = "~/Views/Shared/MasterPage.cshtml";
 }
@@ -7,37 +9,41 @@
     <div class="header">
         <h1 class="sign">Register</h1>
     </div>
-    <hr/>
-    <form>
+    <hr />
+    <form method="post" action="/Register">
         <ul>
             <li class="item cName">
                 <div class="halfName firstName">
                     <label class="lable">First Name</label><br>
-                    <input class="text name" autocomplete="given-name" type="text" id="FirstName" />
+                    <input class="text name" autocomplete="given-name" type="text" id="FirstName" name="FirstName" />
                 </div>
                 <div class="halfName">
                     <label class="lable">Last Name</label><br>
-                    <input class="text name" autocomplete="family-name" type="text" id="LastName" />
+                    <input class="text name" autocomplete="family-name" type="text" id="LastName" name="LastName" />
                 </div>
             </li>
             <li class="item">
                 <label class="lable">Username</label><br>
-                <input class="text" autocomplete="username" type="text" id="UserName" />
+                <input class="text" autocomplete="username" type="text" id="UserName" name="UserName" />
             </li>
             <li class="item">
                 <label class="lable">Email</label><br>
-                <input class="text" autocomplete="email" type="text" id="Email" />
+                <input class="text" autocomplete="email" type="text" id="Email" name="Email" />
+            </li>
+            <li class="item">
+                <label class="lable">Phone Number</label><br>
+                <input class="text" autocomplete="tel-national" type="text" id="PhoneNum" name="PhoneNum" />
             </li>
             <li class="item">
                 <label class="lable">Password</label><br>
-                <input class="text" autocomplete="new-password" type="password" id="Password" />
+                <input class="text" autocomplete="new-password" type="password" id="Password" name="TempPassword" />
             </li>
             <li class="item">
                 <label class="lable">Confirm password</label><br>
                 <input class="text" type="password" id="Password-again" />
             </li>
             <li class="item cButton">
-                <button class="button" type="button" value="Register" onclick="create();">Register</button>
+                <button class="button" type="submit" value="Register">Register</button>
             </li>
             <li class="item">
                 <a href="/Login"><h4>If you already have an account, sign in instead</h4></a>

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -74,7 +75,7 @@ namespace EventsManagerWeb.Controllers
             User user = client.Get();
             if (user != null)
             {
-                Session["UserName"] = "Orel6505";
+                Session["UserName"] = user.UserName;
                 return RedirectToAction("Home", "Visitor");
             }
             else
@@ -86,9 +87,55 @@ namespace EventsManagerWeb.Controllers
             Session["UserName"] = null;
             return RedirectToAction("Home", "Visitor");
         }
-        public ActionResult Register()
+        public ActionResult Register(User entered = null, int temp = 0)
         {
-            return View();
+            User user = entered != null ? entered : new User();
+            return View(user);
+        }
+        //[HttpPost]
+        //public async Task<ActionResult> Register(User user)
+        //{
+        //    WebClient<User> client = new WebClient<User>
+        //    {
+        //        Server = CommonParameters.Location.WebService,
+        //        Controller = "Registered",
+        //        Method = "Register"
+        //    };
+        //    bool IsSuccess = await client.PostAsync(user);
+        //    if (IsSuccess)
+        //    {
+        //        TempData["Login"] = true;
+
+        //        return RedirectToAction("Login", "Visitor");
+        //    }
+        //    else
+        //    {
+        //        ViewBag["Login"] = false;
+        //        return View("Register");
+        //    }
+        //}
+
+        [HttpPost]
+        public ActionResult Register(User user)
+        {
+            WebClient<User> client = new WebClient<User>
+            {
+                Server = CommonParameters.Location.WebService,
+                Controller = "Registered",
+                Method = "Register"
+            };
+            bool IsSuccess = client.Post(user);
+            if (IsSuccess)
+            {
+                TempData["Login"] = true;
+
+                return RedirectToAction("Login", "Visitor");
+            }
+            else
+            {
+                ViewBag["Login"] = false;
+                return View("Register");
+            }
         }
         public ActionResult Login2FA()
         {

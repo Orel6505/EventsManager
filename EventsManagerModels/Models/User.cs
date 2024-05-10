@@ -20,6 +20,8 @@ namespace EventsManagerModels
         public string CreationDate { get; set; } //timestamp
         public UserType Type { get; set; }
         public Password UserPassword { get; set; }
+        public string TempPassword { get; set; }
+
 
         public List<Order> Orders { get; set; }
     }

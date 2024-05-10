@@ -33,16 +33,16 @@ namespace EventsManager.Data_Access_Layer
 
         public bool Insert(User model)
         {
-            string sql = $"INSERT INTO Users(FirstName,LastName,UserName,PassWordHash,Email,Address,PhoneNum,CreationDate,Salt) VALUES(@FirstName,@LastName,@UserName,@UserName,@PassWordHash,@Email,@Address,@PhoneNum,@CreationDate,@Salt)";
+            string sql = $"INSERT INTO Users (FirstName, LastName, UserName, PassWordHash, Email, Address, PhoneNum, CreationDate, Salt) VALUES (@FirstName, @LastName, @UserName, @PassWordHash, @Email, @Address, @PhoneNum, @CreationDate, @Salt);";
             this.AddParameters("FirstName", model.FirstName); //prevents SQL Injection
             this.AddParameters("LastName", model.LastName); //prevents SQL Injection
             this.AddParameters("UserName", model.UserName); //prevents SQL Injection
             this.AddParameters("PassWordHash", model.UserPassword.HashPassword); //prevents SQL Injection
-            this.AddParameters("Salt", model.UserPassword.Salt); //prevents SQL Injection
             this.AddParameters("Email", model.Email); //prevents SQL Injection
-            this.AddParameters("Address", model.Address); //prevents SQL Injection
+            this.AddParameters("Address", model.Address ?? DBNull.Value.ToString());
             this.AddParameters("PhoneNum", model.PhoneNum); //prevents SQL Injection
             this.AddParameters("CreationDate", model.CreationDate); //prevents SQL Injection
+            this.AddParameters("Salt", model.UserPassword.Salt); //prevents SQL Injection
             return this.dbContext.Create(sql) > 0;
         }
 
