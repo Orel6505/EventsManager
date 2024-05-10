@@ -13,7 +13,7 @@ namespace EventsManager.Data_Access_Layer
 
         public Repository(DbContext dbContext)
         {
-            this.dbContext = OleDbContext.GetInstance();
+            this.dbContext = dbContext;
             this.modelFactory = new ModelFactory();
         }
 

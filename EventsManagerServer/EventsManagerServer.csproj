@@ -175,13 +175,11 @@
     <Compile Include="Data_Access_Layer\Repositories\HallRepository.cs" />
     <Compile Include="Data_Access_Layer\Repositories\IRepository.cs" />
     <Compile Include="Data_Access_Layer\Repositories\MenuRepository.cs" />
-    <Compile Include="Data_Access_Layer\Repositories\MessageRepository.cs" />
     <Compile Include="Data_Access_Layer\ModelFactory\FoodModelCreator.cs" />
     <Compile Include="Data_Access_Layer\ModelFactory\HallModelCreator.cs" />
     <Compile Include="Data_Access_Layer\ModelFactory\IModelCreator.cs" />
     <Compile Include="Data_Access_Layer\ModelFactory\IOleDbModelCreator.cs" />
     <Compile Include="Data_Access_Layer\ModelFactory\MenuModelCreator.cs" />
-    <Compile Include="Data_Access_Layer\ModelFactory\MessageModelCreator.cs" />
     <Compile Include="Data_Access_Layer\ModelFactory\ModelFactory.cs" />
     <Compile Include="Data_Access_Layer\ModelFactory\OrderModelCreator.cs" />
     <Compile Include="Data_Access_Layer\ModelFactory\RatingModelCreator.cs" />
