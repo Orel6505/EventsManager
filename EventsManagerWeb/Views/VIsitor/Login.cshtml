@@ -2,22 +2,26 @@
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/MasterPage.cshtml";
 }
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+<script src="~/Content/Scripts/Login.js"></script>
 <link href="~/Content/Styles/Login.css" rel="stylesheet" />
 <div class="base">
     <div class="header">
         <h1 class="sign">Sign in</h1>
     </div>
     <hr />
-    <form method="post" action="/Login">
+    <form method="post" action="/Login" onsubmit="return validateLogin()">
         <ul>
             @Html.AntiForgeryToken()
             <li class="item">
                 <label class="lable" for="Username">Username</label><br>
-                <input class="text" autocomplete="username" type="text" id="Username" name="UserName"/>
+                <input class="text" autocomplete="username" type="text" id="UserName" name="UserName" />
+                <h5 id="UserName-Check">**Username is missing</h5>
             </li>
             <li class="item">
                 <label class="lable" for="Password">Password</label><br>
-                <input class="text" autocomplete="current-password" type="password" id="Password" name="Password"/>
+                <input class="text" autocomplete="current-password" type="password" id="Password" name="Password" />
+                <h5 id="Password-Check">**password cannot be empty</h5>
             </li>
             <li class="item cButton">
                 <button class="button" type="submit" value="Proceed">Login</button>
