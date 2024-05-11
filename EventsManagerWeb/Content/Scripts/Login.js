@@ -74,11 +74,29 @@ function validatePassword() {
         $("#Password-Check").show();
         return false;
     } else {
+        const hasUppercase = /[A-Z]/.test(passwordValue);
+        const hasLowercase = /[a-z]/.test(passwordValue);
+        const hasNumber = /[0-9]/.test(passwordValue);
+        const hasSymbol = /[^a-zA-Z0-9]/.test(passwordValue);
+        const minimumLength = 8;
+
+        if (
+            !hasUppercase ||
+            !hasLowercase ||
+            !hasNumber ||
+            !hasSymbol ||
+            passwordValue.length < minimumLength
+        ) {
+            $("#Password-Check").show();
+            $("#Password-Check").html(
+                "**Password must contain uppercase, lowercase, numbers, symbols, and be at least " + minimumLength +" characters long"
+            );
+            return false;
+        }
         $("#Password-Check").hide();
     }
     return true;
 }
-
 function validateConfirmPassword() {
     let confirmPasswordValue = $("#PasswordConfirm").val();
     let passwordValue = $("#Password").val();
