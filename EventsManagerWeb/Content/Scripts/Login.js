@@ -46,8 +46,7 @@ function validateUsername() {
 }
 
 function validateEmail() {
-    const emailInput = $("#Email");
-    const emailValue = emailInput.val();
+    const emailValue = $("#Email").val();
     const emailRegex = /^([_\-\.0-9a-zA-Z]+)@([_\-\.0-9a-zA-Z]+)\.([a-zA-Z]){2,7}$/;
     if (emailRegex.test(emailValue)) {
         $("#Email-Check").hide();
@@ -59,8 +58,9 @@ function validateEmail() {
 }
 
 function validatePhoneNum() {
-    let PhoneValue = $("#PhoneNum").val();
-    if (PhoneValue.length != 10) {
+    let phoneValue = $("#PhoneNum").val();
+    const phoneRegex = /^0(5[1-9])[0-9]{7}$/;
+    if (!phoneRegex.test(phoneValue)) {
         $("#PhoneNum-Check").show();
         return false;
     } else {
@@ -68,7 +68,6 @@ function validatePhoneNum() {
     }
     return true;
 }
-
 function validatePassword() {
     let passwordValue = $("#Password").val();
     if (passwordValue.length == "") {
