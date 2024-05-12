@@ -28,5 +28,19 @@ namespace EventsManagerWeb.Controllers
             MenuListVIewModel Menus = await client.GetAsync();
             return Menus;
         }
+
+        [System.Web.Http.HttpGet]
+        [EnableCors(origins: "https://localhost:44365", headers: "*", methods: "*")]
+        async public Task<bool> IsAvailableUserName(string UserName)
+        {
+            WebClient<bool> client = new WebClient<bool>
+            {
+                Server = CommonParameters.Location.WebService,
+                Controller = "Registered",
+                Method = "IsAvailableUserName"
+            };
+            client.AddKeyValue("UserName", UserName);
+            return await client.GetAsync();
+        }
     }
 }

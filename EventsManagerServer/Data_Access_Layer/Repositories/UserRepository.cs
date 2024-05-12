@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -89,6 +90,16 @@ namespace EventsManager.Data_Access_Layer
                 while (dataReader.Read() == true)
                     Users.Add(this.modelFactory.UserModelCreator.CreateModel(dataReader));
             return Users;
+        }
+
+        public bool IsAvailableUserName(string UserName)
+        {
+            string sql = "SELECT * FROM Users WHERE UserName=@UserName";
+            this.AddParameters("UserName", UserName);
+            using (IDataReader dataReader = this.dbContext.Read(sql))
+            {
+                return dataReader.Read();
+            };
         }
 
         public object ReadValue()

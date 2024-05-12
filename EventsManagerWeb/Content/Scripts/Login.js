@@ -30,19 +30,39 @@ $(document).ready(function () {
     });
 });
 
-function validateUsername() {
+async function validateUsername() {
     let usernameValue = $("#UserName").val();
     if (!usernameValue.length) {
         $("#UserName-Check").hide();
         return false;
-    } else if (usernameValue.length < 3 || usernameValue.length > 10) {
+    } else if (usernameValue.length < 3 || usernameValue.length > 12) {
         $("#UserName-Check").show();
-        $("#UserName-Check").html("**length of username must be between 3 and 10");
+        $("#UserName-Check").html("**length of username must be between 3 and 12");
+        return false;
+    } else if (await checkUserNameAvailability(usernameValue)) {
+        $("#UserName-Check").show();
+        $("#UserName-Check").html("**UserName Is Already Taken");
         return false;
     } else {
         $("#UserName-Check").hide();
     }
     return true;
+}
+
+async function checkUserNameAvailability(usernameValue) {
+    try {
+        const response = await fetch("/api/IsAvailableUserName?UserName=" + usernameValue);
+        if (!response.ok) {
+            return false;
+            $("#UserName-Check").show();
+            $("#UserName-Check").html("**Error fetching username availability, Please try again later");
+        }
+        return await response.text() === "false";
+    } catch (error) {
+        $("#UserName-Check").show();
+        $("#UserName-Check").html("**Error fetching username availability, Please try again later");
+        return false;
+    }
 }
 
 function validateEmail() {
@@ -120,9 +140,5 @@ function validateRegister() {
 }
 
 function validateLogin() {
-    if (validateUsername() && validatePassword()) {
-        return true;
-    } else {
-        return false;
-    }
+    return true
 }

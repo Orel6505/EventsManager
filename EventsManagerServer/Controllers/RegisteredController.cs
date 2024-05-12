@@ -34,5 +34,26 @@ namespace EventsManager.Controllers
             }
             return false;
         }
+
+        [HttpGet]
+        public bool IsAvailableUserName(string UserName)
+        {
+            DbContext dbContext = OleDbContext.GetInstance();
+            LibraryUnitOfWork libraryUnitOfWork = new LibraryUnitOfWork(dbContext);
+            try
+            {
+                dbContext.OpenConnection();
+                return !libraryUnitOfWork.UserRepository.IsAvailableUserName(UserName);
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+            }
+            finally
+            {
+                dbContext.CloseConnection();
+            }
+            return false;
+        }
     }
 }
