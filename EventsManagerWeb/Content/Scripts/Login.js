@@ -1,5 +1,4 @@
-﻿// Document is ready 
-$(document).ready(function () {
+﻿$(document).ready(function () {
     // Validate Username 
     $("#UserName-Check").hide();
     $("#UserName").keyup(function () {
@@ -137,8 +136,4 @@ function validateRegister() {
     } else {
         return false;
     }
-}
-
-function validateLogin() {
-    return true
 }
