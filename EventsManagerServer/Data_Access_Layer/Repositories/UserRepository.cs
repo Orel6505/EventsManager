@@ -72,7 +72,7 @@ namespace EventsManager.Data_Access_Layer
 
         public User GetUser2FAByUserName(string UserName)
         {
-            string sql = $"SELECT Users.UserName, Users.FirstName, Users.LastName, Users.UserId, Users.Email FROM Users WHERE Users.UserName=@UserName;";
+            string sql = $"SELECT Users.UserName, Users.UserId, Users.UserTypeId, Users.Email FROM Users WHERE Users.UserName=@UserName;";
             this.AddParameters("UserName", UserName); //prevents SQL Injection
             using (IDataReader dataReader = this.dbContext.Read(sql))
             {

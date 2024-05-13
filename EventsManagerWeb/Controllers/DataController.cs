@@ -13,10 +13,10 @@ using System.Web.Mvc;
 namespace EventsManagerWeb.Controllers
 {
     [OutputCache(Duration = 0)]
+    [EnableCors(origins: "https://localhost:44365", headers: "*", methods: "*")]
     public class DataController : ApiController
     {
         [System.Web.Http.HttpGet]
-        [EnableCors(origins: "https://localhost:44365", headers: "*", methods: "*")]
         async public Task<MenuListVIewModel> GetMenus()
         {
             WebClient<MenuListVIewModel> client = new WebClient<MenuListVIewModel>
@@ -25,12 +25,14 @@ namespace EventsManagerWeb.Controllers
                 Controller = "Visitor",
                 Method = "GetMenus"
             };
+            if (Request.Headers.GetCookies("Token").Count <= 0)
+            {
+            }
             MenuListVIewModel Menus = await client.GetAsync();
             return Menus;
         }
 
         [System.Web.Http.HttpGet]
-        [EnableCors(origins: "https://localhost:44365", headers: "*", methods: "*")]
         async public Task<bool> IsAvailableUserName(string UserName)
         {
             WebClient<bool> client = new WebClient<bool>

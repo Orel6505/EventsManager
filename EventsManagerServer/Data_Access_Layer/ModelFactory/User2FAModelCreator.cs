@@ -16,8 +16,8 @@ namespace EventsManager.Data_Access_Layer
         {
             User User = new User()
             {
-                FirstName = Convert.ToString(source["FirstName"]),
-                LastName = Convert.ToString(source["LastName"]),
+                UserTypeId = Convert.ToInt16(source["UserTypeId"]),
+                UserId = Convert.ToInt16(source["UserId"]),
                 UserName = Convert.ToString(source["UserName"]),
                 Email = Convert.ToString(source["Email"]),
                 UserPassword = null

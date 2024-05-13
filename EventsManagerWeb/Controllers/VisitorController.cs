@@ -1,9 +1,14 @@
 ﻿using EventsManagerModels;
 using EventsManagerWebService;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Reflection;
+using System.Security.Claims;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
@@ -76,6 +81,15 @@ namespace EventsManagerWeb.Controllers
             if (user != null)
             {
                 Session["UserName"] = user.UserName;
+                if (user.UserTypeId == 1)
+                {
+                    HttpCookie httpOnlyCookie = new HttpCookie("Token", GetToken(user))
+                    {
+                        HttpOnly = true,
+                        SameSite = SameSiteMode.Lax
+                    };
+                    Response.SetCookie(httpOnlyCookie);
+                }
                 return RedirectToAction("Home", "Visitor");
             }
             else
@@ -87,10 +101,9 @@ namespace EventsManagerWeb.Controllers
             Session["UserName"] = null;
             return RedirectToAction("Home", "Visitor");
         }
-        public ActionResult Register(User entered = null, int temp = 0)
+        public ActionResult Register()
         {
-            User user = entered != null ? entered : new User();
-            return View(user);
+            return View();
         }
         //[HttpPost]
         //public async Task<ActionResult> Register(User user)
@@ -140,6 +153,31 @@ namespace EventsManagerWeb.Controllers
         public ActionResult Login2FA()
         {
             return View();
+        }
+
+        public string GetToken(User user)
+        {
+            var key = ConfigurationManager.AppSettings["JwtKey"];
+            var issuer = ConfigurationManager.AppSettings["JwtIssuer"];
+
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+            //Create a List of Claims, Keep claims name short    
+            var permClaims = new List<Claim>
+            {
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim("UserId", user.UserId.ToString()),
+            };
+
+            //Create Security Token object by giving required parameters    
+            JwtSecurityToken token = new JwtSecurityToken(issuer, //Issuer
+                issuer,  //Audience
+                permClaims,
+                expires: DateTime.Now.AddDays(1),
+                signingCredentials: credentials);
+            string jwt_token = new JwtSecurityTokenHandler().WriteToken(token);
+            return jwt_token;
         }
     }
 }

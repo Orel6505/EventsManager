@@ -24,8 +24,9 @@ namespace EventsManager.Data_Access_Layer
                 Address = Convert.ToString(source["Address"]),
                 PhoneNum = Convert.ToString(source["PhoneNum"]),
                 CreationDate = Convert.ToString(source["CreationDate"]),
+                UserTypeId = Convert.ToInt16(source["UserTypeId"]),
                 UserPassword = new Password(Convert.ToString(source["PasswordHash"]), Convert.ToString(source["Salt"])),
-                Type = null,
+                UserType = null,
                 Orders = null
             };
             return user;
