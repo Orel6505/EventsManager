@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Mvc;
+using AuthorizeAttribute = System.Web.Http.AuthorizeAttribute;
 
 namespace EventsManagerWeb.Controllers
 {
@@ -16,6 +17,7 @@ namespace EventsManagerWeb.Controllers
     [EnableCors(origins: "https://localhost:44365", headers: "*", methods: "*")]
     public class DataController : ApiController
     {
+        [Authorize]
         [System.Web.Http.HttpGet]
         async public Task<MenuListVIewModel> GetMenus()
         {

@@ -17,20 +17,31 @@ function ShowFoodOptions() {
 }
 
 function GetMenus() {
-    const xhttp = new XMLHttpRequest();
-    xhttp.onload = function () {
-        try {
-            globalThis.MenuResponse = JSON.parse(this.responseText);
+    const token = (document.cookie).split("=")[1];
+    console.log(token)
+
+    if (!token) {
+        console.error('Bearer token not found in the "Token" cookie.');
+        return;
+    }
+
+    const headers = {
+        'Authorization': `Bearer ${token}`
+    };
+    fetch('/api/GetMenus', { headers })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error fetching menus: ${response.status} ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            globalThis.MenuResponse = data;
             LoadMenus();
-        } catch (error) {
-            console.error("Error fetching menus:", error);
-        }
-    };
-    xhttp.onerror = function () {
-        console.error("Error during XHR request for menus.");
-    };
-    xhttp.open("GET", "/api/GetMenus", true);
-    xhttp.send();
+        })
+        .catch(error => {
+            console.error('Error fetching menus:', error);
+        });
 }
 function LoadMenus() {
     $("#MenusWrapper").empty();

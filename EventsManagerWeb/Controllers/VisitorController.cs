@@ -85,8 +85,7 @@ namespace EventsManagerWeb.Controllers
                 {
                     HttpCookie httpOnlyCookie = new HttpCookie("Token", GetToken(user))
                     {
-                        HttpOnly = true,
-                        SameSite = SameSiteMode.Lax
+                        SameSite = SameSiteMode.Lax,
                     };
                     Response.SetCookie(httpOnlyCookie);
                 }
@@ -99,6 +98,7 @@ namespace EventsManagerWeb.Controllers
         public ActionResult LogOut()
         {
             Session["UserName"] = null;
+            Response.Cookies["Token"].Expires = DateTime.Now.AddDays(-1);
             return RedirectToAction("Home", "Visitor");
         }
         public ActionResult Register()
