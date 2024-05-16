@@ -155,6 +155,11 @@ namespace EventsManagerWeb.Controllers
             return View();
         }
 
+        public ActionResult NotFound()
+        {
+            return View();
+        }
+
         public string GetToken(User user)
         {
             var key = ConfigurationManager.AppSettings["JwtKey"];

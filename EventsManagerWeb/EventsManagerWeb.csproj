@@ -197,6 +197,7 @@
     <Content Include="Content\img\wallbrush_image.png" />
     <Content Include="Content\Styles\Login.css" />
     <Content Include="Content\Scripts\Menus.js" />
+    <Content Include="Content\Styles\NotFound.css" />
     <Content Include="Content\Styles\Style.css" />
     <Content Include="Content\Styles\Menus.css" />
     <Content Include="Global.asax" />
@@ -230,6 +231,7 @@
     <Content Include="Views\Visitor\Login.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Visitor\Login2FA.cshtml" />
+    <Content Include="Views\Visitor\NotFound.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
