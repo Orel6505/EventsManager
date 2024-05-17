@@ -1,11 +1,15 @@
 ﻿@if (!string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
 {
-    using (Html.BeginForm("LogOut", "Visitor", FormMethod.Post, new { id = "logoutForm", @class = "" }))
-    {
-        @Html.AntiForgeryToken()
-        <a class="navText" href="#">Welcome: @Session["UserName"]</a>
-        <a class="navText" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
-    }
+    @Html.AntiForgeryToken()
+    <button class="dropbtn navText">Welcome: @Session["UserName"]</button>
+    <div class="dropdown-content">
+        <a class="navText" href="#">My Orders</a>
+        <a class="navText" href="#">My Account</a>
+        @using (Html.BeginForm("LogOut", "Visitor", FormMethod.Post, new { id = "logoutForm", @class = "" }))
+         {
+              <button class="navText">Log off</button>
+         }
+    </div>
 }
 else
 {

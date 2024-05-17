@@ -178,7 +178,7 @@ header {
 	.explain {
 		display: inline-block;
 		width: 30vw;
-		height: 90%;
+		height: 200px;
 		overflow: hidden;
 	}
 

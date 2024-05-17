@@ -46,6 +46,11 @@ header {
 .navText {
 	padding: 16px 12px 18px 12px;
 	margin: 16px 0px 10px 0px;
+	font-size: 1rem;
+	color: white;
+	font-weight: bolder;
+	background-color: transparent;
+	border: none;
 }
 
 .logo:focus, .logo:hover {
@@ -86,6 +91,39 @@ header {
 	line-height: normal;
 	background: white;
 	border-radius: 20%;
+}
+
+.dropdown-content {
+	display: none;
+	position: fixed;
+	background-color: #f1f1f1;
+	min-width: 180px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+	margin-top: 10px;
+	border-radius: 25px;
+	flex-flow: column;
+	justify-content: center;
+}
+
+.dropdown-content a{
+	color: black;
+	display: flex;
+	text-align: center;
+	margin: 0;
+	width: contain;
+}
+
+.dropdown-content button {
+	color: black;
+	display: flex;
+	text-align: center;
+	margin: 0;
+	width: -webkit-fill-available;
+}
+
+.nav .cLogin:focus .dropdown-content, .cLogin:hover .dropdown-content {
+	display: flex;
 }
 
 @media screen and (max-width: 700px) {
