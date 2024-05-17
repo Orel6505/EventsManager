@@ -11,13 +11,13 @@ namespace EventsManagerModels
         public int OrderId { get; set; }
         public string OrderDate { get; set; } //timestamp
         public int MenuId { get; set; }
-        public int HallId { get; set; }
         public int UserId { get; set; }
         public bool IsPaid {  get; set; }
         public int NumOfPeople { get; set; }
         public string EventDate { get; set; }
         public int EventTypeId { get; set; }
         public EventType EventType { get; set; }
+        public Menu menu { get; set; }
 
     }
 }

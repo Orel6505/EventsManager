@@ -5,8 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Web;
 using System.Web.Http;
+using System.Web.UI.WebControls;
 
 namespace EventsManager.Controllers
 {
@@ -54,6 +56,34 @@ namespace EventsManager.Controllers
                 dbContext.CloseConnection();
             }
             return false;
+        }
+
+        [HttpGet]
+        public List<Order> GetOrders(int UserId)
+        {
+            DbContext dbContext = OleDbContext.GetInstance();
+            LibraryUnitOfWork libraryUnitOfWork = new LibraryUnitOfWork(dbContext);
+            try
+            {
+                List<Order> orders;
+                dbContext.OpenConnection();
+                orders = libraryUnitOfWork.OrderRepository.ReadByUserId(UserId);
+                foreach (Order order in orders)
+                {
+                    order.menu = libraryUnitOfWork.MenuRepository.Read(order.MenuId);
+                    order.EventType = libraryUnitOfWork.EventTypeRepository.Read(order.EventTypeId);
+                }
+                return orders;
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+            }
+            finally
+            {
+                dbContext.CloseConnection();
+            }
+            return null;
         }
     }
 }

@@ -17,7 +17,6 @@ namespace EventsManager.Data_Access_Layer
                 OrderId = Convert.ToInt16(source["OrderId"]),
                 OrderDate = Convert.ToString(source["OrderDate"]),
                 MenuId = Convert.ToInt16(source["MenuId"]),
-                HallId = Convert.ToInt16(source["HallId"]),
                 UserId = Convert.ToInt16(source["UserId"]),
                 IsPaid = Convert.ToBoolean(source["IsPaid"]),
                 NumOfPeople = Convert.ToInt16(source["NumOfPeople"]),

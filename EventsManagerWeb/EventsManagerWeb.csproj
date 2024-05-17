@@ -242,6 +242,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Master\" />
+    <Folder Include="Views\Registered\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommonParameters\CommonParameters.csproj">

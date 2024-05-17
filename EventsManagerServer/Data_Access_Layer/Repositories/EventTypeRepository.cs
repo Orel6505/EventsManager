@@ -41,7 +41,7 @@ namespace EventsManager.Data_Access_Layer
 
         public EventType Read(object id)
         {
-            string sql = $"SELECT FROM EventTypes WHERE EventTypeId=@EventTypeId";
+            string sql = $"SELECT * FROM EventTypes WHERE EventTypeId=@EventTypeId";
             this.AddParameters("EventTypeId", id.ToString()); //prevents SQL Injection
             using (IDataReader dataReader = this.dbContext.Read(sql))
             {
