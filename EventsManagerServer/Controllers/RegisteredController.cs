@@ -59,21 +59,30 @@ namespace EventsManager.Controllers
         }
 
         [HttpGet]
-        public List<Order> GetOrders(int UserId)
+        public OrderListVIewModel GetOrders(int UserId)
         {
+            OrderListVIewModel model = new OrderListVIewModel();
             DbContext dbContext = OleDbContext.GetInstance();
             LibraryUnitOfWork libraryUnitOfWork = new LibraryUnitOfWork(dbContext);
             try
             {
-                List<Order> orders;
                 dbContext.OpenConnection();
-                orders = libraryUnitOfWork.OrderRepository.ReadByUserId(UserId);
-                foreach (Order order in orders)
+                model.Orders = libraryUnitOfWork.OrderRepository.ReadByUserId(UserId);
+                foreach (Order order in model.Orders)
                 {
                     order.menu = libraryUnitOfWork.MenuRepository.Read(order.MenuId);
                     order.EventType = libraryUnitOfWork.EventTypeRepository.Read(order.EventTypeId);
                 }
-                return orders;
+                model.Menus = libraryUnitOfWork.MenuRepository.ReadAll();
+                model.Foods = libraryUnitOfWork.FoodRepository.ReadAll();
+                model.FoodTypes = libraryUnitOfWork.FoodTypeRepository.ReadAll();
+                model.Halls = libraryUnitOfWork.HallRepository.ReadAll();
+                foreach (EventsManagerModels.Menu menu in model.Menus)
+                {
+                    menu.FoodIds = libraryUnitOfWork.MenuRepository.GetFoodIdsBy(menu.MenuId);
+                    menu.FoodTypeIds = libraryUnitOfWork.MenuRepository.GetFoodTypeIdsBy(menu.MenuId);
+                }
+                return model;
             }
             catch (Exception ex)
             {

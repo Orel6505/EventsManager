@@ -7,6 +7,7 @@ using System.Configuration;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Remoting.Contexts;
 using System.Security.Claims;
 using System.Text;
 using System.Threading;
@@ -81,14 +82,13 @@ namespace EventsManagerWeb.Controllers
             if (user != null)
             {
                 Session["UserName"] = user.UserName;
-                if (user.UserTypeId == 1)
+                string token = GetToken(user);
+                HttpCookie httpOnlyCookie = new HttpCookie("Token", token)
                 {
-                    HttpCookie httpOnlyCookie = new HttpCookie("Token", GetToken(user))
-                    {
-                        SameSite = SameSiteMode.Lax,
-                    };
-                    Response.SetCookie(httpOnlyCookie);
-                }
+                    SameSite = SameSiteMode.Lax,
+                    Secure = true,
+                };
+                Response.SetCookie(httpOnlyCookie);
                 return RedirectToAction("Home", "Visitor");
             }
             else
@@ -105,28 +105,6 @@ namespace EventsManagerWeb.Controllers
         {
             return View();
         }
-        //[HttpPost]
-        //public async Task<ActionResult> Register(User user)
-        //{
-        //    WebClient<User> client = new WebClient<User>
-        //    {
-        //        Server = CommonParameters.Location.WebService,
-        //        Controller = "Registered",
-        //        Method = "Register"
-        //    };
-        //    bool IsSuccess = await client.PostAsync(user);
-        //    if (IsSuccess)
-        //    {
-        //        TempData["Login"] = true;
-
-        //        return RedirectToAction("Login", "Visitor");
-        //    }
-        //    else
-        //    {
-        //        ViewBag["Login"] = false;
-        //        return View("Register");
-        //    }
-        //}
 
         [HttpPost]
         public ActionResult Register(User user)

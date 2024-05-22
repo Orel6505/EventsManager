@@ -16,7 +16,7 @@ function ShowFoodOptions() {
     ShowOptions("FoodOptions");
 }
 
-function GetMenus() {
+function GetOrders() {
     const token = (document.cookie).split("=")[1];
     console.log(token)
 
@@ -28,7 +28,7 @@ function GetMenus() {
     const headers = {
         'Authorization': `Bearer ${token}`
     };
-    fetch('/api/GetMenus', { headers })
+    fetch('/api/GetOrders', { headers })
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error fetching menus: ${response.status} ${response.statusText}`);
@@ -43,19 +43,15 @@ function GetMenus() {
             console.error('Error fetching menus:', error);
         });
 }
-function LoadMenus() {
+function LoadOrders() {
     $("#MenusWrapper").empty();
     let ResultCouner = 0;
     const SearchVal = document.getElementById("MenuSearch").value ?? '';
 
-    MenuResponse.Menus.forEach(menu => {
+    MenuResponse.Orders.forEach(menu => {
         if (
             isSearched(SearchVal, menu) &&
-            isChecked(".HallCheckBox", menu.HallId) &&
-            isCheckedLong(".ShowNoFood", menu.FoodIds) &&
-            isCheckedArray(".FoodCheckBox", menu.FoodIds) &&
-            isCheckedLong(".FoodTypeCheckBox", menu.FoodTypeIds) &&
-            isCheckedArray(".FoodTypeCheckBox", menu.FoodTypeIds)
+            isChecked(".HallCheckBox", menu.HallId)
         ) {
             $("#MenusWrapper").append(
                 '<div id="MenuItem">' +

@@ -73,6 +73,22 @@ namespace EventsManager.Data_Access_Layer
                     Foods.Add(Convert.ToInt16(dataReader["FoodId"]));
             return Foods;
         }
+        public List<int> GetFoodTypeIdsBy(object id)
+        {
+            List<int> Foods = new List<int>();
+            string sql = "SELECT FoodTypes.FoodTypeId\r\nFROM Menus INNER JOIN ((FoodTypes INNER JOIN Foods ON FoodTypes.FoodTypeId = Foods.FoodTypeId) INNER JOIN FoodMenu ON Foods.FoodId = FoodMenu.FoodId) ON Menus.MenuId = FoodMenu.MenuId\r\nWHERE (((Menus.MenuId)=[@MenuId]));\r\n";
+            this.AddParameters("MenuId", id.ToString()); //prevents SQL Injection
+            using (IDataReader dataReader = this.dbContext.Read(sql))
+                while (dataReader.Read() == true)
+                {
+                    int tmp = Convert.ToInt16(dataReader["FoodTypeId"]);
+                    if (Foods.IndexOf(tmp) < 0)
+                    {
+                        Foods.Add(tmp);
+                    }
+                }
+            return Foods;
+        }
 
         public object ReadValue()
         {

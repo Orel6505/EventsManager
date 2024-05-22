@@ -130,6 +130,7 @@ namespace EventsManager.Controllers
                 foreach (EventsManagerModels.Menu menu in model.Menus)
                 {
                     menu.FoodIds = libraryUnitOfWork.MenuRepository.GetFoodIdsBy(menu.MenuId);
+                    menu.FoodTypeIds = libraryUnitOfWork.MenuRepository.GetFoodTypeIdsBy(menu.MenuId);
                 }
             }
             catch (Exception ex)

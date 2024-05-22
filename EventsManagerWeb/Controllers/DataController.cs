@@ -2,10 +2,13 @@
 using EventsManagerWebService;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Mvc;
@@ -13,11 +16,12 @@ using AuthorizeAttribute = System.Web.Http.AuthorizeAttribute;
 
 namespace EventsManagerWeb.Controllers
 {
+    [Authorize]
     [OutputCache(Duration = 0)]
     [EnableCors(origins: "https://localhost:44365", headers: "*", methods: "*")]
     public class DataController : ApiController
     {
-        [Authorize]
+        [System.Web.Http.AllowAnonymous]
         [System.Web.Http.HttpGet]
         async public Task<MenuListVIewModel> GetMenus()
         {
@@ -33,7 +37,7 @@ namespace EventsManagerWeb.Controllers
             MenuListVIewModel Menus = await client.GetAsync();
             return Menus;
         }
-
+        [System.Web.Http.AllowAnonymous]
         [System.Web.Http.HttpGet]
         async public Task<bool> IsAvailableUserName(string UserName)
         {
@@ -45,6 +49,26 @@ namespace EventsManagerWeb.Controllers
             };
             client.AddKeyValue("UserName", UserName);
             return await client.GetAsync();
+        }
+        [System.Web.Http.HttpGet]
+        async public Task<OrderListVIewModel> GetOrders()
+        {
+            WebClient<OrderListVIewModel> client = new WebClient<OrderListVIewModel>
+            {
+                Server = CommonParameters.Location.WebService,
+                Controller = "Registered",
+                Method = "GetOrders"
+            };
+            client.AddKeyValue("UserId", GetUserIdFromJWT(HttpContext.Current.Request.Cookies["Token"].ToString()));
+            OrderListVIewModel Menus = await client.GetAsync();
+            return Menus;
+        }
+
+        protected string GetUserIdFromJWT(string token)
+        {
+            var jwt = new JwtSecurityTokenHandler().ReadJwtToken(token).Payload;
+            return jwt.ToString();
+
         }
     }
 }

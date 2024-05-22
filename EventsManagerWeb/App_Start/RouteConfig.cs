@@ -16,6 +16,12 @@ namespace EventsManagerWeb
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "DefaultRegistered",
+                url: "Account/{action}/{id}",
+                defaults: new { controller = "Registered", action = "MyOrders", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{action}/{id}",
                 defaults: new { controller = "Visitor", action = "Home", id = UrlParameter.Optional }
