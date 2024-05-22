@@ -70,6 +70,18 @@ namespace EventsManager.Data_Access_Layer
             //returns User
         }
 
+        public UserType UserTypeByUserId(string UserId)
+        {
+            string sql = $"SELECT UserTypes.UserTypeId,UserTypes.UserTypeName FROM UserTypes INNER JOIN Users ON UserTypes.UserTypeId = Users.UserTypeId WHERE Users.UserId=@UserId;";
+            this.AddParameters("UserId", UserId); //prevents SQL Injection
+            using (IDataReader dataReader = this.dbContext.Read(sql))
+            {
+                dataReader.Read();
+                return this.modelFactory.UserTypeModelCreator.CreateModel(dataReader);
+            }
+            //returns UserType
+        }
+
         public User GetUser2FAByUserName(string UserName)
         {
             string sql = $"SELECT Users.UserName, Users.UserId, Users.UserTypeId, Users.Email FROM Users WHERE Users.UserName=@UserName;";

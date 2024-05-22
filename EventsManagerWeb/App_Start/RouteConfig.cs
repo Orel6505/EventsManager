@@ -34,9 +34,6 @@ namespace EventsManagerWeb
 
             config.MapHttpAttributeRoutes();
 
-            config.SuppressDefaultHostAuthentication();
-            config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
-
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{action}/{id}",

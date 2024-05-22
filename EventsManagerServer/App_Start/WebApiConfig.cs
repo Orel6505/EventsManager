@@ -17,6 +17,12 @@ namespace EventsManager
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
+                name: "Index",
+                routeTemplate: "{id}.html",
+                defaults: new { id = "index" }
+            );
+
+            config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "{controller}/{action}/{id}",
                 defaults: new { id = RouteParameter.Optional }

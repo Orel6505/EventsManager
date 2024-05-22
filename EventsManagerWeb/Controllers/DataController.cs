@@ -1,5 +1,6 @@
 ﻿using EventsManagerModels;
 using EventsManagerWebService;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -7,6 +8,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
@@ -16,7 +18,6 @@ using AuthorizeAttribute = System.Web.Http.AuthorizeAttribute;
 
 namespace EventsManagerWeb.Controllers
 {
-    [Authorize]
     [OutputCache(Duration = 0)]
     [EnableCors(origins: "https://localhost:44365", headers: "*", methods: "*")]
     public class DataController : ApiController
@@ -48,8 +49,10 @@ namespace EventsManagerWeb.Controllers
                 Method = "IsAvailableUserName"
             };
             client.AddKeyValue("UserName", UserName);
-            return await client.GetAsync();
+            return await client.GetAsync(); //TODO: remove this feature, doesn't follow security standarts
         }
+
+        [Authorize(Roles = "Admin")]
         [System.Web.Http.HttpGet]
         async public Task<OrderListVIewModel> GetOrders()
         {
@@ -59,16 +62,9 @@ namespace EventsManagerWeb.Controllers
                 Controller = "Registered",
                 Method = "GetOrders"
             };
-            client.AddKeyValue("UserId", GetUserIdFromJWT(HttpContext.Current.Request.Cookies["Token"].ToString()));
+            client.AddKeyValue("UserId", "1");
             OrderListVIewModel Menus = await client.GetAsync();
             return Menus;
-        }
-
-        protected string GetUserIdFromJWT(string token)
-        {
-            var jwt = new JwtSecurityTokenHandler().ReadJwtToken(token).Payload;
-            return jwt.ToString();
-
         }
     }
 }

@@ -199,5 +199,25 @@ namespace EventsManager.Controllers
             }
             return null;
         }
+        [HttpGet]
+        public UserType UserTypeByUserId(string UserId)
+        {
+            DbContext dbContext = OleDbContext.GetInstance();
+            LibraryUnitOfWork libraryUnitOfWork = new LibraryUnitOfWork(dbContext);
+            try
+            {
+                dbContext.OpenConnection();
+                return libraryUnitOfWork.UserRepository.UserTypeByUserId(UserId);
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+            }
+            finally
+            {
+                dbContext.CloseConnection();
+            }
+            return null;
+        }
     }
 }

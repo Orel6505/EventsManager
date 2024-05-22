@@ -18,7 +18,7 @@ namespace EventsManagerWeb
         public void Configuration(IAppBuilder app)
         {
             // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=316888
-            app.UseJwtBearerAuthentication(new JwtBearerAuthenticationOptions
+            app.Use<JwtCookieAuthenticationMiddleware>(new JwtCookieAuthenticationOptions
             {
                 AuthenticationMode = AuthenticationMode.Active,
                 TokenValidationParameters = new TokenValidationParameters()
@@ -26,7 +26,7 @@ namespace EventsManagerWeb
                     ValidateIssuer = true,
                     ValidateAudience = true,
                     ValidateIssuerSigningKey = true,
-                    ValidIssuer = ConfigurationManager.AppSettings["JwtIssuer"], //some string, normally web url,  
+                    ValidIssuer = ConfigurationManager.AppSettings["JwtIssuer"],
                     ValidAudience = ConfigurationManager.AppSettings["JwtIssuer"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(ConfigurationManager.AppSettings["JwtKey"]))
                 }

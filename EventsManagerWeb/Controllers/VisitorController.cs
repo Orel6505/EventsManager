@@ -86,6 +86,7 @@ namespace EventsManagerWeb.Controllers
                 HttpCookie httpOnlyCookie = new HttpCookie("Token", token)
                 {
                     SameSite = SameSiteMode.Lax,
+                    HttpOnly = true,
                     Secure = true,
                 };
                 Response.SetCookie(httpOnlyCookie);
