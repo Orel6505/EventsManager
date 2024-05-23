@@ -73,15 +73,7 @@ namespace EventsManager.Controllers
                     order.menu = libraryUnitOfWork.MenuRepository.Read(order.MenuId);
                     order.EventType = libraryUnitOfWork.EventTypeRepository.Read(order.EventTypeId);
                 }
-                model.Menus = libraryUnitOfWork.MenuRepository.ReadAll();
-                model.Foods = libraryUnitOfWork.FoodRepository.ReadAll();
-                model.FoodTypes = libraryUnitOfWork.FoodTypeRepository.ReadAll();
                 model.Halls = libraryUnitOfWork.HallRepository.ReadAll();
-                foreach (EventsManagerModels.Menu menu in model.Menus)
-                {
-                    menu.FoodIds = libraryUnitOfWork.MenuRepository.GetFoodIdsBy(menu.MenuId);
-                    menu.FoodTypeIds = libraryUnitOfWork.MenuRepository.GetFoodTypeIdsBy(menu.MenuId);
-                }
                 return model;
             }
             catch (Exception ex)

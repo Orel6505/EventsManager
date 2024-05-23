@@ -17,18 +17,7 @@ function ShowFoodOptions() {
 }
 
 function GetMenus() {
-    const token = (document.cookie).split("=")[1];
-    console.log(token)
-
-    if (!token) {
-        console.error('Bearer token not found in the "Token" cookie.');
-        return;
-    }
-
-    const headers = {
-        'Authorization': `Bearer ${token}`
-    };
-    fetch('/api/GetMenus', { headers })
+    fetch('/api/GetMenus')
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error fetching menus: ${response.status} ${response.statusText}`);

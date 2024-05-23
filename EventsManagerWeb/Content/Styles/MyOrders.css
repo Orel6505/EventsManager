@@ -1,0 +1,75 @@
+﻿.SortMenu {
+    width: 100%;
+}
+
+.SortMenu h1{
+    text-align: center;
+}
+
+.SortMenuOptions {
+    display: block;
+    background-color: blue;
+    color: white;
+    padding: 16px;
+    font-size: 1rem;
+    border: none;
+    width: 100%;
+}
+
+.MenuSearch {
+    width: 30vw;
+}
+
+.OptionItems {
+    max-height: 600px;
+    transition: 0.4s ease-in-out;
+    display: block;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.OptionItem {
+    display: block;
+    direction: rtl;
+    text-align: center;
+    min-width: 160px;
+    background-color: cyan;
+}
+
+.SortMenuOptions:hover {
+    background-color: #ddd;
+}
+
+.OptionItem h4 {
+    width: fit-content;
+    display: inline;
+}
+
+.OrdersTable {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #f2f2f2;
+}
+
+.OrdersTable td, .OrdersTable th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.OrdersTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.OrdersTable tr:hover {
+    background-color: #ddd;
+}
+
+.OrdersTable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #04AA6D;
+    color: white;
+}

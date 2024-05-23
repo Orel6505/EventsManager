@@ -239,6 +239,7 @@
     <Content Include="Content\img\wallbrush_image.png" />
     <Content Include="Content\Styles\Login.css" />
     <Content Include="Content\Scripts\Menus.js" />
+    <Content Include="Content\Styles\MyOrders.css" />
     <Content Include="Content\Styles\NotFound.css" />
     <Content Include="Content\Styles\Style.css" />
     <Content Include="Content\Styles\Menus.css" />

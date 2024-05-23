@@ -52,7 +52,7 @@ namespace EventsManagerWeb.Controllers
             return await client.GetAsync(); //TODO: remove this feature, doesn't follow security standarts
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, User")]
         [System.Web.Http.HttpGet]
         async public Task<OrderListVIewModel> GetOrders()
         {
@@ -62,7 +62,7 @@ namespace EventsManagerWeb.Controllers
                 Controller = "Registered",
                 Method = "GetOrders"
             };
-            client.AddKeyValue("UserId", "1");
+            client.AddKeyValue("UserId", "2");
             OrderListVIewModel Menus = await client.GetAsync();
             return Menus;
         }

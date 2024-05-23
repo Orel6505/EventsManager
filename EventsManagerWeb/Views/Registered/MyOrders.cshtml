@@ -8,23 +8,16 @@
 
 @if (Model != null)
 {
-    <link rel="stylesheet" href="~/Content/Styles/Menus.css" />
+    <link rel="stylesheet" href="~/Content/Styles/MyOrders.css" />
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
     <script src="~/Content/Scripts/Orders.js"></script>
-    <div class="ShowMenu">
-        <div id="MenusWrapper"></div>
-    </div>
     <div class="SortMenu" id="SortMenu">
-        <h4 class="OptionItem ">סינון</h4><hr>
-        <input type="search" id="MenuSearch" class="MenuSearch" name="MenuSearch">
-        <div class="OptionItem HallOption">
-            <input type="checkbox" class="ShowNoFood" name="ShowNoFood" checked>
-            <h4>הראה רק תפריטים עם מנות</h4>
-        </div>
+        <h1>היסטורית הזמנות</h1><hr>
         @if (Model.Halls.Count > 0)
         {
-            <button class="SortMenuOptions" onclick="ShowHallsOptions()">סוגי אולמות</button>
+            <button class="SortMenuOptions" onclick="ShowHallsOptions()">סינון</button>
             <div class="OptionItems" id="HallOptions">
+                <input type="search" id="MenuSearch" class="MenuSearch" name="MenuSearch">
                 @foreach (Hall hall in Model.Halls)
                 {
                     <div class="OptionItem HallOption">
@@ -34,32 +27,19 @@
                 }
             </div>
         }
-        @if (Model.FoodTypes.Count > 0)
-        {
-            <button class="SortMenuOptions" onclick="ShowFoodTypeOptions()">סוגי מנות</button>
-            <div class="OptionItems" id="FoodTypeOptions">
-                @foreach (FoodType foodType in Model.FoodTypes)
-                {
-                    <div class="OptionItem FoodTypeOption">
-                        <input type="checkbox" class="FoodTypeCheckBox" name="FoodTypeCheckBox" value="@foodType.FoodTypeId">
-                        <h4>@foodType.FoodTypeName</h4>
-                    </div>
-                }
-            </div>
-        }
-        @if (Model.Foods.Count > 0)
-        {
-            <button class="SortMenuOptions" onclick="ShowFoodOptions()">סוגי מאכלים</button>
-            <div class="OptionItems" id="FoodOptions">
-                @foreach (Food food in Model.Foods)
-                {
-                    <div class="OptionItem FoodOption">
-                        <input type="checkbox" class="FoodCheckBox" name="FoodCheckBox" value="@food.FoodId">
-                        <h4>@food.FoodName</h4>
-                    </div>
-                }
-            </div>
-        }
+        <table id="OrdersTable" class="OrdersTable">
+            <thead class="OrdersTableHead">
+                <tr>
+                    <th>מזהה הזמנה</th>
+                    <th>תאריך ההזמנה</th>
+                    <th>תאריך האירוע</th>
+                    <th>התפריט שהוזמן</th>
+                    <th>כמות המוזמנים</th>
+                    <th>שולם</th>
+                </tr>
+            </thead>
+            <tbody id="Orders" class="OrdersTableBody"></tbody>
+        </table>
     </div>
     <script>
         const CheckBox = document.getElementById("SortMenu");

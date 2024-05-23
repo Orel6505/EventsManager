@@ -17,18 +17,7 @@ function ShowFoodOptions() {
 }
 
 function GetOrders() {
-    const token = (document.cookie).split("=")[1];
-    console.log(token)
-
-    if (!token) {
-        console.error('Bearer token not found in the "Token" cookie.');
-        return;
-    }
-
-    const headers = {
-        'Authorization': `Bearer ${token}`
-    };
-    fetch('/api/GetOrders', { headers })
+    fetch('/api/GetOrders')
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error fetching menus: ${response.status} ${response.statusText}`);
@@ -37,38 +26,44 @@ function GetOrders() {
         })
         .then(data => {
             globalThis.MenuResponse = data;
-            LoadMenus();
+            LoadOrders();
         })
         .catch(error => {
             console.error('Error fetching menus:', error);
         });
 }
 function LoadOrders() {
-    $("#MenusWrapper").empty();
+    $("#Orders").empty();
     let ResultCouner = 0;
     const SearchVal = document.getElementById("MenuSearch").value ?? '';
 
-    MenuResponse.Orders.forEach(menu => {
+    MenuResponse.Orders.forEach(Order => {
         if (
-            isSearched(SearchVal, menu) &&
-            isChecked(".HallCheckBox", menu.HallId)
+            isSearched(SearchVal, Order)
         ) {
-            $("#MenusWrapper").append(
-                '<div id="MenuItem">' +
-                    '<a href="/Menu/?id=' + menu.MenuId + '">' + menu.MenuName + '</a>' +
-                '</div>'
+            let OrderDate = new Date(Order.OrderDate * 1000);
+            let OrderDateString = OrderDate.toLocaleString();
+            $("#Orders").append(
+                '<tr>' +
+                    '<td>' + "Order-" + Order.OrderId + '</td>' +
+                    '<td>' + OrderDateString + '</td>' +
+                    '<td>' + Order.EventType.EventTypeName + " " + Order.EventDate + '</td>' +
+                    '<td>' + '<a href="/Menu/?id=' + Order.MenuId + '">' + Order.menu.MenuName + '</a>' + '</td>' +
+                    '<td>' + Order.NumOfPeople + '</td>' +
+                    '<td>' + Order.IsPaid + '</td>' +
+                '</tr>'
             );
             ResultCouner++;
         }
     });
     if (!ResultCouner && SearchVal) {
-        $("#MenusWrapper").append('<div id="MenuItem">' + 'לא נמצאו תפריטים עם השם הזה.' + '</div>');
+        $("#Orders").append('<div>' + 'לא נמצאו תפריטים עם השם הזה.' + '</div>');
     }
 }
 
-function isSearched(SearchVal, menu) {
+function isSearched(SearchVal, Order) {
     if (SearchVal !== null) { // strict not-equal operator
-        if (menu.MenuName.includes(SearchVal)) {
+        if (Order.EventType.EventTypeName.includes(SearchVal)) {
             return true;
         } else {
             return false;
