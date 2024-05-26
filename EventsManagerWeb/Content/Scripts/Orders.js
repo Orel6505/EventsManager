@@ -4,17 +4,6 @@ function ShowOptions(elements) {
     const ex = document.getElementById(elements);
     ex.style.maxHeight = (ex.style.maxHeight === "0px") ? "600px" : "0px";
 }
-function ShowHallsOptions() {
-    ShowOptions("HallOptions");
-}
-
-function ShowFoodTypeOptions() {
-    ShowOptions("FoodTypeOptions");
-}
-
-function ShowFoodOptions() {
-    ShowOptions("FoodOptions");
-}
 
 function GetOrders() {
     fetch('/api/GetOrders')
@@ -35,12 +24,12 @@ function GetOrders() {
 function LoadOrders() {
     $("#Orders").empty();
     let ResultCouner = 0;
-    const SearchVal = document.getElementById("MenuSearch").value ?? '';
+    //const SearchVal = document.getElementById("MenuSearch").value ?? '';
 
     MenuResponse.Orders.forEach(Order => {
-        if (
-            isSearched(SearchVal, Order)
-        ) {
+        //if (
+        //    isSearched(SearchVal, Order)
+        //) {
             let OrderDate = new Date(Order.OrderDate * 1000);
             let OrderDateString = OrderDate.toLocaleString();
             $("#Orders").append(
@@ -54,63 +43,20 @@ function LoadOrders() {
                 '</tr>'
             );
             ResultCouner++;
-        }
+        //}
     });
     if (!ResultCouner && SearchVal) {
         $("#Orders").append('<div>' + 'לא נמצאו תפריטים עם השם הזה.' + '</div>');
     }
 }
 
-function isSearched(SearchVal, Order) {
-    if (SearchVal !== null) { // strict not-equal operator
-        if (Order.EventType.EventTypeName.includes(SearchVal)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    return true;
-}
-
-function isChecked(element, num) {
-    const checkboxes = document.querySelectorAll(element);
-    let isTouched = true;
-    for (const checkbox of checkboxes) {
-        if (checkbox.checked) {
-            isTouched = false;
-            if (checkbox.value == num) {
-                return true;
-            }
-        }
-    }
-    return isTouched;
-}
-
-function isCheckedArray(element, arr) {
-    const checkboxes = document.querySelectorAll(element);
-    let isTouched = true;
-    for (const checkbox of checkboxes) {
-        if (checkbox.checked) {
-            isTouched = false;
-            if (arr.includes(parseInt(checkbox.value))) {
-                isTouched = true;
-            }
-        }
-    }
-    return isTouched;
-}
-
-function isCheckedLong(element, arr) {
-    const checkboxes = document.querySelectorAll(element);
-    let isTouched = false;
-    for (const checkbox of checkboxes) {
-        if (checkbox.checked) {
-            if (arr.length > 0) {
-                isTouched = true;
-            }
-        } else {
-            isTouched = true;
-        }
-    }
-    return isTouched;
-}
+//function isSearched(SearchVal, Order) {
+//    if (SearchVal !== null) { // strict not-equal operator
+//        if (Order.EventType.EventTypeName.includes(SearchVal)) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
+//    return true;
+//}

@@ -15,16 +15,15 @@
         <h1>היסטורית הזמנות</h1><hr>
         @if (Model.Halls.Count > 0)
         {
-            <button class="SortMenuOptions" onclick="ShowHallsOptions()">סינון</button>
-            <div class="OptionItems" id="HallOptions">
-                <input type="search" id="MenuSearch" class="MenuSearch" name="MenuSearch">
+            <button class="SortMenuOptions" onclick="ShowOptions('OptionsItems')">סינון</button>
+            <div class="OptionItems" id="OptionsItems">
+                <select id="Halls">
+                    <option value="None">לא נבחר</option>
                 @foreach (Hall hall in Model.Halls)
                 {
-                    <div class="OptionItem HallOption">
-                        <input type="checkbox" class="HallCheckBox" name="HallCheckBox" value="@hall.HallId">
-                        <h4>@hall.HallName</h4>
-                    </div>
+                    <option value="@hall.HallId">@hall.HallName</option>
                 }
+                </select>
             </div>
         }
         <table id="OrdersTable" class="OrdersTable">
@@ -42,8 +41,8 @@
         </table>
     </div>
     <script>
-        const CheckBox = document.getElementById("SortMenu");
-        const Listener = document.getElementById("MenuSearch");
+        const CheckBox = document.getElementById("Halls");
+        const Listener = document.getElementById("Halls");
         CheckBox.addEventListener('change', LoadOrders);
         Listener.addEventListener('input', LoadOrders);
         window.onload = function () {
