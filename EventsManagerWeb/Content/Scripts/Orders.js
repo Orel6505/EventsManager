@@ -36,10 +36,11 @@ function LoadOrders() {
                 '<tr>' +
                     '<td>' + "Order-" + Order.OrderId + '</td>' +
                     '<td>' + OrderDateString + '</td>' +
-                    '<td>' + Order.EventType.EventTypeName + " " + Order.EventDate + '</td>' +
-                    '<td>' + '<a href="/Menu/?id=' + Order.MenuId + '">' + Order.menu.MenuName + '</a>' + '</td>' +
-                    '<td>' + Order.NumOfPeople + '</td>' +
+                    '<td class="hiddenonlow">' + Order.EventType.EventTypeName + " " + Order.EventDate + '</td>' +
+                    '<td class="hiddenonlow">' + '<a href="/Menu/?id=' + Order.MenuId + '">' + Order.menu.MenuName + '</a>' + '</td>' +
+                    '<td class="hiddenonlow">' + Order.NumOfPeople + '</td>' +
                     '<td>' + Order.IsPaid + '</td>' +
+                    '<td class="shownonlow"><button class="show-more-btn">Details</button></td>' +
                 '</tr>'
             );
             ResultCouner++;
