@@ -8,6 +8,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -62,7 +63,8 @@ namespace EventsManagerWeb.Controllers
                 Controller = "Registered",
                 Method = "GetOrders"
             };
-            client.AddKeyValue("UserId", "2");
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+            client.AddKeyValue("UserId", claimsIdentity.FindFirst("UserId").Value);
             OrderListVIewModel Menus = await client.GetAsync();
             return Menus;
         }

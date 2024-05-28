@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Runtime.Remoting.Contexts;
 using System.Security.Claims;
@@ -88,6 +89,7 @@ namespace EventsManagerWeb.Controllers
                     SameSite = SameSiteMode.Lax,
                     HttpOnly = true,
                     Secure = true,
+                    Expires = DateTime.MinValue,
                 };
                 Response.SetCookie(httpOnlyCookie);
                 return RedirectToAction("Home", "Visitor");

@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Runtime.Remoting.Contexts;
 using System.Security.Claims;
 using System.Text;
 using System.Threading;
@@ -22,18 +23,23 @@ namespace EventsManagerWeb.Controllers
     [Route("/Account/{action}")]
     public class RegisteredController : Controller
     {
+        [Authorize]
         public ActionResult MyOrders()
         {
-            var handler = new JwtSecurityTokenHandler();
             WebClient<OrderListVIewModel> client = new WebClient<OrderListVIewModel>
             {
                 Server = CommonParameters.Location.WebService,
                 Controller = "Registered",
                 Method = "GetOrders"
             };
-            client.AddKeyValue("UserId", "1");
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+            client.AddKeyValue("UserId", claimsIdentity.FindFirst("UserId").Value);
             OrderListVIewModel Menus = client.Get();
             return View(Menus);
+        }
+        public ActionResult Order() 
+        {
+            return View();
         }
     }
 }

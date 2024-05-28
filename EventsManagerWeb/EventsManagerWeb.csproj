@@ -222,6 +222,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Scripts\Login.js" />
+    <Content Include="Content\Scripts\Order.js" />
+    <Content Include="Content\Scripts\Register.js" />
     <Content Include="Content\Scripts\Orders.js" />
     <Content Include="Content\Styles\Home.css" />
     <Content Include="Content\Scripts\Home.js" />
@@ -239,6 +241,7 @@
     <Content Include="Content\img\wallbrush_image.png" />
     <Content Include="Content\Styles\Login.css" />
     <Content Include="Content\Scripts\Menus.js" />
+    <Content Include="Content\Styles\Order.css" />
     <Content Include="Content\Styles\MyOrders.css" />
     <Content Include="Content\Styles\NotFound.css" />
     <Content Include="Content\Styles\Style.css" />
@@ -278,6 +281,7 @@
     <Content Include="Views\Visitor\Login2FA.cshtml" />
     <Content Include="Views\Visitor\NotFound.cshtml" />
     <Content Include="Views\Registered\MyOrders.cshtml" />
+    <Content Include="Views\Registered\Order.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

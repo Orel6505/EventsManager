@@ -16,6 +16,7 @@ using EventsManagerModels;
 using EventsManagerWebService;
 using System.Web.Helpers;
 using System.Reflection;
+using System.Web.Mvc;
 
 namespace EventsManagerWeb
 {
@@ -55,12 +56,13 @@ namespace EventsManagerWeb
                 {
                     return null;
                 }
-                // Assign roles based on userId (customize this logic as needed)
-                Claim roles = GetRoleForUserId(userId);
+
+                // Assign roles based on userId
+                Claim roles = await GetRoleForUserId(userId);
 
                 ClaimsIdentity identity = new ClaimsIdentity(claimsPrincipal.Identity.AuthenticationType);
                 identity.AddClaims(claimsPrincipal.Claims);
-                identity.AddClaim(new Claim(ClaimTypes.Name, userId));
+                identity.AddClaim(new Claim(ClaimTypes.Name, userId??"None"));
                 identity.AddClaim(roles);
                 AuthenticationTicket ticket = new AuthenticationTicket(identity, new AuthenticationProperties());
                 return ticket;
@@ -71,10 +73,8 @@ namespace EventsManagerWeb
             }
         }
 
-        // Custom logic to get roles based on userId (replace with your actual logic)
-        private static Claim GetRoleForUserId(string userId)
+        private async static Task<Claim> GetRoleForUserId(string userId)
         {
-            // Example: Query database or use any other logic to get roles for the userId
             WebClient<UserType> client = new WebClient<UserType>
             {
                 Server = CommonParameters.Location.WebService,
@@ -82,11 +82,18 @@ namespace EventsManagerWeb
                 Method = "UserTypeByUserId"
             };
             client.AddKeyValue("UserId", userId);
-            UserType userType = client.Get();
-            if (userType.UserTypeId != 0)
+            try
             {
-                return new Claim(ClaimTypes.Role, userType.UserTypeName);
-            } 
+                UserType userType = await client.GetAsync();
+                if (userType.UserTypeId != 0)
+                {
+                    return new Claim(ClaimTypes.Role, userType.UserTypeName);
+                }
+            }
+            catch (Exception)
+            {
+                return new Claim(ClaimTypes.Role, "Anonymous");
+            }
             return new Claim(ClaimTypes.Role, "Anonymous");
         }
     }

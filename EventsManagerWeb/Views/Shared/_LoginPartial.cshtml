@@ -3,7 +3,7 @@
     @Html.AntiForgeryToken()
     <button class="dropbtn navText">Welcome: @Session["UserName"]</button>
     <div class="dropdown-content">
-        <a class="navText" href="#">My Orders</a>
+        <a class="navText" href="/Account/MyOrders">My Orders</a>
         <a class="navText" href="#">My Account</a>
         @using (Html.BeginForm("LogOut", "Visitor", FormMethod.Post, new { id = "logoutForm", @class = "" }))
          {
