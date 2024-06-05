@@ -47,8 +47,10 @@ function LoadMenus() {
             isCheckedArray(".FoodTypeCheckBox", menu.FoodTypeIds)
         ) {
             $("#MenusWrapper").append(
-                '<div id="MenuItem">' +
-                    '<a href="/Menu/?id=' + menu.MenuId + '">' + menu.MenuName + '</a>' +
+                '<div class="product" data-category="'+ menu.HallId + '" data-price="699">' +
+                    '<img src="'+ menu.MenuId + '.png" alt="תמונת תפריט">' +
+                    '<h3>' + menu.MenuName + '</h3>' +
+                    '<p>Price: $699</p>' +
                 '</div>'
             );
             ResultCouner++;

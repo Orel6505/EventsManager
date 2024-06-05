@@ -1,15 +1,6 @@
-﻿.SortMenu {
-    float: right;
-    padding: 10px;
-}
-
-.ShowMenu {
-    display: inline-block;
-}
-
-.SortMenuOptions {
+﻿.SortMenuOptions {
     display: block;
-    background-color: blue;
+    background-color: black;
     color: white;
     padding: 16px;
     font-size: 1rem;
@@ -32,7 +23,7 @@
     display: block;
     direction: rtl;
     min-width: 160px;
-    background-color: cyan;
+    background-color: white;
 }
 
 .SortMenuOptions:hover {
@@ -42,4 +33,92 @@
 .OptionItem h4 {
     width: fit-content;
     display: inline;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+.content {
+    display: flex;
+}
+
+.sidebar {
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h2 {
+    margin-top: 0;
+    text-align:center;
+    padding:10px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 10px 0;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #000;
+}
+
+.sidebar ul li a:hover {
+    text-decoration: underline;
+}
+
+    .sidebar label {
+        display: block;
+        margin: 20px 0 10px 0;
+    }
+
+.products {
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+    height: max-content
+}
+
+.product {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: calc(33.333% - 40px);
+    box-sizing: border-box;
+}
+
+    .product img {
+        width: 100%;
+        height: auto;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .product h3 {
+        margin: 0 0 10px 0;
+    }
+
+@media (max-width: 900px) {
+    .product {
+        width: calc(50% - 40px);
+    }
+}
+
+@media (max-width: 600px) {
+    .product {
+        width: 100%;
+    }
 }
