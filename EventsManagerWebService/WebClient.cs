@@ -85,6 +85,11 @@ namespace EventsManagerWebService
             RequestCreator(method, url);
             this.Request.Content = ContentCreator(model, FileNames);
         }
+        void RequestCreator(HttpMethod method, string url, T model, Stream stream)
+        {
+            RequestCreator(method, url);
+            this.Request.Content = ContentCreator(model, stream);
+        }
 
         ObjectContent ContentCreator(T model)
         {
@@ -107,6 +112,14 @@ namespace EventsManagerWebService
                     multipart.Add(ContentCreator(FileName));
                 return multipart;
             }
+        }
+        StreamContent ContentCreator(Stream stream)
+        {
+            return new StreamContent(stream);
+        }
+        MultipartFormDataContent ContentCreator(T model, Stream stream)
+        {
+            return new MultipartFormDataContent { ContentCreator(model), ContentCreator(stream) };
         }
 
         //Methods implemented from the interface IWebClient.cs
@@ -146,6 +159,15 @@ namespace EventsManagerWebService
             return this.Response.IsSuccessStatusCode;
         }
 
+        /// <summary> Creates Json file from it's fields, then sends https request back </summary>
+        /// <returns> <see langword="true"/> value if successful, else <see langword="false"/> </returns>
+        public bool Post(T model, Stream stream)
+        {
+            RequestCreator(HttpMethod.Post, UrlString(), model, stream);
+            this.Response = this.Client.SendAsync(this.Request).Result;
+            return this.Response.IsSuccessStatusCode;
+        }
+
         /// <summary> Represents the HTTP Get Method </summary>
         /// <returns> <see langword="true"/> value if successful, else <see langword="default"/> </returns>
         public async Task<T> GetAsync()
@@ -180,6 +202,15 @@ namespace EventsManagerWebService
             RequestCreator(HttpMethod.Post, UrlString(), model, FileNames);
             this.Response = await this.Client.SendAsync(this.Request);
             return this.Response.IsSuccessStatusCode && await this.Response.Content.ReadAsAsync<bool>();
+        }
+
+        /// <summary> Creates Json file from it's fields, then sends https request back </summary>
+        /// <returns> <see langword="true"/> value if successful, else <see langword="false"/> </returns>
+        public async Task<bool> PostAsync(T model, Stream stream)
+        {
+            RequestCreator(HttpMethod.Post, UrlString(), model, stream);
+            this.Response = await this.Client.SendAsync(this.Request);
+            return this.Response.IsSuccessStatusCode;
         }
     }
 }
