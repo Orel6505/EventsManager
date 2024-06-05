@@ -51,6 +51,7 @@ function LoadMenus() {
                     '<img src="'+ menu.MenuId + '.png" alt="תמונת תפריט">' +
                     '<h3>' + menu.MenuName + '</h3>' +
                     '<p>Price: $699</p>' +
+                    '<button type="button" class="SortMenuOptions learnmore" onclick="window.location.href=\'/Menu/?id=' + menu.MenuId +'\';">למד עוד</button>' +
                 '</div>'
             );
             ResultCouner++;
