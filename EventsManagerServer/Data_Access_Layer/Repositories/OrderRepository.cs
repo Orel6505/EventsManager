@@ -32,10 +32,11 @@ namespace EventsManager.Data_Access_Layer
 
         public bool Insert(Order model)
         {
-            string sql = $"INSERT INTO Orders(NumOfPeople, OrderDate, MenuId, UserId, EventTypeId, EventDate, IsPaid) VALUES(@NumOfPeople,@OrderDate,@MenuId,@UserId,@EventTypeId,@EventDate,@IsPaid)";
+            string sql = $"INSERT INTO Orders(NumOfPeople, OrderDate, MenuId, HallId, UserId, EventTypeId, EventDate, IsPaid) VALUES(@NumOfPeople,@OrderDate,@MenuId,@HallId,@UserId,@EventTypeId,@EventDate,@IsPaid)";
             this.AddParameters("NumOfPeople", model.NumOfPeople.ToString()); //prevents SQL Injection
             this.AddParameters("OrderDate", model.OrderDate); //prevents SQL Injection
             this.AddParameters("MenuId", model.MenuId.ToString()); //prevents SQL Injection
+            this.AddParameters("HallId", model.HallId.ToString()); //prevents SQL Injection
             this.AddParameters("UserId", model.UserId.ToString()); //prevents SQL Injection
             this.AddParameters("IsPaid", model.IsPaid.ToString()); //prevents SQL Injection
             this.AddParameters("EventTypeId", model.EventTypeId.ToString()); //prevents SQL Injection
@@ -93,11 +94,12 @@ namespace EventsManager.Data_Access_Layer
 
         public bool Update(Order model)
         {
-            string sql = "UPDATE Orders SET NumOfPeople=@NumOfPeople, OrderDate=@OrderDate, MenuId=@MenuId, UserId=@UserId, EventTypeId=@EventTypeId, EventDate=@EventDate, IsPaid=@IsPaid where OrderId=@OrderId";
+            string sql = "UPDATE Orders SET NumOfPeople=@NumOfPeople, OrderDate=@OrderDate, MenuId=@MenuId, HallId=@HallId, UserId=@UserId, EventTypeId=@EventTypeId, EventDate=@EventDate, IsPaid=@IsPaid where OrderId=@OrderId";
             this.AddParameters("OrderId", model.OrderId.ToString()); //prevents SQL Injection
             this.AddParameters("NumOfPeople", model.NumOfPeople.ToString()); //prevents SQL Injection
             this.AddParameters("OrderDate", model.OrderDate); //prevents SQL Injection
             this.AddParameters("MenuId", model.MenuId.ToString()); //prevents SQL Injection
+            this.AddParameters("HallId", model.HallId.ToString()); //prevents SQL Injection
             this.AddParameters("UserId", model.UserId.ToString()); //prevents SQL Injection
             this.AddParameters("IsPaid", model.IsPaid.ToString()); //prevents SQL Injection
             this.AddParameters("EventTypeId", model.EventTypeId.ToString()); //prevents SQL Injection
