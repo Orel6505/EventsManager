@@ -1,19 +1,23 @@
 ﻿@{
     Layout = "~/Views/Shared/MasterPage.cshtml";
 }
-
+<link rel="stylesheet" href="~/Content/Styles/AccountNav.css" />
 <div class="container">
     <div class="content">
         <aside>
             <nav>
                 <ul>
+                    <li class="profile-sidebar">
+                        <img src="~/Content/Profile-img/@(Session["UserName"]+ "" +".png")" alt="Profile Picture">
+                        <h2>@Session["UserName"]</h2>
+                        <h6>@Session["Email"]</h6>
+                    </li>
                     <li><a href="#">Account</a></li>
-                    <li><a href="#" class="active">Orders</a></li>
-                    <li><a href="#">Membership</a></li>
+                    <li><a href="#">Orders</a></li>
                 </ul>
             </nav>
         </aside>
-        <main>
+        <main class="data">
             @RenderBody()
         </main>
     </div>

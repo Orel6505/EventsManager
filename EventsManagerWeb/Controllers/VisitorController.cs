@@ -83,6 +83,7 @@ namespace EventsManagerWeb.Controllers
             if (user != null)
             {
                 Session["UserName"] = user.UserName;
+                Session["Email"] = user.Email;
                 string token = GetToken(user);
                 HttpCookie httpOnlyCookie = new HttpCookie("Token", token)
                 {
@@ -100,8 +101,10 @@ namespace EventsManagerWeb.Controllers
         [HttpPost]
         public ActionResult LogOut()
         {
-            Session["UserName"] = null;
+            Session.Clear();
+            Session.Abandon();
             Response.Cookies["Token"].Expires = DateTime.Now.AddDays(-1);
+            Response.Cookies.Add(new HttpCookie("ASP.NET_SessionId", ""));
             return RedirectToAction("Home", "Visitor");
         }
         public ActionResult Register()

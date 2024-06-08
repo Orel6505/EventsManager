@@ -1,54 +1,4 @@
-﻿.content {
-    display: flex;
-    min-height: 100vh;
-}
-
-aside {
-    width: 200px;
-    background-color: #fff;
-    border-right: 1px solid #e0e0e0;
-    padding: 20px;
-}
-
-aside nav ul {
-    list-style: none;
-    padding: 0;
-}
-
-aside nav ul li {
-    position: relative;
-    margin-bottom: 10px;
-}
-
-aside nav ul li a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-    padding-left: 10px;
-    display: block;
-}
-
-aside nav ul li a.active {
-    color: #0073e6;
-}
-
-aside nav ul li a.active::before {
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 5px;
-    height: 100%;
-    background-color: #0073e6;
-}
-
-main {
-    flex: 1;
-    padding: 20px;
-    background-color: #fff;
-}
-
-.month-section {
+﻿.month-section {
     margin-bottom: 40px;
 }
 
@@ -174,26 +124,6 @@ main {
     right: 10px;
     font-size: 20px;
     cursor: pointer;
-}
-
-@media (max-width: 768px) {
-    .content {
-        flex-direction: column;
-    }
-
-    aside {
-        width: 100%;
-        border-right: none;
-        border-bottom: 1px solid #e0e0e0;
-    }
-
-    footer ul {
-        flex-direction: column;
-    }
-
-    footer ul li {
-        margin: 10px;
-    }
 }
 
 .hiddenonlow {

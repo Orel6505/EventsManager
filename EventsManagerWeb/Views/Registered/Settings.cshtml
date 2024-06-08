@@ -1,0 +1,62 @@
+﻿@using EventsManagerModels;
+
+@model User
+@{
+    ViewBag.Title = "MyOrders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model == null)
+{
+    <section class="errorSection">
+        <h1 class="errorTitle">There was a connection issue. Please try later later</h1>
+    </section>
+}
+
+<link rel="stylesheet" href="~/Content/Styles/Settings.css" />
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <div class="page">
+        <div class="profile-form">
+            <h1>User Information Update</h1><div class="update-image">
+            <form action="/Account/Update" method="post" enctype="multipart/form-data">
+                <h4>Profile Image</h4>
+                <input type="file" title="search image" class="file" for="img" name="file" id="file" onchange="form.submit()" accept=".jpg, .png, .gif | image/*" value="@Model.UserId" hidden/>
+                <label class="lable" for="file">
+                    <img src="~/Content/Profile-img/@(Session["UserName"]+ "" +".png")" alt="Profile Picture">
+                </label>
+            </form>
+        </div>
+        <form action="/Account/Settings/Update" method="post">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" value="@Model.FirstName" required>
+
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" value="@Model.LastName" required>
+
+            <label for="userName">Username:</label>
+            <input type="text" id="userName" name="userName" value="@Model.UserName" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="@Model.Email" required>
+
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" value="@Model.Address">
+
+            <label for="phoneNum">Phone Number:</label>
+            <input type="tel" id="phoneNum" name="phoneNum" value="@Model.PhoneNum">
+        </form>
+    </div>
+    <div class="profile-form">
+        <h1>User Information Update</h1>
+        <form action="/update" method="post">
+
+            <label for="userPassword">User Password:</label>
+            <input type="password" id="userPassword" name="userPassword" required>
+
+            <label for="userPassword">User Password:</label>
+            <input type="password" id="userPassword" name="userPassword" required>
+
+            <input type="submit" value="Update">
+        </form>
+    </div>
+</div>
