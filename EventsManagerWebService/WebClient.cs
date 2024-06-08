@@ -85,6 +85,11 @@ namespace EventsManagerWebService
             RequestCreator(method, url);
             this.Request.Content = ContentCreator(model, FileNames);
         }
+        void RequestCreator(HttpMethod method, string url, Stream stream)
+        {
+            RequestCreator(method, url);
+            this.Request.Content = ContentCreator(stream);
+        }
         void RequestCreator(HttpMethod method, string url, T model, Stream stream)
         {
             RequestCreator(method, url);
@@ -161,6 +166,15 @@ namespace EventsManagerWebService
 
         /// <summary> Creates Json file from it's fields, then sends https request back </summary>
         /// <returns> <see langword="true"/> value if successful, else <see langword="false"/> </returns>
+        public bool Post(Stream stream)
+        {
+            RequestCreator(HttpMethod.Post, UrlString(), stream);
+            this.Response = this.Client.SendAsync(this.Request).Result;
+            return this.Response.IsSuccessStatusCode;
+        }
+
+        /// <summary> Creates Json file from it's fields, then sends https request back </summary>
+        /// <returns> <see langword="true"/> value if successful, else <see langword="false"/> </returns>
         public bool Post(T model, Stream stream)
         {
             RequestCreator(HttpMethod.Post, UrlString(), model, stream);
@@ -202,6 +216,15 @@ namespace EventsManagerWebService
             RequestCreator(HttpMethod.Post, UrlString(), model, FileNames);
             this.Response = await this.Client.SendAsync(this.Request);
             return this.Response.IsSuccessStatusCode && await this.Response.Content.ReadAsAsync<bool>();
+        }
+
+        /// <summary> Creates Json file from it's fields, then sends https request back </summary>
+        /// <returns> <see langword="true"/> value if successful, else <see langword="false"/> </returns>
+        public async Task<bool> PostAsync(Stream stream)
+        {
+            RequestCreator(HttpMethod.Post, UrlString(), stream);
+            this.Response = await this.Client.SendAsync(this.Request);
+            return this.Response.IsSuccessStatusCode;
         }
 
         /// <summary> Creates Json file from it's fields, then sends https request back </summary>
