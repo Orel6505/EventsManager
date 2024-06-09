@@ -26,37 +26,64 @@
                 </label>
             </form>
         </div>
-        <form action="/Account/Settings/Update" method="post">
-            <label for="firstName">First Name:</label>
-            <input type="text" id="firstName" name="firstName" value="@Model.FirstName" required>
-
-            <label for="lastName">Last Name:</label>
-            <input type="text" id="lastName" name="lastName" value="@Model.LastName" required>
-
-            <label for="userName">Username:</label>
-            <input type="text" id="userName" name="userName" value="@Model.UserName" required>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" value="@Model.Email" required>
-
-            <label for="address">Address:</label>
-            <input type="text" id="address" name="address" value="@Model.Address">
-
-            <label for="phoneNum">Phone Number:</label>
-            <input type="tel" id="phoneNum" name="phoneNum" value="@Model.PhoneNum">
-        </form>
+            <form action="/Account/UpdateUser" method="post">
+                <ul>
+                    <li class="item cName">
+                        <div class="halfName firstName">
+                            <label class="lable">First Name</label><br>
+                            <input class="text name half" required autocomplete="given-name" type="text" id="FirstName" name="FirstName" value="@Model.FirstName" />
+                        </div>
+                        <div class="halfName">
+                            <label class="lable">Last Name</label><br>
+                            <input class="text name half" required autocomplete="family-name" type="text" id="LastName" name="LastName" value="@Model.LastName" />
+                        </div>
+                    </li>
+                    <li class="item">
+                        <label class="lable">Username</label><br>
+                        <input class="text" required autocomplete="username" type="text" id="UserName" name="UserName" value="@Model.UserName" />
+                        <h5 id="UserName-Check">**Username is missing</h5>
+                    </li>
+                    <li class="item">
+                        <label class="lable">Email</label><br>
+                        <input class="text" required autocomplete="email" type="text" id="Email" name="Email" value="@Model.Email" />
+                        <h5 id="Email-Check">**Your email must be a valid email</h5>
+                    </li>
+                    <li class="item">
+                        <label class="lable">Address</label><br>
+                        <input class="text" required type="text" id="Address" name="Address" value="@Model.Address" />
+                        <h5 id="Email-Check">**Your email must be a valid email</h5>
+                    </li>
+                    <li class="item">
+                        <label class="lable">Phone Number</label><br>
+                        <input class="text" required autocomplete="tel-national" type="text" id="PhoneNum" name="PhoneNum" value="@Model.PhoneNum" />
+                        <h5 id="PhoneNum-Check">**Phone Number is invalid</h5>
+                    </li>
+                    <li class="item cButton">
+                        <button id="cButton" class="button" type="submit" value="Register">Register</button>
+                    </li>
+                </ul>
+            </form>
     </div>
     <div class="profile-form">
-        <h1>User Information Update</h1>
+        <h1>Password Update</h1>
         <form action="/update" method="post">
-
-            <label for="userPassword">User Password:</label>
-            <input type="password" id="userPassword" name="userPassword" required>
-
-            <label for="userPassword">User Password:</label>
-            <input type="password" id="userPassword" name="userPassword" required>
-
-            <input type="submit" value="Update">
+            <ul>
+                <li class="item">
+                    <label for="userPassword">User Password:</label>
+                    <input type="password" id="userPassword" name="userPassword" required>
+                </li>
+                <li class="item">
+                    <label for="userPassword">User Password:</label>
+                    <input type="password" id="userPassword1" name="userPassword" required>
+                </li>
+                <li class="item">
+                    <label for="userPassword">User Password:</label>
+                    <input type="password" id="userPassword2" name="userPassword" required>
+                </li>
+                <li class="item cButton">
+                    <button id="cButton1" class="button" type="submit" value="Register">Register</button>
+                </li>
+            </ul>
         </form>
     </div>
 </div>

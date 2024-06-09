@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Remoting.Messaging;
 using System.Web;
 using System.Web.Http;
@@ -25,6 +26,28 @@ namespace EventsManager.Controllers
                 user.UserPassword = new Password(user.TempPassword);
                 user.CreationDate = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString();
                 return libraryUnitOfWork.UserRepository.Insert(user);
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+            }
+            finally
+            {
+                dbContext.CloseConnection();
+            }
+            return false;
+        }
+
+        [HttpPost]
+        [ActionName("UpdateUser")]
+        public bool Update(User user)
+        {
+            DbContext dbContext = OleDbContext.GetInstance();
+            LibraryUnitOfWork libraryUnitOfWork = new LibraryUnitOfWork(dbContext);
+            try
+            {
+                dbContext.OpenConnection();
+                return libraryUnitOfWork.UserRepository.UpdateInfo(user);
             }
             catch (Exception ex)
             {
@@ -86,5 +109,28 @@ namespace EventsManager.Controllers
             }
             return null;
         }
+
+
+        [HttpGet]
+        public User UserDetails(int id)
+        {
+            DbContext dbContext = OleDbContext.GetInstance();
+            LibraryUnitOfWork libraryUnitOfWork = new LibraryUnitOfWork(dbContext);
+            try
+            {
+                dbContext.OpenConnection();
+                return libraryUnitOfWork.UserRepository.Read(id);
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+            }
+            finally
+            {
+                dbContext.CloseConnection();
+            }
+            return null;
+        }
+
     }
 }

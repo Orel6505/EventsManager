@@ -52,9 +52,9 @@ async function checkUserNameAvailability(usernameValue) {
     try {
         const response = await fetch("/api/IsAvailableUserName?UserName=" + usernameValue);
         if (!response.ok) {
-            return false;
             $("#UserName-Check").show();
             $("#UserName-Check").html("**Error fetching username availability, Please try again later");
+            return false;
         }
         return await response.text() === "false";
     } catch (error) {
@@ -95,7 +95,7 @@ function validatePassword() {
     } else {
         const hasUppercase = /[A-Z]/.test(passwordValue);
         const hasLowercase = /[a-z]/.test(passwordValue);
-        const hasNumber = /[0-9]/.test(passwordValue);
+        const hasNumber =  /\d/.test(passwordValue);
         const hasSymbol = /[^a-zA-Z0-9]/.test(passwordValue);
         const minimumLength = 8;
 

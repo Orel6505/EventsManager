@@ -17,12 +17,6 @@
     margin-top: 0;
 }
 
-.profile-form label {
-    display: block;
-    margin-bottom: 5px;
-    padding: 5px;
-}
-
 .profile-form input{
     max-width: 100%;
     width: 370px;
@@ -32,7 +26,16 @@
     border-radius: 5px;
 }
 
-.profile-form input[type="submit"] {
+ul {
+    list-style-type: none;
+}
+
+.lable {
+    color: #888888;
+    font-size: 16px;
+}
+
+.button {
     background: #663399;
     color: #fff;
     border: none;
@@ -41,8 +44,44 @@
     cursor: pointer;
 }
 
-.profile-form input[type="submit"]:hover {
+.cButton {
+    display: flex;
+    justify-content: center;
+    max-width: 100%;
+    width: 370px;
+    padding: 20px
+}
+
+.button:hover {
     background: #5a287d;
+}
+
+h4 {
+    display: flex;
+    justify-content: center;
+    font-size: 0.8rem;
+}
+
+.name {
+    width: 100%;
+}
+
+.cName {
+    width: 50%;
+}
+
+.halfName {
+    display: inline-block;
+    width: 49%;
+    margin-top: 27px;
+}
+
+.firstName {
+    padding-right: 5px;
+}
+
+.item {
+    margin-top: 27px;
 }
 
 @media (max-width: 1000px) {
@@ -59,6 +98,12 @@
     }
     .profile-form h1 {
         text-align: center
+    }
+    .cName {
+        width: 100%;
+    }
+    .data {
+        flex: 0;
     }
 }
 

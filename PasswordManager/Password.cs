@@ -8,12 +8,9 @@ using System.Threading.Tasks;
 namespace PasswordManager
 {
     [Serializable]
-    [DataContract]
     public class Password : SecurityHelper
     {
-        [DataMember]
         public string Salt { get; }
-        [DataMember]
         public string HashPassword { get; set; }
         public int SaltLength { get; set; }
 

@@ -49,23 +49,51 @@ namespace EventsManagerWeb.Controllers
         }
         public ActionResult Settings()
         {
-            User user = new User();
+            WebClient<User> client = new WebClient<User>
+            {
+                Server = CommonParameters.Location.WebService,
+                Controller = "Registered",
+                Method = "UserDetails"
+            };
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+            client.AddKeyValue("id", claimsIdentity.FindFirst("UserId").Value.ToString());
+            User user = client.Get();
             return View(user);
         }
 
         [HttpPost]
         public ActionResult Update(HttpPostedFileBase file)
         {
-            if (file != null)
+            if (file != null && file.ContentLength > 0)
             {
                 if (!file.ContentType.StartsWith("image"))
                 {
                     return RedirectToAction("Settings");
                 }
-                using (Image image = Image.FromStream(file.InputStream)) { 
-                    image.Save(Path.Combine($"{Server.MapPath("/")}Content\\Profile-img\\{Session["UserName"]}.png"), ImageFormat.Png);
+                using (Image image = Image.FromStream(file.InputStream)) {
+                    if (Session["UserName"] != null)
+                        image.Save(Path.Combine($"{Server.MapPath("/")}Content\\Profile-img\\{Session["UserName"]}.png"), ImageFormat.Png);
+                    else
+                        ViewBag.Error = 1;
                 }
             }
+            Response.AddHeader("Cache-control", "no-cache");
+            return RedirectToAction("Settings");
+        }
+
+        [HttpPost]
+        [ActionName("UpdateUser")]
+        public ActionResult Update(User user)
+        {
+            WebClient<User> client = new WebClient<User>
+            {
+                Server = CommonParameters.Location.WebService,
+                Controller = "Registered",
+                Method = "UpdateUser"
+            };
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+            user.UserId = Convert.ToInt16(claimsIdentity.FindFirst("UserId").Value.ToString());
+            TempData["Update"] = client.Post(user);
             return RedirectToAction("Settings");
         }
     }

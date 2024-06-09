@@ -121,7 +121,7 @@ namespace EventsManager.Data_Access_Layer
 
         public bool Update(User model)
         {
-            string sql = "UPDATE Users SET FirstName=@FirstName, LastName=@LastName, UserName=@UserName, PassWordHash=@PassWordHash, Email=@Email, Address=@Address, PhoneNum=@PhoneNum,CreationDate=@CreationDate, Salt=@Salt where UserId=@UserId";
+            string sql = "UPDATE Users SET FirstName=@FirstName, LastName=@LastName, UserName=@UserName, PassWordHash=@PassWordHash, Email=@Email, Address=@Address, PhoneNum=@PhoneNum, CreationDate=@CreationDate, Salt=@Salt WHERE UserId=@UserId";
             this.AddParameters("UserId", model.UserId.ToString()); //prevents SQL Injection
             this.AddParameters("FirstName", model.FirstName); //prevents SQL Injection
             this.AddParameters("LastName", model.LastName); //prevents SQL Injection
@@ -132,6 +132,19 @@ namespace EventsManager.Data_Access_Layer
             this.AddParameters("Address", model.Address); //prevents SQL Injection
             this.AddParameters("PhoneNum", model.PhoneNum); //prevents SQL Injection
             this.AddParameters("CreationDate", model.CreationDate); //prevents SQL Injection
+            return this.dbContext.Update(sql) > 0;
+        }
+
+        public bool UpdateInfo(User model)
+        {
+            string sql = "UPDATE Users SET FirstName=@FirstName, LastName=@LastName, UserName=@UserName, Email=@Email, Address=@Address, PhoneNum=@PhoneNum WHERE UserId=@UserId";
+            this.AddParameters("FirstName", model.FirstName); //prevents SQL Injection
+            this.AddParameters("LastName", model.LastName); //prevents SQL Injection
+            this.AddParameters("UserName", model.UserName); //prevents SQL Injection
+            this.AddParameters("Email", model.Email); //prevents SQL Injection
+            this.AddParameters("Address", model.Address); //prevents SQL Injection
+            this.AddParameters("PhoneNum", model.PhoneNum); //prevents SQL Injection
+            this.AddParameters("UserId", model.UserId.ToString()); //prevents SQL Injection
             return this.dbContext.Update(sql) > 0;
         }
     }
