@@ -5,8 +5,8 @@ function ShowOptions(elements) {
     ex.style.maxHeight = (ex.style.maxHeight === "0px") ? "600px" : "0px";
 }
 
-function GetOrders() {
-    fetch('/api/GetOrders')
+async function GetOrders() {
+    await fetch('/api/GetOrders')
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error fetching menus: ${response.status} ${response.statusText}`);
@@ -21,6 +21,7 @@ function GetOrders() {
             console.error('Error fetching menus:', error);
         });
 }
+
 function LoadOrders() {
     $("#Orders").empty();
     let ResultCouner = 0;

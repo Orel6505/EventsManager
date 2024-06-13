@@ -16,8 +16,8 @@ function ShowFoodOptions() {
     ShowOptions("FoodOptions");
 }
 
-function GetMenus() {
-    fetch('/api/GetMenus')
+async function GetMenus() {
+    await fetch('/api/GetMenus')
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error fetching menus: ${response.status} ${response.statusText}`);

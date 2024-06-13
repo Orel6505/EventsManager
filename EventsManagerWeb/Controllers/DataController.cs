@@ -19,11 +19,11 @@ using AuthorizeAttribute = System.Web.Http.AuthorizeAttribute;
 
 namespace EventsManagerWeb.Controllers
 {
+    [System.Web.Http.AllowAnonymous]
     [OutputCache(Duration = 0)]
     [EnableCors(origins: "https://localhost:44365", headers: "*", methods: "*")]
     public class DataController : ApiController
     {
-        [System.Web.Http.AllowAnonymous]
         [System.Web.Http.HttpGet]
         async public Task<MenuListVIewModel> GetMenus()
         {
@@ -33,13 +33,9 @@ namespace EventsManagerWeb.Controllers
                 Controller = "Visitor",
                 Method = "GetMenus"
             };
-            if (Request.Headers.GetCookies("Token").Count <= 0)
-            {
-            }
             MenuListVIewModel Menus = await client.GetAsync();
             return Menus;
         }
-        [System.Web.Http.AllowAnonymous]
         [System.Web.Http.HttpGet]
         async public Task<bool> IsAvailableUserName(string UserName)
         {

@@ -36,7 +36,7 @@ namespace PasswordManager
         }
 
         public bool IsSamePassword(string EnteredPassword)
-        {
+        { //Prevents Timing Attack*
             int count = 0;
             Byte[] EnteredBytes = Encoding.UTF8.GetBytes(GenerateHash(EnteredPassword, this.Salt));
             Byte[] PasswordBytes = Encoding.UTF8.GetBytes(this.HashPassword);

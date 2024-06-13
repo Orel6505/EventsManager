@@ -64,19 +64,22 @@ namespace EventsManagerWeb.Controllers
         [HttpPost]
         public ActionResult Update(HttpPostedFileBase file)
         {
-            if (file != null && file.ContentLength > 0)
-            {
-                if (!file.ContentType.StartsWith("image"))
-                {
-                    return RedirectToAction("Settings");
-                }
-                using (Image image = Image.FromStream(file.InputStream)) {
-                    if (Session["UserName"] != null)
-                        image.Save(Path.Combine($"{Server.MapPath("/")}Content\\Profile-img\\{Session["UserName"]}.png"), ImageFormat.Png);
-                    else
-                        ViewBag.Error = 1;
-                }
+            if (file == null || file.ContentLength <= 0)
+            { //if file is null or empty, do not save the image
+                return RedirectToAction("Settings");
             }
+            if (!file.ContentType.StartsWith("image"))
+            { //if file is not image, do not save image
+                return RedirectToAction("Settings");
+            }
+            if (Session["UserName"] == null) 
+            { //if user is null, do not save image
+                return RedirectToAction("Settings");
+            }
+            using (Image image = Image.FromStream(file.InputStream))
+                image.Save(Path.Combine($"{Server.MapPath("/Content/Profile-img")}{Session["UserName"]}.png"), ImageFormat.Png);
+
+            //cache is set to don't save cache
             Response.AddHeader("Cache-control", "no-cache");
             return RedirectToAction("Settings");
         }

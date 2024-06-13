@@ -12,6 +12,5 @@ namespace EventsManagerModels
         public List<FoodType> FoodTypes { get; set; }
         public List<Food> Foods { get; set; }
         public List<Hall> Halls { get; set; }
-
     }
 }
