@@ -21,13 +21,13 @@ header {
 @supports (backdrop-filter: blur(10px)) {
 	.part1 {
 		backdrop-filter: blur(10px);
-		background-image: url(https://freight.cargo.site/w/3840/q/75/i/a9f227752a9ba3bc689092085a7e6eb87b787abd858c3e3f0aebdc6a40f138d0/Windows_Final_3840p_v10_opt.png);
+		background-image: url(https://lh3.googleusercontent.com/p/AF1QipNPBvHhz_xXymXAfTYv6GR2-izPkZF-hAwIRGUF=s680-w680-h510);
 	}
 }
 
 @supports not (backdrop-filter: blur(10px)) {
 	.part1 {
-		background-image: url(https://freight.cargo.site/w/3840/q/75/i/a9f227752a9ba3bc689092085a7e6eb87b787abd858c3e3f0aebdc6a40f138d0/Windows_Final_3840p_v10_opt.png);
+		background-image: url(https://lh3.googleusercontent.com/p/AF1QipNPBvHhz_xXymXAfTYv6GR2-izPkZF-hAwIRGUF=s680-w680-h510);
 	}
 }
 
