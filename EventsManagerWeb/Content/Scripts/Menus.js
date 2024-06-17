@@ -48,7 +48,7 @@ function LoadMenus() {
         ) {
             $("#MenusWrapper").append(
                 '<div class="product" data-category="'+ menu.HallId + '" data-price="699">' +
-                    '<img src="'+ menu.MenuId + '.png" alt="תמונת תפריט">' +
+                '<img src="' + "/Content/MenuImage/"+ menu.MenuId + '.png" alt="תמונת תפריט">' +
                     '<h3>' + menu.MenuName + '</h3>' +
                     '<p>Price: $699</p>' +
                     '<button type="button" class="SortMenuOptions learnmore" onclick="window.location.href=\'/Menu/?id=' + menu.MenuId +'\';">למד עוד</button>' +

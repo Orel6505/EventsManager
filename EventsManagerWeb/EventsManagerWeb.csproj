@@ -222,6 +222,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Scripts\Login.js" />
+    <Content Include="Content\Scripts\Halls.js" />
     <Content Include="Content\Scripts\Order.js" />
     <Content Include="Content\Scripts\Register.js" />
     <Content Include="Content\Scripts\Orders.js" />
@@ -242,6 +243,7 @@
     <Content Include="Content\Styles\Login.css" />
     <Content Include="Content\Scripts\Menus.js" />
     <Content Include="Content\Styles\AccountNav.css" />
+    <Content Include="Content\Styles\Halls.css" />
     <Content Include="Content\Styles\Order.css" />
     <Content Include="Content\Styles\MyOrders.css" />
     <Content Include="Content\Styles\NotFound.css" />
@@ -271,7 +273,7 @@
     <Content Include="Views\web.config" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\MasterPage.cshtml" />
-    <Content Include="Views\Visitor\Food.cshtml" />
+    <Content Include="Views\Visitor\Hall.cshtml" />
     <Content Include="Views\Visitor\Menus.cshtml" />
     <Content Include="Views\Visitor\Menu.cshtml" />
     <Content Include="Views\Visitor\Home.cshtml" />
@@ -285,6 +287,7 @@
     <Content Include="Views\Registered\MyOrders.cshtml" />
     <Content Include="Views\Registered\Order.cshtml" />
     <Content Include="Views\Registered\Settings.cshtml" />
+    <Content Include="Views\Visitor\Halls.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

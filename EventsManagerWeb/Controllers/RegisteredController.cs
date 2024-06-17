@@ -77,7 +77,7 @@ namespace EventsManagerWeb.Controllers
                 return RedirectToAction("Settings");
             }
             using (Image image = Image.FromStream(file.InputStream))
-                image.Save(Path.Combine($"{Server.MapPath("/Content/Profile-img")}{Session["UserName"]}.png"), ImageFormat.Png);
+                image.Save(Path.Combine($"{Server.MapPath("/Content/Profile-img")}\\{Session["UserName"]}.png"), ImageFormat.Png);
 
             //cache is set to don't save cache
             Response.AddHeader("Cache-control", "no-cache");
