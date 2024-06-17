@@ -1,0 +1,17 @@
+﻿@using EventsManagerModels;
+
+@model Hall
+@{
+    ViewBag.Title = "Hall";
+    Layout = "~/Views/Shared/MasterPage.cshtml";
+}
+<div class="Hallwraper">
+    <div class="HallImage">
+        <img class="HallImg" src="@Model.HallId" />
+    </div>
+    <div class="HallData">
+        <h1 class="HallName">@Model.HallName</h1>
+        <p class="HallDescription">@Model.HallDesc</p>
+    </div>
+</div>
+

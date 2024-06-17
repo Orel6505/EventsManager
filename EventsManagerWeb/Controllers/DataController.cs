@@ -37,6 +37,17 @@ namespace EventsManagerWeb.Controllers
             return Menus;
         }
         [System.Web.Http.HttpGet]
+        async public Task<List<Hall>> GetHalls()
+        {
+            WebClient<List<Hall>> client = new WebClient<List<Hall>>
+            {
+                Server = CommonParameters.Location.WebService,
+                Controller = "Visitor",
+                Method = "GetHalls"
+            }; 
+            return await client.GetAsync();
+        }
+        [System.Web.Http.HttpGet]
         async public Task<bool> IsAvailableUserName(string UserName)
         {
             WebClient<bool> client = new WebClient<bool>
