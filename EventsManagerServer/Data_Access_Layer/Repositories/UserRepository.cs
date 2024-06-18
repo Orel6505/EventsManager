@@ -147,5 +147,14 @@ namespace EventsManager.Data_Access_Layer
             this.AddParameters("UserId", model.UserId.ToString()); //prevents SQL Injection
             return this.dbContext.Update(sql) > 0;
         }
+
+        public bool UpdatePassword(User model)
+        {
+            string sql = "UPDATE Users SET PassWordHash=@PassWordHash, Salt=@Salt WHERE UserId=@UserId";
+            this.AddParameters("PassWordHash", model.UserPassword.HashPassword); //prevents SQL Injection
+            this.AddParameters("Salt", model.UserPassword.Salt); //prevents SQL Injection
+            this.AddParameters("UserId", model.UserId.ToString()); //prevents SQL Injection
+            return this.dbContext.Update(sql) > 0;
+        }
     }
 }

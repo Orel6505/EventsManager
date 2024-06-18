@@ -60,6 +60,29 @@ namespace EventsManager.Controllers
             return false;
         }
 
+        [HttpPost]
+        [ActionName("UpdatePassword")]
+        public bool UpdatePassword(User user)
+        {
+            DbContext dbContext = OleDbContext.GetInstance();
+            LibraryUnitOfWork libraryUnitOfWork = new LibraryUnitOfWork(dbContext);
+            try
+            {
+                dbContext.OpenConnection();
+                user.UserPassword = new Password(user.TempPassword); 
+                return libraryUnitOfWork.UserRepository.UpdatePassword(user);
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+            }
+            finally
+            {
+                dbContext.CloseConnection();
+            }
+            return false;
+        }
+
         [HttpGet]
         public bool IsAvailableUserName(string UserName)
         {

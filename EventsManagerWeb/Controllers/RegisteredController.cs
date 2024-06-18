@@ -99,5 +99,24 @@ namespace EventsManagerWeb.Controllers
             TempData["Update"] = client.Post(user);
             return RedirectToAction("Settings");
         }
+        [HttpPost]
+        [ActionName("UpdatePassword")]
+        public ActionResult Update(string NewPassword)
+        {
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+            WebClient<User> client = new WebClient<User>
+            {
+                Server = CommonParameters.Location.WebService,
+                Controller = "Registered",
+                Method = "UpdatePassword"
+            };
+            User user = new User()
+            {
+                UserId = Convert.ToInt16(claimsIdentity.FindFirst("UserId").Value.ToString()),
+                TempPassword = NewPassword
+            };
+            TempData["Update"] = client.Post(user);
+            return RedirectToAction("Settings");
+        }
     }
 }

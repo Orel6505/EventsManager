@@ -221,6 +221,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Scripts\UpdatePassword.js" />
     <Content Include="Content\Scripts\Login.js" />
     <Content Include="Content\Scripts\Halls.js" />
     <Content Include="Content\Scripts\Order.js" />
