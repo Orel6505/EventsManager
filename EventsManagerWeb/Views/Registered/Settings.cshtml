@@ -66,20 +66,21 @@
     </div>
     <div class="profile-form">
         <h1>Password Update</h1>
-        <form action="/Account/UpdatePassword" method="post">
+        <form action="/Account/UpdatePassword" method="post" onsubmit="return validatePassword()">
             <ul>
                 <li class="item">
-                    <label for="userPassword">User Password:</label>
-                    <input type="password" id="Password" name="Password" required>
-                </li>
-                <li class="item">
-                    <label for="userPassword">New Password:</label>
-                    <input type="password" id="NewPassword" name="NewPassword" required>
+                    <label class="lable" for="userPassword">User Password</label><br>
+                    <input class="text" type="password" id="Password" name="Password" required>
                     <h5 id="Password-Check">**Please Fill the password</h5>
                 </li>
                 <li class="item">
-                    <label for="userPassword">Confirm New Password:</label>
-                    <input type="password" id="PasswordConfirm" name="PasswordConfirm" required>
+                    <label class="lable" for="userPassword">New Password</label><br>
+                    <input class="text" type="password" id="NewPassword" name="NewPassword" required>
+                    <h5 id="NewPassword-Check">**Please Fill the password</h5>
+                </li>
+                <li class="item">
+                    <label class="lable" for="userPassword">Confirm New Password</label><br>
+                    <input class="text" type="password" id="PasswordConfirm" name="PasswordConfirm" required>
                     <h5 id="PasswordConfirm-Check">**Passwords didn't match</h5>
                 </li>
                 <li class="item cButton">

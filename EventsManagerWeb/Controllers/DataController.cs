@@ -59,6 +59,28 @@ namespace EventsManagerWeb.Controllers
             client.AddKeyValue("UserName", UserName);
             return await client.GetAsync(); //TODO: remove this feature, doesn't follow security standarts
         }
+        [System.Web.Http.HttpGet]
+        [Authorize(Roles = "Admin, User")]
+        async public Task<bool> CheckPassword(string Password)
+        {
+            WebClient<bool> client = new WebClient<bool>
+            {
+                Server = CommonParameters.Location.WebService,
+                Controller = "Registered",
+                Method = "CheckPassword"
+            };
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+            try
+            {
+                client.AddKeyValue("UserId", claimsIdentity.FindFirst("UserId").Value);
+                client.AddKeyValue("Password", Password);
+                return await client.GetAsync();
+            }
+            catch (Exception) {
+                return false;
+            }
+
+        }
 
         [Authorize(Roles = "Admin, User")]
         [System.Web.Http.HttpGet]

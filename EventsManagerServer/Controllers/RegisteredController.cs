@@ -84,6 +84,28 @@ namespace EventsManager.Controllers
         }
 
         [HttpGet]
+        public bool CheckPassword(string UserId, string Password)
+        {
+            DbContext dbContext = OleDbContext.GetInstance();
+            LibraryUnitOfWork libraryUnitOfWork = new LibraryUnitOfWork(dbContext);
+            try
+            {
+                dbContext.OpenConnection();
+                Password UserPassword = libraryUnitOfWork.UserRepository.GetPasswordByUserId(UserId);
+                return UserPassword.IsSamePassword(Password);
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+            }
+            finally
+            {
+                dbContext.CloseConnection();
+            }
+            return false;
+        }
+
+        [HttpGet]
         public bool IsAvailableUserName(string UserName)
         {
             DbContext dbContext = OleDbContext.GetInstance();

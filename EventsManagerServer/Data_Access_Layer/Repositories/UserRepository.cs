@@ -1,4 +1,5 @@
 ﻿using EventsManagerModels;
+using PasswordManager;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -68,6 +69,17 @@ namespace EventsManager.Data_Access_Layer
                 return this.modelFactory.LoginUserModelCreator.CreateModel(dataReader);
             }
             //returns User
+        }
+
+        public Password GetPasswordByUserId(string UserId)
+        {
+            string sql = $"SELECT Users.PasswordHash, Users.Salt FROM Users WHERE UserId=@UserId;";
+            this.AddParameters("UserId", UserId); //prevents SQL Injection
+            using (IDataReader dataReader = this.dbContext.Read(sql))
+            {
+                dataReader.Read();
+                return new Password(Convert.ToString(dataReader["PasswordHash"]), Convert.ToString(dataReader["Salt"]));
+            }
         }
 
         public UserType UserTypeByUserId(string UserId)

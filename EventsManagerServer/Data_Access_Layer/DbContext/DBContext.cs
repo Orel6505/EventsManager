@@ -18,12 +18,8 @@ namespace EventsManager.Data_Access_Layer
 
         public void CloseConnection()
         {
-            if (this.connection.State == ConnectionState.Open)
-            {
-                this.connection.Close(); //close connection
-                this.command.Parameters.Clear(); //clears the parameters
-            }
-            // this.connection.Dispose(); //removes from memory
+            this.connection.Close();
+            this.command.Parameters.Clear();
             this.command.Dispose(); //removes from memory
             if (this.transaction != null)
                 this.transaction.Dispose(); //removes from memory
