@@ -1,0 +1,37 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: .NET Builder
+
+on:
+  push:
+    branches: [ "22may" ]
+  pull_request:
+    branches: [ "22may" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    strategy:
+      fail-fast: false
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        ref: 22may
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.x
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v2
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v2.0.0
+    - name: Navigate to Workspace
+      run: cd $GITHUB_WORKSPACE
+    - name: Restore Solution Packages
+      run: nuget restore EventsManager.sln
+    - name: Build
+      run: msbuild EventsManager.sln
