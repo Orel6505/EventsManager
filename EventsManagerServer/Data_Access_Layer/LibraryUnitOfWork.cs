@@ -18,7 +18,7 @@ namespace EventsManager.Data_Access_Layer
         UserRepository userRepository;
         UserTypeRepository userTypeRepository;
 
-        DbContext dbContext;
+        private readonly DbContext dbContext;
         public LibraryUnitOfWork(DbContext dbContext)
         {
             this.dbContext = dbContext;

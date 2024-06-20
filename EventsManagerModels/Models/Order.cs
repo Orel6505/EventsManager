@@ -18,7 +18,7 @@ namespace EventsManagerModels
         public string EventDate { get; set; }
         public int EventTypeId { get; set; }
         public EventType EventType { get; set; }
-        public Menu menu { get; set; }
+        public Menu ChosenMenu { get; set; }
 
     }
 }

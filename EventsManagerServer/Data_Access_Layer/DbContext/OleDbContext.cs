@@ -10,7 +10,7 @@ namespace EventsManager.Data_Access_Layer
     public class OleDbContext : DbContext
     {
         static OleDbContext oleDbContext;
-        static object blocker = new object();
+        private static readonly object blocker = new object();
         private OleDbContext()
         {
             this.connection = new OleDbConnection();
