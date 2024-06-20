@@ -1,5 +1,5 @@
 # EventsManager
-
+[![Build](https://github.com/Orel6505/EventsManager/actions/workflows/build.yml/badge.svg?branch=22may)](https://github.com/Orel6505/EventsManager/actions/workflows/build.yml)
 ## In Short
 The idea for this project came to me one time after I worked as a waiter in Kfar Habad.
 
