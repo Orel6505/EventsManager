@@ -138,7 +138,7 @@ namespace EventsManager.Controllers
                 model.Orders = libraryUnitOfWork.OrderRepository.ReadByUserId(UserId);
                 foreach (Order order in model.Orders)
                 {
-                    order.menu = libraryUnitOfWork.MenuRepository.Read(order.MenuId);
+                    order.ChosenMenu = libraryUnitOfWork.MenuRepository.Read(order.MenuId);
                     order.EventType = libraryUnitOfWork.EventTypeRepository.Read(order.EventTypeId);
                 }
                 model.Halls = libraryUnitOfWork.HallRepository.ReadAll();

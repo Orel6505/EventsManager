@@ -20,7 +20,6 @@
     <h1>היסטורית הזמנות</h1><hr>
     @if (Model.Halls.Count > 0)
     {
-        <button class="SortMenuOptions" onclick="ShowOptions('OptionsItems')">סינון</button>
         <div class="OptionItems" id="OptionsItems">
             <select id="Halls">
                 <option value="None">לא נבחר</option>
@@ -37,6 +36,7 @@
                 <th>מזהה הזמנה</th>
                 <th>תאריך ההזמנה</th>
                 <th class="hiddenonlow">תאריך האירוע</th>
+                <th class="hiddenonlow">האולם שהוזמן</th>
                 <th class="hiddenonlow">התפריט שהוזמן</th>
                 <th class="hiddenonlow">כמות המוזמנים</th>
                 <th>שולם</th>
@@ -53,10 +53,10 @@
         <table class="details-table">
             <thead>
                 <tr>
-                    <th>Order Number</th>
-                    <th>Menu</th>
+                    <th>Menu Selected</th>
                     <th>Hall Selected</th>
                     <th>Number of Invited People</th>
+                    <th>Is Paid</th>
                 </tr>
             </thead>
             <tbody>
@@ -96,10 +96,10 @@
             button.addEventListener('click', function () {
                 const orderRow = button.closest('tr');
                 // Extract order details from table cells
-                const orderNumber = orderRow.cells[0].textContent.split('#')[1];
+                const orderNumber = orderRow.cells[3].textContent;
                 const menuName = orderRow.cells[3].textContent;
                 const numOfPeople = parseInt(orderRow.cells[4].textContent);
-                const isPaid = orderRow.cells[5].textContent === 'true';
+                const isPaid = orderRow.cells[6].textContent === 'true';
 
                 // Populate popup content
                 document.getElementById('popup-order-number').textContent = orderNumber;
