@@ -227,6 +227,7 @@
     <Content Include="Content\Scripts\Order.js" />
     <Content Include="Content\Scripts\Register.js" />
     <Content Include="Content\Scripts\Orders.js" />
+    <Content Include="Content\Scripts\UpdateUser.js" />
     <Content Include="Content\Styles\Home.css" />
     <Content Include="Content\Scripts\Home.js" />
     <Content Include="Content\img\bag_icon.png" />
