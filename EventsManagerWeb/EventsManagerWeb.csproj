@@ -254,6 +254,11 @@
     <Content Include="Content\Styles\Style.css" />
     <Content Include="Content\Styles\Menus.css" />
     <Content Include="Global.asax" />
+    <None Include="Scripts\jquery-3.7.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.7.1.js" />
+    <Content Include="Scripts\jquery-3.7.1.min.js" />
+    <Content Include="Scripts\jquery-3.7.1.slim.js" />
+    <Content Include="Scripts\jquery-3.7.1.slim.min.js" />
     <Content Include="template\img\open-menu.png" />
     <Content Include="template\img\profile.png" />
     <Content Include="template\Index.html" />
@@ -291,6 +296,8 @@
     <Content Include="Views\Registered\Order.cshtml" />
     <Content Include="Views\Registered\Settings.cshtml" />
     <Content Include="Views\Visitor\Halls.cshtml" />
+    <Content Include="Scripts\jquery-3.7.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.7.1.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
