@@ -10,7 +10,7 @@ namespace PasswordManager
     [Serializable]
     public class Password : SecurityHelper
     {
-        public string Salt { get; }
+        public string Salt { get; set; }
         public string HashPassword { get; set; }
         public int SaltLength { get; set; }
 
@@ -32,6 +32,7 @@ namespace PasswordManager
 
         public void ApplyNewPassword(string EnteredPassword)
         {
+            this.Salt = GenerateSalt(SaltLength);
             this.HashPassword = GenerateHash(EnteredPassword, this.Salt);
         }
 
