@@ -17,6 +17,7 @@ using EventsManagerWebService;
 using System.Web.Helpers;
 using System.Reflection;
 using System.Web.Mvc;
+using System.Runtime.Caching;
 
 namespace EventsManagerWeb
 {
@@ -35,6 +36,8 @@ namespace EventsManagerWeb
 
     public class JwtCookieAuthenticationHandler : AuthenticationHandler<JwtCookieAuthenticationOptions>
     {
+        const string CacheKeyBase = "user_roles_";
+
         protected override async Task<AuthenticationTicket> AuthenticateCoreAsync()
         {
             string token = Request.Cookies["Token"]; // Get the token from the cookie
@@ -73,7 +76,27 @@ namespace EventsManagerWeb
             }
         }
 
-        private async static Task<Claim> GetRoleForUserId(string userId)
+        public async Task<Claim> GetRoleForUserId(string userId)
+        {
+            var cacheKey = CacheKeyBase + userId; // Combine base key and user ID
+            var cache = MemoryCache.Default;
+
+            var roles = cache.Get(cacheKey); // Try to get from cache
+            if (roles == null)
+            {
+                // Fetch roles from database or COM component
+                roles = await GetRolesFromSource(userId);
+
+                // Add to cache with expiration
+                var cacheItemPolicy = new CacheItemPolicy(); // Set expiration time
+                cacheItemPolicy.AbsoluteExpiration = DateTime.Now.AddMinutes(30);
+                cache.Set(cacheKey, roles, cacheItemPolicy);
+            }
+
+            return (Claim) roles;
+        }
+
+        private async static Task<Claim> GetRolesFromSource(string userId)
         {
             WebClient<UserType> client = new WebClient<UserType>
             {
