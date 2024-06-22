@@ -84,8 +84,8 @@ namespace EventsManagerWeb
             client.AddKeyValue("UserId", userId);
             try
             {
-                UserType userType = await client.GetAsync();
-                if (userType.UserTypeId != 0)
+                UserType userType = await client.GetAsync() ?? null;
+                if (userType != null && userType.UserTypeId != 0)
                 {
                     return new Claim(ClaimTypes.Role, userType.UserTypeName);
                 }
