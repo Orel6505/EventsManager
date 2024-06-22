@@ -123,7 +123,7 @@ namespace EventsManagerWeb.Controllers
         {
             return View();
         }
-
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult Register(User user)
         {
