@@ -88,8 +88,10 @@ namespace EventsManagerWeb
                 roles = await GetRolesFromSource(userId);
 
                 // Add to cache with expiration
-                var cacheItemPolicy = new CacheItemPolicy(); // Set expiration time
-                cacheItemPolicy.AbsoluteExpiration = DateTime.Now.AddMinutes(30);
+                var cacheItemPolicy = new CacheItemPolicy
+                {
+                    AbsoluteExpiration = DateTime.Now.AddMinutes(30)
+                }; // Set expiration time
                 cache.Set(cacheKey, roles, cacheItemPolicy);
             }
 
