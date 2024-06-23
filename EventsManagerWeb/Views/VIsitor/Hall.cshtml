@@ -5,13 +5,80 @@
     ViewBag.Title = "Hall";
     Layout = "~/Views/Shared/MasterPage.cshtml";
 }
+<link rel="stylesheet" href="~/Content/Styles/Hall.css" />
 <div class="Hallwraper">
-    <div class="HallImage">
-        <img class="HallImg" src="@Model.HallId" />
-    </div>
     <div class="HallData">
-        <h1 class="HallName">@Model.HallName</h1>
-        <p class="HallDescription">@Model.HallDesc</p>
+        <h3 class="HallName">@Model.HallName</h3>
+        <h6 class="HallDesc">@Model.HallDesc</h6>
+    </div>
+    <div class="HallImage">
+        <img class="HallImg" src="https://placehold.co/600x400" type="image/jpeg" aria-hidden="false" alt="">
     </div>
 </div>
 
+<main class="Data">
+    <div class="rating-container">
+        <form action="/Account/Rate" method="post" enctype="multipart/form-data">
+            <input type="hidden" id="HallId" name="HallId" value="@Model.HallId" />
+            <div class="rating-header">
+                <h1>New Rating</h1>
+            </div>
+            <div class="rating-content">
+                <div class="form-group">
+                    <label for="RatingStars" class="lable">Rating Stars:</label>
+                    <div class="star-rating">
+                        <input type="radio" id="5-stars" name="RatingStars" value="5" />
+                        <label for="5-stars" title="5 stars">&#9733;</label>
+
+                        <input type="radio" id="4-stars" name="RatingStars" value="4" />
+                        <label for="4-stars" title="4 stars">&#9733;</label>
+
+                        <input type="radio" id="3-stars" name="RatingStars" value="3" />
+                        <label for="3-stars" title="3 stars">&#9733;</label>
+
+                        <input type="radio" id="2-stars" name="RatingStars" value="2" />
+                        <label for="2-stars" title="2 stars">&#9733;</label>
+
+                        <input type="radio" id="1-stars" name="RatingStars" value="1" />
+                        <label for="1-stars" title="1 star">&#9733;</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="RatingTitle" class="lable">Rating Title:</label><br>
+                        <input type="text" id="RatingTitle" name="RatingTitle" class="form-control rating-title" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="RatingDesc" class="lable">Rating Description:</label><br>
+                        <textarea style="resize: none;" id="RatingDesc" name="RatingDesc" class="form-control rating-description" required></textarea>
+                    </div>
+                </div>
+                <div class="form-group rating-image">
+                    <label for="RatingImages" class="lable">Rating Images:</label><br>
+                    <input type="file" id="RatingImages" name="RatingImages" multiple />
+                </div>
+                <div class="form-group cButton">
+                    <button type="submit" class=" button">Submit Rating</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    @foreach (Rating rating in Model.Ratings)
+    {
+        <div class="rating-container">
+            <div class="rating-header">
+                <div class="rating-stars">@rating.RatingStars</div>
+                <div class="rating-date">@DateTimeOffset.FromUnixTimeSeconds(long.Parse(rating.RatingDate)).ToUniversalTime()</div>
+            </div>
+            <div class="rating-content">
+                <p class="rating-author">@rating.UserRating.UserName</p>
+                <h2 class="rating-title">@rating.RatingTitle</h2>
+                <p class="rating-description">@rating.RatingDesc</p>
+            </div>
+            <div class="rating-image">
+                @foreach (RatingImage image in rating.RatingImages)
+                {
+                    <img src="@image.ImageLocation" alt="Rating Image">
+                }
+            </div>
+        </div>
+    }
+</main>

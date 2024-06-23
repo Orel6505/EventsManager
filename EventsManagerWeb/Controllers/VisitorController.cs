@@ -58,6 +58,19 @@ namespace EventsManagerWeb.Controllers
             return View(Halls);
         }
 
+        public ActionResult Hall(int id = 1)
+        {
+            WebClient<Hall> client = new WebClient<Hall>
+            {
+                Server = CommonParameters.Location.WebService,
+                Controller = "Visitor",
+                Method = "GetHallById"
+            };
+            client.AddKeyValue("id", id.ToString());
+            Hall hall = client.Get();
+            return View(hall);
+        }
+
         public ActionResult Menu(int id = 1)
         {
             WebClient<Menu> client = new WebClient<Menu>

@@ -16,5 +16,6 @@ namespace EventsManagerModels
         public int UserId { get; set; }
         public int HallId { get; set; }
         public List<RatingImage> RatingImages { get; set; }
+        public User UserRating { get; set; }
     }
 }

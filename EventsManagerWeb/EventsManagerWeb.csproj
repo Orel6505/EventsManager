@@ -268,6 +268,7 @@
     <Content Include="Content\Scripts\Menus.js" />
     <Content Include="Content\Styles\AccountNav.css" />
     <Content Include="Content\Styles\Halls.css" />
+    <Content Include="Content\Styles\Hall.css" />
     <Content Include="Content\Styles\Menu.css" />
     <Content Include="Content\Styles\Order.css" />
     <Content Include="Content\Styles\MyOrders.css" />

@@ -1,0 +1,197 @@
+﻿
+
+.Hallwraper {
+    border-radius: 10px;
+    width: 80%;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    height: 90vh;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.HallData, .HallImage {
+    flex: 1;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.HallData {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    text-align: center
+}
+
+.HallName {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.HallDesc {
+    font-size: 14px;
+    color: #555;
+}
+
+.HallImg {
+    border-radius: 10px;
+    width: 70vh;
+    object-fit: cover
+}
+
+
+@media (max-width: 850px) {
+    .Hallwraper {
+        flex-direction: column-reverse;
+        height: 100vh;
+    }
+    .HallImg {
+        width: 100%;
+        object-fit: cover;
+    }
+    .HallData {
+        justify-content: start;
+    }
+}
+
+.form-group h1 {
+    margin-top: 0;
+}
+
+.form-group input, textarea {
+    max-width: 100%;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.lable {
+    color: #888888;
+    font-size: 16px;
+}
+
+.button {
+    background: #663399;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cButton {
+    display: flex;
+    justify-content: center;
+    max-width: 100%;
+    padding: 20px
+}
+
+.button:hover {
+    background: #5a287d;
+}
+
+h4 {
+    display: flex;
+    justify-content: center;
+    font-size: 0.8rem;
+}
+
+.item {
+    margin-top: 27px;
+}
+
+.rating-container {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.rating-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.rating-stars {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+}
+
+.rating-stars::before {
+    content: '★';
+    color: #FFD700;
+}
+
+.rating-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+    direction: rtl;
+}
+
+.rating-description {
+    color: #555;
+    margin-bottom: 10px;
+    line-height: 1.5;
+    direction: rtl;
+}
+
+.rating-author {
+    font-size: 14px;
+    color: #888;
+}
+
+.rating-image img {
+    max-width: 100%;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.star-rating {
+    display: flex;
+    font-size: 2rem;
+    justify-content: space-around;
+    padding: 0 10px;
+    position: relative;
+    width: 10em;
+    display: flex;
+    flex-direction: row-reverse; /* Reverse the order of labels */
+    justify-content: flex-end;
+}
+
+.star-rating input {
+    display: none;
+}
+
+.star-rating label {
+    color: #ddd;
+    cursor: pointer;
+    font-size: 2rem;
+    padding: 0;
+    transition: color 0.2s;
+}
+
+.star-rating input:checked ~ label,
+.star-rating input:hover ~ label {
+    color: #FFD700;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color: #FFD700;
+}

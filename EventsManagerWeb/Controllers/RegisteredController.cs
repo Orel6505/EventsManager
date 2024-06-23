@@ -1,6 +1,7 @@
 ﻿using EventsManagerModels;
 using EventsManagerWebService;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -117,6 +118,47 @@ namespace EventsManagerWeb.Controllers
             };
             TempData["Update"] = client.Post(user);
             return RedirectToAction("Settings");
+        }
+
+        [HttpPost]
+        public ActionResult Rate(Rating rating, IEnumerable<HttpPostedFileBase> RatingImages)
+        {
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+            List<string> images = null;
+            WebClient<Rating> client = new WebClient<Rating>
+            {
+                Server = CommonParameters.Location.WebService,
+                Controller = "Registered",
+                Method = "Rating"
+            };
+            if (Session["UserName"] == null)
+            { //if user is null, do not save image
+                return Redirect(Request.UrlReferrer.ToString());
+            }
+            rating.UserId = Convert.ToInt16(claimsIdentity.FindFirst("UserId").Value);
+            rating.RatingDate = Convert.ToString(DateTimeOffset.UtcNow.ToUnixTimeSeconds());
+            if (RatingImages != null)
+            {
+                int count = 0;
+                foreach (HttpPostedFileBase file in RatingImages)
+                {
+                    if (file == null || file.ContentLength <= 0)
+                    { //if file is null or empty, do not save the image
+                        continue;
+                    }
+                    if (!file.ContentType.StartsWith("image"))
+                    { //if file is not image, do not save image
+                        continue;
+                    }
+                    count++;
+                    using (Image image = Image.FromStream(file.InputStream))
+                        image.Save(Path.Combine($"{Server.MapPath("/Content/Review-img")}\\Rating-{rating.RatingId}-{count}.png"), ImageFormat.Png);
+                    string ratingImage = $"/Content/Review-img\\Rating-{rating.RatingDate}-{count}.png";
+                    images.Add(ratingImage);
+                }
+            }
+            TempData["Error"] = client.PostAsync(rating, images);
+            return Redirect(Request.UrlReferrer.ToString());
         }
     }
 }

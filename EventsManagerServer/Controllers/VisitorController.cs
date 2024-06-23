@@ -99,6 +99,7 @@ namespace EventsManager.Controllers
                 foreach (Rating rating in hall.Ratings)
                 {
                     rating.RatingImages = libraryUnitOfWork.RatingImageRepository.ReadByRatingId(rating.RatingId);
+                    rating.UserRating = libraryUnitOfWork.UserRepository.Read(rating.UserId);
                 }
             }
             catch (Exception ex)
