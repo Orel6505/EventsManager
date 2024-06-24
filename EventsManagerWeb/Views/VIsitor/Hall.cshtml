@@ -63,20 +63,21 @@
     </div>
     @foreach (Rating rating in Model.Ratings)
     {
+        var userRole = ((System.Security.Claims.ClaimsIdentity)User.Identity).FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value;
         <div class="rating-container">
             <div class="rating-header">
                 <div class="rating-stars">@rating.RatingStars</div>
-                <div class="rating-date">@DateTimeOffset.FromUnixTimeSeconds(long.Parse(rating.RatingDate)).ToUniversalTime()</div>
+                <div class="rating-date">@DateTimeOffset.FromUnixTimeSeconds(long.Parse(rating.RatingDate)).ToLocalTime()</div>
             </div>
             <div class="rating-content">
-                <p class="rating-author">@rating.UserRating.UserName</p>
+                <p class="rating-author">@rating.UserRating.UserName <strong>@(userRole)</strong></p>
                 <h2 class="rating-title">@rating.RatingTitle</h2>
                 <p class="rating-description">@rating.RatingDesc</p>
             </div>
             <div class="rating-image">
                 @foreach (RatingImage image in rating.RatingImages)
                 {
-                    <img src="@image.ImageLocation" alt="Rating Image">
+                    <img src="@image.ImageLocation" alt="Rating Image" class="smallImage">
                 }
             </div>
         </div>

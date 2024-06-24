@@ -44,7 +44,7 @@ namespace EventsManager.Data_Access_Layer
 
         public Rating Read(object id)
         {
-            string sql = $"SELECT FROM Ratings WHERE RatingId=@RatingId";
+            string sql = $"SELECT * FROM Ratings WHERE RatingId=@RatingId";
             this.AddParameters("RatingId", id.ToString()); //prevents SQL Injection
             using (IDataReader dataReader = this.dbContext.Read(sql))
             {
@@ -52,6 +52,18 @@ namespace EventsManager.Data_Access_Layer
                 return this.modelFactory.RatingModelCreator.CreateModel(dataReader);
             }
             //returns Rating
+        }
+
+        public int ReadByRatingDate(string RatingDate)
+        {
+            string sql = $"SELECT Ratings.RatingId FROM Ratings ORDER BY Ratings.RatingId DESC;"; //TODO: Fix this dirty fix
+            this.AddParameters("RatingDate", RatingDate.ToString()); //prevents SQL Injection
+            using (IDataReader dataReader = this.dbContext.Read(sql))
+            {
+                dataReader.Read();
+                return Convert.ToInt32(dataReader["RatingId"]);
+            }
+            //returns Ratings
         }
 
         public List<Rating> ReadAll()
@@ -67,7 +79,7 @@ namespace EventsManager.Data_Access_Layer
         public List<Rating> ReadRatingsByHallIdId(int HallId)
         {
             List<Rating> Ratings = new List<Rating>();
-            string sql = "SELECT * FROM Ratings WHERE HallId=@HallId";
+            string sql = "SELECT * FROM Ratings WHERE HallId=@HallId ORDER BY Ratings.RatingId desc";
             this.AddParameters("HallId", HallId.ToString()); //prevents SQL Injection
             using (IDataReader dataReader = this.dbContext.Read(sql))
                 while (dataReader.Read() == true)

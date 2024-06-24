@@ -177,5 +177,53 @@ namespace EventsManager.Controllers
             return null;
         }
 
+        [HttpPost]
+        public bool NewRate(Rating rating)
+        {
+            DbContext dbContext = OleDbContext.GetInstance();
+            LibraryUnitOfWork libraryUnitOfWork = new LibraryUnitOfWork(dbContext);
+            try
+            {
+                dbContext.OpenConnection();
+
+                // Insert the rating
+                if (!libraryUnitOfWork.RatingRepository.Insert(rating))
+                {
+                    return false;
+                }
+
+                // Insert rating images (if any)
+                if (rating.RatingImagesLocation.Count > 0)
+                {
+                    foreach (string file in rating.RatingImagesLocation)
+                    {
+                        RatingImage image = new RatingImage
+                        {
+                            ImageLocation = file,
+                            RatingId = libraryUnitOfWork.RatingRepository.ReadByRatingDate(rating.RatingDate)
+                        };
+
+                        if (image.RatingId == 0)
+                        {
+                            // Handle the case when no valid RatingId is found
+                            throw new InvalidOperationException("Invalid RatingId.");
+                        }
+
+                        libraryUnitOfWork.RatingImageRepository.Insert(image);
+                    }
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+            }
+            finally
+            {
+                dbContext.CloseConnection();
+            }
+            return false;
+        }
+
     }
 }

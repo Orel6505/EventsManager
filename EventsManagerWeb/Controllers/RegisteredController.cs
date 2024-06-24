@@ -124,12 +124,12 @@ namespace EventsManagerWeb.Controllers
         public ActionResult Rate(Rating rating, IEnumerable<HttpPostedFileBase> RatingImages)
         {
             var claimsIdentity = User.Identity as ClaimsIdentity;
-            List<string> images = null;
+            List<string> images = new List<string>();
             WebClient<Rating> client = new WebClient<Rating>
             {
                 Server = CommonParameters.Location.WebService,
                 Controller = "Registered",
-                Method = "Rating"
+                Method = "NewRate"
             };
             if (Session["UserName"] == null)
             { //if user is null, do not save image
@@ -151,13 +151,22 @@ namespace EventsManagerWeb.Controllers
                         continue;
                     }
                     count++;
-                    using (Image image = Image.FromStream(file.InputStream))
-                        image.Save(Path.Combine($"{Server.MapPath("/Content/Review-img")}\\Rating-{rating.RatingId}-{count}.png"), ImageFormat.Png);
-                    string ratingImage = $"/Content/Review-img\\Rating-{rating.RatingDate}-{count}.png";
-                    images.Add(ratingImage);
+                    try
+                    {
+                        using (Image image = Image.FromStream(file.InputStream))
+                            image.Save(Path.Combine($"{Server.MapPath("/Content/Review-img")}\\Rating-{rating.RatingDate}-{count}.png"), ImageFormat.Png);
+                        string ratingImage = $"/Content/Review-img/Rating-{rating.RatingDate}-{count}.png";
+                        images.Add(ratingImage);
+                    }
+                    catch (Exception)
+                    {
+                        continue;
+                    }
+                    
                 }
+                rating.RatingImagesLocation = images;
             }
-            TempData["Error"] = client.PostAsync(rating, images);
+            TempData["Error"] = client.Post(rating);
             return Redirect(Request.UrlReferrer.ToString());
         }
     }
