@@ -84,7 +84,6 @@ namespace EventsManagerWeb
             var roles = cache.Get(cacheKey); // Try to get from cache
             if (roles == null)
             {
-                // Fetch roles from database or COM component
                 roles = await GetRolesFromSource(userId);
 
                 // Add to cache with expiration
@@ -96,6 +95,19 @@ namespace EventsManagerWeb
             }
 
             return (Claim) roles;
+        }
+        public void CleanCacheRoles()
+        {
+            var cache = MemoryCache.Default;
+            cache.Dispose();
+        }
+
+        public bool RemoveRoleFromCache(string userId)
+        {
+            var cacheKey = CacheKeyBase + userId;
+            var cache = MemoryCache.Default;
+
+            return (bool)cache.Remove(cacheKey);
         }
 
         private async static Task<Claim> GetRolesFromSource(string userId)
