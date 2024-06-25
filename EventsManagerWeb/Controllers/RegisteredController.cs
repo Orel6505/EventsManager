@@ -44,9 +44,16 @@ namespace EventsManagerWeb.Controllers
             OrderListVIewModel Menus = client.Get();
             return View(Menus);
         }
-        public ActionResult Order() 
+        public ActionResult Order(int id=1)
         {
-            return View();
+            WebClient<NewOrderViewModel> client = new WebClient<NewOrderViewModel>
+            {
+                Server = CommonParameters.Location.WebService,
+                Controller = "Registered",
+                Method = "OrderMenus"
+            };
+            client.AddKeyValue("HallId", id.ToString());
+            return View(client.Get());
         }
         public ActionResult Settings()
         {
@@ -167,6 +174,26 @@ namespace EventsManagerWeb.Controllers
                 rating.RatingImagesLocation = images;
             }
             TempData["Error"] = client.Post(rating);
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+        [HttpPost]
+        public ActionResult NewOrder(Order order)
+        {
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+            WebClient<Order> client = new WebClient<Order>
+            {
+                Server = CommonParameters.Location.WebService,
+                Controller = "Registered",
+                Method = "NewOrder"
+            };
+            if (Session["UserName"] == null)
+            { //if user is null, do not save image
+                return Redirect(Request.UrlReferrer.ToString());
+            }
+            order.UserId = Convert.ToInt16(claimsIdentity.FindFirst("UserId").Value);
+            order.OrderDate = Convert.ToString(DateTimeOffset.UtcNow.ToUnixTimeSeconds());
+            order.IsPaid = "true";
+            TempData["Error"] = client.Post(order);
             return Redirect(Request.UrlReferrer.ToString());
         }
     }

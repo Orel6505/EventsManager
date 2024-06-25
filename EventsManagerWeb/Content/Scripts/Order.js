@@ -1,13 +1,16 @@
-﻿const daysTag = document.querySelector(".days"),
-    currentDate = document.querySelector(".current-date"),
-    prevNextIcon = document.querySelectorAll(".icons span");
+﻿const daysTag = document.querySelector(".days");
+const currentDate = document.querySelector(".current-date");
+const prevNextIcon = document.querySelectorAll(".icons span");
 
-let date = new Date(),
-    currYear = date.getFullYear(),
-    currMonth = date.getMonth();
+let date = new Date();
+let currYear = date.getFullYear();
+let currMonth = date.getMonth();
 
-const months = ["January", "February", "March", "April", "May", "June", "July",
-    "August", "September", "October", "November", "December"];
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+window.addEventListener("load", () => {
+    $("#OrderForm").hide();
+});
 
 const renderCalendar = () => {
     let firstDayofMonth = new Date(currYear, currMonth, 1).getDay(), 
@@ -26,12 +29,13 @@ const renderCalendar = () => {
             isToday = i < date.getDate() ? "inactive" : "";
             isToday = i === date.getDate() ? "active" : isToday;
         }
-        liTag += `<li class="${isToday}"><button class="check-availability" onclick="alert(0)" data-date="${currYear}-${currMonth + 1}-${i}">${i}</button></li>`;
+        liTag += `<li class="${isToday}"><button class="check-availability" onclick="" data-date="${currYear}-${currMonth + 1}-${i}" value="${i}/${currMonth + 1}/${currYear}">${i}</button></li>`;
     }
 
-    for (let i = lastDayofMonth; i < 6; i++) {
-        liTag += `<li class="inactive">${i - lastDayofMonth + 1}</li>`
-    }
+    //for (let i = lastDayofMonth; i < 6; i++) {
+    //    liTag += `<li class="inactive">${i - lastDayofMonth + 1}</li>`
+    //}
+
     currentDate.innerText = `${months[currMonth]} ${currYear}`;
     daysTag.innerHTML = liTag;
 }
@@ -53,3 +57,39 @@ prevNextIcon.forEach(icon => {
         }
     });
 });
+
+$("button").click(function () {
+    let buttonval = $(this).val();
+    let HallId = $('#HallId').val();
+    checkHallAvailability(buttonval, HallId);
+});
+
+async function checkHallAvailability(dateval, HallId) {
+    $("#EventType").empty();
+    $("#Hall-Response").empty();
+    $("#OrderForm").hide();
+    $("#Order").empty();
+    $("#Order").append(
+        '<input type="hidden" id="EventDate" name="EventDate" value="' + dateval +'" />'
+    );
+    try {
+        const response = await fetch(`https://localhost:44365/api/HallAvailability?EventDate=${dateval}&HallId=${HallId}`);
+        if (!response.ok) {
+            $("#Hall-Response").show();
+            $("#Hall-Response").html("**Error fetching username availability. Please try again later.");
+            return false;
+        }
+        const data = await response.json(); // Parse the JSON data
+        data.forEach((event) => {
+            $("#EventTypeId").append(
+                '<option value=' + event.EventTypeId + '>' + event.EventTypeName + '</option>'
+            );
+        });
+        $("#OrderForm").show();
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        $("#Hall-Response").show();
+        $("#Hall-Response").html("**Error fetching username availability. Please try again later.");
+        return false;
+    }
+}

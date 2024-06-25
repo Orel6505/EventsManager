@@ -18,7 +18,9 @@ namespace EventsManager.Data_Access_Layer
                 MenuDesc = Convert.ToString(source["MenuDesc"]),
                 MenuImage = Convert.ToString(source["MenuImage"]),
                 HallId = Convert.ToInt16(source["HallId"]),
-                Foods = null
+                Foods = null,
+                FoodIds = null,
+                FoodTypeIds = null
             };
             return menu;
         }

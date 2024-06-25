@@ -57,7 +57,7 @@ namespace EventsManagerWeb.Controllers
                 Method = "IsAvailableUserName"
             };
             client.AddKeyValue("UserName", UserName);
-            return await client.GetAsync(); //TODO: remove this feature, doesn't follow security standarts
+            return await client.GetAsync(); //TODO: remove this feature, doesn't follow security standards
         }
         [System.Web.Http.HttpGet]
         [Authorize(Roles = "Admin, User")]
@@ -96,6 +96,19 @@ namespace EventsManagerWeb.Controllers
             client.AddKeyValue("UserId", claimsIdentity.FindFirst("UserId").Value);
             OrderListVIewModel Menus = await client.GetAsync();
             return Menus;
+        }
+        [System.Web.Http.HttpGet]
+        async public Task<List<EventType>> HallAvailability(string EventDate, int HallId)
+        {
+            WebClient<List<EventType>> client = new WebClient<List<EventType>>
+            {
+                Server = CommonParameters.Location.WebService,
+                Controller = "Registered",
+                Method = "HallAvailability"
+            };
+            client.AddKeyValue("EventDate", EventDate);
+            client.AddKeyValue("HallId", HallId.ToString());
+            return await client.GetAsync(); 
         }
     }
 }

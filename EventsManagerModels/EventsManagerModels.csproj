@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\FoodType.cs" />
+    <Compile Include="ViewModels\NewOrderViewModel.cs" />
     <Compile Include="ViewModels\OrderListVIewModel.cs" />
     <Compile Include="ViewModels\MenuListVIewModel.cs" />
     <Compile Include="Models\EventType.cs" />
@@ -62,6 +66,9 @@
       <Project>{cf21b46a-558e-446c-862b-9623dae654db}</Project>
       <Name>PasswordManager</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

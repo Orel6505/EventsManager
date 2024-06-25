@@ -224,6 +224,68 @@ namespace EventsManager.Controllers
             }
             return false;
         }
-
+        [HttpGet]
+        public List<EventType> HallAvailability(string EventDate, string HallId)
+        {
+            DbContext dbContext = OleDbContext.GetInstance();
+            LibraryUnitOfWork libraryUnitOfWork = new LibraryUnitOfWork(dbContext);
+            try
+            {
+                dbContext.OpenConnection();
+                return libraryUnitOfWork.EventTypeRepository.HallAvailability(EventDate, HallId);
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+            }
+            finally
+            {
+                dbContext.CloseConnection();
+            }
+            return null;
+        }
+        [HttpGet]
+        public NewOrderViewModel OrderMenus(string HallId)
+        {
+            NewOrderViewModel orderViewModel = new NewOrderViewModel();
+            DbContext dbContext = OleDbContext.GetInstance();
+            LibraryUnitOfWork libraryUnitOfWork = new LibraryUnitOfWork(dbContext);
+            try
+            {
+                dbContext.OpenConnection();
+                orderViewModel.Menus = libraryUnitOfWork.MenuRepository.GetAllByHallId(HallId);
+                orderViewModel.OrderHall = libraryUnitOfWork.HallRepository.Read(HallId);
+                return orderViewModel;
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+            }
+            finally
+            {
+                dbContext.CloseConnection();
+            }
+            return null;
+        }
+        [HttpPost]
+        public bool NewOrder(Order order)
+        {
+            DbContext dbContext = OleDbContext.GetInstance();
+            LibraryUnitOfWork libraryUnitOfWork = new LibraryUnitOfWork(dbContext);
+            try
+            {
+                dbContext.OpenConnection();
+                return libraryUnitOfWork.OrderRepository.Insert(order);
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+            }
+            finally
+            {
+                dbContext.CloseConnection();
+            }
+            return false;
+        }
     }
 }

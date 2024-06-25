@@ -63,6 +63,17 @@ namespace EventsManager.Data_Access_Layer
             return Menus;
         }
 
+        public List<Menu> GetAllByHallId(string HallId)
+        {
+            List<Menu> Menus = new List<Menu>();
+            string sql = "SELECT Menus.*\r\nFROM Menus\r\nWHERE HallId = @HallId\r\n  AND EXISTS (\r\n    SELECT 1\r\n    FROM FoodMenu\r\n    WHERE FoodMenu.MenuId = Menus.MenuId\r\n);";
+            this.AddParameters("HallId", HallId); //prevents SQL Injection
+            using (IDataReader dataReader = this.dbContext.Read(sql))
+                while (dataReader.Read() == true)
+                    Menus.Add(this.modelFactory.MenuModelCreator.CreateModel(dataReader));
+            return Menus;
+        }
+
         public List<int> GetFoodIdsBy(object id)
         {
             List<int> Foods = new List<int>();

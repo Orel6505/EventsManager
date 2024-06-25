@@ -10,7 +10,7 @@
     padding: 0 10px;
     justify-content: center;
     min-height: 100vh;
-    background: #9B59B6;
+    flex-flow: column;
 }
 .order-menu .date-info {
     display: flex;
@@ -109,4 +109,92 @@
 
 .check-availability:hover {
     background: #f2f2f2;
+}
+
+.inactive button {
+    color: #aaa;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.base {
+    background-color: white;
+    padding: 30px 30px 30px 30px;
+    height: 100%;
+    width: 30vw;
+    border-radius: 25px;
+}
+
+.sign {
+    font-size: 26px;
+}
+
+.info {
+    font-size: 14px;
+    margin-top: 10px;
+    color: #999999;
+}
+
+hr {
+    width: 100%;
+    margin-top: 20px;
+    color: #e4e4e4;
+}
+
+.lable {
+    color: #888888;
+    font-size: 16px;
+}
+
+.text {
+    margin-top: 10px;
+    height: 50px;
+    width: 100%;
+    font-size: 1rem;
+    border-radius: 5px;
+    border-color: #e2e2e2;
+}
+
+.button {
+    background: #663399;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cButton {
+    display: flex;
+    justify-content: center;
+}
+
+h4 {
+    display: flex;
+    justify-content: center;
+    font-size: 0.8rem;
+}
+
+.name {
+    width: 100%;
+}
+
+.OrderForm {
+    background-color: #fff;
+    width: 450px;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    overflow:hidden;
+}
+.OrderForm-input {
+    max-width: 100%;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }

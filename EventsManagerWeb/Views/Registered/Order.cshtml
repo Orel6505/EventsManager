@@ -1,5 +1,5 @@
 ﻿@using EventsManagerModels;
-
+@model NewOrderViewModel
 @{
     ViewBag.Title = "Order";
     Layout = "~/Views/Shared/MasterPage.cshtml";
@@ -7,25 +7,59 @@
 <script src="~/Scripts/jquery-3.7.1.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
 <link rel="stylesheet" href="~/Content/Styles/Order.css" />
-<div class="order-menu">
-    <div class="date-info">
-        <p class="current-date"></p>
-        <div class="icons">
-            <span id="prev" class="material-symbols-rounded">chevron_left</span>
-            <span id="next" class="material-symbols-rounded">chevron_right</span>
+<div>
+    <div class="order-menu">
+        <h1 style="text-align: center; padding: 10px"> Order New Event</h1>
+        <div class="date-info">
+            <p class="current-date"></p>
+            <div class="icons">
+                <span id="prev" class="material-symbols-rounded">chevron_left</span>
+                <span id="next" class="material-symbols-rounded">chevron_right</span>
+            </div>
         </div>
-    </div>
-    <div class="calendar">
-        <ul class="weeks">
-            <li>Sun</li>
-            <li>Mon</li>
-            <li>Tue</li>
-            <li>Wed</li>
-            <li>Thu</li>
-            <li>Fri</li>
-            <li>Sat</li>
-        </ul>
-        <ul class="days"></ul>
-        <script src="~/Content/Scripts/Order.js"></script>
+        <div class="calendar">
+            <ul class="weeks">
+                <li>Sun</li>
+                <li>Mon</li>
+                <li>Tue</li>
+                <li>Wed</li>
+                <li>Thu</li>
+                <li>Fri</li>
+                <li>Sat</li>
+            </ul>
+            <ul class="days"></ul>
+            <script src="~/Content/Scripts/Order.js"></script>
+        </div>
+        <div id="Hall-Response"></div>
     </div>
 </div>
+<main class="Data">
+    <div class="OrderForm" id="OrderForm">
+        <form action="/Account/NewOrder" method="post" enctype="multipart/form-data">
+            <input type="hidden" id="HallId" name="HallId" value="@Model.OrderHall.HallId" />
+            <div id="Order" hidden></div>
+            <div>
+                <label for="EventType" class="lable">Choose Date</label><br>
+                <select name="EventTypeId" id="EventTypeId" class="OrderForm-input">
+                </select>
+            </div>
+            <div>
+                <label for="Menus" class="lable">Choose Menu</label><br>
+                <select name="MenuId" id="MenuId" class="OrderForm-input">
+
+                    @foreach (Menu menu in Model.Menus)
+                    {
+                        <option value="@menu.MenuId">@menu.MenuName</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="NumOfPeople" class="lable">NumberOfPeople</label><br>
+                <input type="text" id="NumOfPeople" name="NumOfPeople" class="OrderForm-input" min="1" max="400" required />
+            </div>
+            <div class="form-group cButton">
+                <button type="submit" class=" button">Submit Rating</button>
+            </div>
+        </form>
+    </div>
+</main>

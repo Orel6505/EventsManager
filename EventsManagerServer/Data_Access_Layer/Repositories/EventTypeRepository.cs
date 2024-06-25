@@ -51,6 +51,20 @@ namespace EventsManager.Data_Access_Layer
             //returns Menu
         }
 
+        public List<EventType> HallAvailability(string EventDate, string HallId)
+        {
+            List<EventType> EventTypes = new List<EventType>();
+            string sql = "SELECT EventTypes.*\r\nFROM EventTypes\r\nWHERE EventTypes.EventTypeId NOT IN (\r\n    SELECT EventTypeId\r\n    FROM Orders\r\n    WHERE EventDate = @EventDate AND IsPaid = True AND HallId = @HallId\r\n);";
+            this.AddParameters("EventDate", EventDate);
+            this.AddParameters("HallId", HallId);
+            using (IDataReader dataReader = this.dbContext.Read(sql))
+            {
+                while(dataReader.Read() == true)
+                    EventTypes.Add(this.modelFactory.EventTypeModelCreator.CreateModel(dataReader));
+                return EventTypes;
+            };
+        }
+
         public List<EventType> ReadAll()
         {
             List<EventType> EventTypes = new List<EventType>();

@@ -29,18 +29,16 @@ namespace EventsManager.Data_Access_Layer
             this.AddParameters("OrderId", model.OrderId.ToString()); //prevents SQL Injection
             return this.dbContext.Delete(sql) > 0;
         }
-
         public bool Insert(Order model)
         {
-            string sql = $"INSERT INTO Orders(NumOfPeople, OrderDate, MenuId, HallId, UserId, EventTypeId, EventDate, IsPaid) VALUES(@NumOfPeople,@OrderDate,@MenuId,@HallId,@UserId,@EventTypeId,@EventDate,@IsPaid)";
-            this.AddParameters("NumOfPeople", model.NumOfPeople.ToString()); //prevents SQL Injection
-            this.AddParameters("OrderDate", model.OrderDate); //prevents SQL Injection
+            string sql = "INSERT INTO Orders (MenuId, UserId, EventTypeId, HallId, NumOfPeople, EventDate, IsPaid) VALUES (@MenuId, @UserId, @EventTypeId, @HallId, @NumOfPeople, @EventDate, @IsPaid)";
             this.AddParameters("MenuId", model.MenuId.ToString()); //prevents SQL Injection
-            this.AddParameters("HallId", model.HallId.ToString()); //prevents SQL Injection
             this.AddParameters("UserId", model.UserId.ToString()); //prevents SQL Injection
-            this.AddParameters("IsPaid", model.IsPaid.ToString()); //prevents SQL Injection
             this.AddParameters("EventTypeId", model.EventTypeId.ToString()); //prevents SQL Injection
-            this.AddParameters("EventDate", model.EventDate); //prevents SQL Injection
+            this.AddParameters("HallId", model.HallId.ToString()); //prevents SQL Injection
+            this.AddParameters("NumOfPeople", model.NumOfPeople.ToString()); //prevents SQL Injection
+            this.AddParameters("EventDate", model.EventDate.ToString()); //prevents SQL Injection
+            this.AddParameters("IsPaid", model.IsPaid.ToString()); //prevents SQL Injection
             return this.dbContext.Create(sql) > 0;
         }
 
