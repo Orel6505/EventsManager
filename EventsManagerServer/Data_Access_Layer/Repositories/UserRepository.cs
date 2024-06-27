@@ -109,7 +109,7 @@ namespace EventsManager.Data_Access_Layer
         public List<User> ReadAll()
         {
             List<User> Users = new List<User>();
-            string sql = "SELECT * FROM Users";
+            string sql = "SELECT * FROM Users ORDER BY Users.UserId ASC";
             using (IDataReader dataReader = this.dbContext.Read(sql))
                 while (dataReader.Read() == true)
                     Users.Add(this.modelFactory.UserModelCreator.CreateModel(dataReader));

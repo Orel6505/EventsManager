@@ -24,5 +24,6 @@ namespace EventsManagerModels
         public int UserTypeId { get; set; }
 
         public List<Order> Orders { get; set; }
+        public string FormAction { get; set; }
     }
 }

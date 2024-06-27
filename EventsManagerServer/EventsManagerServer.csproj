@@ -163,6 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\RegisteredController.cs" />
     <Compile Include="Controllers\VisitorController.cs" />
     <Compile Include="Data_Access_Layer\DbContext\DbContext.cs" />

@@ -120,8 +120,7 @@ namespace EventsManagerWeb.Controllers
                 Response.SetCookie(httpOnlyCookie);
                 return RedirectToAction("Home", "Visitor");
             }
-            else
-                return RedirectToAction("Menus", "Visitor");
+            return Redirect(Request.UrlReferrer.ToString());
         }
         [HttpPost]
         public ActionResult LogOut()
@@ -150,14 +149,12 @@ namespace EventsManagerWeb.Controllers
             if (IsSuccess)
             {
                 TempData["Login"] = true;
-
-                return RedirectToAction("Login", "Visitor");
             }
             else
             {
                 ViewBag["Login"] = false;
-                return View("Register");
             }
+            return Redirect(Request.UrlReferrer.ToString());
         }
         public ActionResult Login2FA()
         {
