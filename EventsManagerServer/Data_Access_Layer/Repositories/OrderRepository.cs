@@ -56,7 +56,7 @@ namespace EventsManager.Data_Access_Layer
         public List<Order> ReadAll()
         {
             List<Order> Orders = new List<Order>();
-            string sql = "SELECT * FROM Orders";
+            string sql = "SELECT * FROM Orders ORDER BY OrderId ASC";
             using (IDataReader dataReader = this.dbContext.Read(sql))
                 while (dataReader.Read() == true)
                     Orders.Add(this.modelFactory.OrderModelCreator.CreateModel(dataReader));

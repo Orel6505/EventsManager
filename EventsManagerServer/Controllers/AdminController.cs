@@ -9,7 +9,9 @@ using System.Reflection;
 using System.Runtime.Remoting.Messaging;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.UI.WebControls;
+using Menu = EventsManagerModels.Menu;
 
 namespace EventsManager.Controllers
 {
@@ -106,6 +108,64 @@ namespace EventsManager.Controllers
             }
             return null;
         }
+
+        [HttpGet]
+        public List<Order> GetOrders()
+        {
+            DbContext dbContext = OleDbContext.GetInstance();
+            LibraryUnitOfWork libraryUnitOfWork = new LibraryUnitOfWork(dbContext);
+            try
+            {
+                dbContext.OpenConnection();
+                List<Order> orders = libraryUnitOfWork.OrderRepository.ReadAll();
+                foreach (Order order in orders) 
+                { 
+                    order.ChosenMenu = libraryUnitOfWork.MenuRepository.Read(order.MenuId);
+                    order.ChosenHall = libraryUnitOfWork.HallRepository.Read(order.HallId);
+                    order.ChosenUser = libraryUnitOfWork.UserRepository.Read(order.UserId);
+                    order.EventType = libraryUnitOfWork.EventTypeRepository.Read(order.EventTypeId);
+                }
+                return orders;
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+            }
+            finally
+            {
+                dbContext.CloseConnection();
+            }
+            return null;
+        }
+
+
+        [HttpGet]
+        [EnableCors(origins: "https://localhost:44365", headers: "*", methods: "*")]
+        public List<Menu> GetMenus()
+        {
+            DbContext dbContext = OleDbContext.GetInstance();
+            LibraryUnitOfWork libraryUnitOfWork = new LibraryUnitOfWork(dbContext);
+            try
+            {
+                dbContext.OpenConnection();
+                List<Menu> menus = libraryUnitOfWork.MenuRepository.ReadAll();
+                foreach (Menu menu in menus)
+                {
+                    menu.ChosenHall = libraryUnitOfWork.HallRepository.Read(menu.HallId);
+                }
+                return menus;
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+                return null;
+            }
+            finally
+            {
+                dbContext.CloseConnection();
+            }
+        }
+
         [HttpPost]
         public bool NewOrder(Order order)
         {

@@ -13,6 +13,10 @@
     overflow: auto;
 }
 
+.data {
+    max-width: 100%;
+}
+
 .popup-content {
     margin: 8% auto;
     padding: 20px;

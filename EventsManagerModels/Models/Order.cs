@@ -19,6 +19,10 @@ namespace EventsManagerModels
         public int EventTypeId { get; set; }
         public EventType EventType { get; set; }
         public Menu ChosenMenu { get; set; }
+        public Hall ChosenHall { get; set; }
+        public User ChosenUser { get; set; }
+
+
 
     }
 }

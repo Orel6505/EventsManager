@@ -33,6 +33,26 @@ namespace EventsManagerWeb.Controllers
             };
             return View(client.Get());
         }
+        public ActionResult Orders()
+        {
+            WebClient<List<Order>> client = new WebClient<List<Order>>
+            {
+                Server = CommonParameters.Location.WebService,
+                Controller = "Admin",
+                Method = "GetOrders"
+            };
+            return View(client.Get());
+        }
+        public ActionResult Menus()
+        {
+            WebClient<List<Menu>> client = new WebClient<List<Menu>>
+            {
+                Server = CommonParameters.Location.WebService,
+                Controller = "Admin",
+                Method = "GetMenus"
+            };
+            return View(client.Get());
+        }
         [HttpPost]
         public ActionResult Users(User user)
         {

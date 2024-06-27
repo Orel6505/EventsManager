@@ -14,6 +14,7 @@ namespace EventsManagerModels
         public string MenuImage { get; set; }
         public int HallId { get; set; }
 
+        public Hall ChosenHall { get; set; }
         public List<Food> Foods { get; set; }
         public List<int> FoodIds { get; set; }
         public List<int> FoodTypeIds { get; set; }
