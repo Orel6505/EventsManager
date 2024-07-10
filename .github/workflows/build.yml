@@ -5,9 +5,9 @@ name: .NET Builder
 
 on:
   push:
-    branches: [ "22may" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "22may" ]
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -20,7 +20,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
-        ref: 22may
+        ref: main
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
