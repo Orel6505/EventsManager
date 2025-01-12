@@ -64,13 +64,22 @@ $("button").click(function () {
     checkHallAvailability(buttonval, HallId);
 });
 
+function escapeHtml(unsafe) {
+    return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
 async function checkHallAvailability(dateval, HallId) {
     $("#EventType").empty();
     $("#Hall-Response").empty();
     $("#OrderForm").hide();
     $("#Order").empty();
     $("#Order").append(
-        '<input type="hidden" id="EventDate" name="EventDate" value="' + dateval +'" />'
+        '<input type="hidden" id="EventDate" name="EventDate" value="' + escapeHtml(dateval) +'" />'
     );
     try {
         const response = await fetch(`https://localhost:44365/api/HallAvailability?EventDate=${dateval}&HallId=${HallId}`);
