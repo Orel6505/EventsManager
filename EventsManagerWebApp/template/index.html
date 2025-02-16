@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="Style.css">
+  <link rel="icon" type="image/x-icon" href="img/profile.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> My Website </title>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <ul class="nav">
+        <a class="cLogo" href="Index.html"><img class="logo" src="img/profile.png"></a>
+        <a class="navText" href="Index.html"> Home </a>
+        <a class="navText" href="Index1.html"> Test Foods </a>
+        <a class="navText" href="Index2.html"> Test </a>
+        <a class="cOpenNav" onclick="openNav()"><img class="mOpenNav" src="img/open-menu.png"></a>
+        <a class="mCloseNav" onclick="closeNav()" class="closeNav">&times;</a>
+      </ul>
+    </nav>
+  </header>
+  <script>
+    function openNav() {
+      document.getElementById("nav-mobile").style.width = "100%";
+    }
+    
+    function closeNav() {
+      document.getElementById("nav-mobile").style.width = "100%";
+    }
+  </script>
+  
+  <div class="page-wrapper"></div>
+
+  <footer>
+    <h2 class="footer-table-section"> About </h2>
+    <table class="footer-table">
+      <tr class="footer-table-contant">
+        <td><img class="footer-table-logo" src="img/profile.png"></td>
+        <td class="footer-table-about">Hello, my name is Orel Yosupov. I am 17 years old.
+        Currently I'm learning at 12th grade in Ort Lilienthal school in Ramla
+        This Project is my final project in software engineering bagrut</td>
+      </tr>
+    </table>
+    <table class="footer-table-copy">
+      <tr>
+        <td>&copy; Designed by Orel Yosupov (Orel6505)</td>
+      </tr>
+    </table>
+  </footer>
+</body>
+</html>

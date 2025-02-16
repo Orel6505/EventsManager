@@ -1,0 +1,89 @@
+﻿@using EventsManagerModels;
+
+@model MenuListVIewModel
+@{
+    ViewBag.Title = "Menus";
+    Layout = "~/Views/Shared/MasterPage.cshtml";
+}
+
+@if (Model != null)
+{
+    <link rel="stylesheet" href="~/css/Menus.css" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/Menus.js"></script>
+    <div class="content">
+        <aside class="sidebar">
+            <div class="filter">
+                <h2>סינון</h2>
+                <div>
+                    <div class="SortMenu" id="SortMenu">
+                        <input type="search" id="MenuSearch" class="MenuSearch" name="MenuSearch">
+                        <div class="OptionItem HallOption">
+                            <input type="checkbox" class="ShowNoFood" name="ShowNoFood" checked>
+                            <h4>הראה רק תפריטים עם מנות</h4>
+                        </div>
+                        @if (Model.Halls.Count > 0)
+                        {
+                            <button class="SortMenuOptions" onclick="ShowHallsOptions()">סוגי אולמות</button>
+                            <div class="OptionItems" id="HallOptions">
+                                @foreach (Hall hall in Model.Halls)
+                                {
+                                    <div class="OptionItem HallOption">
+                                        <input type="checkbox" class="HallCheckBox" name="HallCheckBox" value="@hall.HallId">
+                                        <h4>@hall.HallName</h4>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        @if (Model.FoodTypes.Count > 0)
+                        {
+                            <button class="SortMenuOptions" onclick="ShowFoodTypeOptions()">סוגי מנות</button>
+                            <div class="OptionItems" id="FoodTypeOptions">
+                                @foreach (FoodType foodType in Model.FoodTypes)
+                                {
+                                    <div class="OptionItem FoodTypeOption">
+                                        <input type="checkbox" class="FoodTypeCheckBox" name="FoodTypeCheckBox" value="@foodType.FoodTypeId">
+                                        <h4>@foodType.FoodTypeName</h4>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        @if (Model.Foods.Count > 0)
+                        {
+                            <button class="SortMenuOptions" onclick="ShowFoodOptions()">סוגי מאכלים</button>
+                            <div class="OptionItems" id="FoodOptions">
+                                @foreach (Food food in Model.Foods)
+                                {
+                                    <div class="OptionItem FoodOption">
+                                        <input type="checkbox" class="FoodCheckBox" name="FoodCheckBox" value="@food.FoodId">
+                                        <h4>@food.FoodName</h4>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+                <label for="priceRange">Price Range</label>
+                <input type="range" id="priceRange" min="0" max="1000" step="10" oninput="filterByPrice(this.value)">
+            </div>
+        </aside>
+        <main class="products" id="MenusWrapper">
+        </main>
+    </div>
+    <script>
+        const CheckBox = document.getElementById("SortMenu");
+        const Listener = document.getElementById("MenuSearch");
+        CheckBox.addEventListener('change', LoadMenus);
+        Listener.addEventListener('input', LoadMenus);
+        window.onload = function () {
+            GetMenus();
+            setInterval(GetMenus, 100000); // 100 seconds interval
+        };
+    </script>
+}
+else
+{
+    <section class="errorSection">
+        <h1 class="errorTitle">There was a connection issue. Please try later later</h1>
+    </section>
+}

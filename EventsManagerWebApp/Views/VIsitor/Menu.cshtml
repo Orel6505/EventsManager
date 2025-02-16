@@ -1,0 +1,66 @@
+﻿@using EventsManagerModels;
+
+@model Menu
+@{
+    ViewBag.Title = "Menu";
+    Layout = "~/Views/Shared/MasterPage.cshtml";
+}
+<link rel="stylesheet" href="~/css/Menu.css" />
+<div class="container">
+    <div class="content">
+        <aside>
+            <nav>
+                <ul>
+                    <li class="profile-sidebar">
+                        <img class="MenuImg" src="~/img/Menu/@(Model.MenuImage)" alt="Profile Picture">
+                        <h1 class="MenuName">@Model.MenuName</h1>
+                        <p class="MenuDescription">@Model.MenuDesc</p>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="data">
+            <div class="Menuwraper">
+                <div class="foodWraper">
+                    <table id="OrdersTable" class="rounded-table">
+                        <thead class="OrdersTableHead">
+                            <tr>
+                                <th>תמונת המאכל</th>
+                                <th>שם המאכל</th>
+                                <th class="">תיאור המאכל</th>
+                                <th class="">מחיר המאכל</th>
+                                <th class="shownonlow">פרטים נוספים</th>
+                            </tr>
+                        </thead>
+                        <tbody id="Orders" class="OrdersTableBody">
+                            @if (Model.Foods.Count > 0)
+                            {
+                                double counter = 0;
+                                foreach (Food food in Model.Foods)
+                                {
+                                    counter = counter + food.FoodPrice;
+                                    <tr>
+                                        <td><img class="foodImage" src=""></td>
+                                        <td><h2 class="foodTitle">@food.FoodName</h2></td>
+                                        <td><h3 class="foodTitle">@food.FoodDesc</h3></td>
+                                        <td><h4 class="">@food.FoodPrice </h4></td>
+                                    </tr>
+                                }
+                                TempData["MenuPrice"] = counter;
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td class="errorTitle"> אין מאכלים בתפריט הזה כרגע, אנא נסו מאוחר יותר</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <section class="SumOfMenu">
+                        <h1 class="">הסכום הכולל של כל המנות: @TempData["MenuPrice"] ש"ח</h1>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/MasterPage.cshtml";
+}
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<link href="~/css/Login.css" rel="stylesheet" />
+<script src="~/js/Login.js"></script>
+<div class="base">
+    <div class="header">
+        <h1 class="sign">Sign in</h1>
+    </div>
+    <hr />
+    <form method="post" action="/Login" onsubmit="return validateLogin()">
+        <ul>
+            @Html.AntiForgeryToken()
+            <li class="item">
+                <label class="lable" for="Username">Username</label><br>
+                <input class="text" autocomplete="username" type="text" id="UserName" name="UserName" />
+                <h5 id="UserName-Check">**Username is missing</h5>
+            </li>
+            <li class="item">
+                <label class="lable" for="Password">Password</label><br>
+                <input class="text" autocomplete="current-password" type="password" id="Password" name="Password" />
+                <h5 id="Password-Check">**password cannot be empty</h5>
+            </li>
+            <li class="item cButton">
+                <button class="button" type="submit" value="Proceed">Login</button>
+            </li>
+            <li class="item">
+                <a href="/Register"><h4>If don't have an account, Register Now</h4></a>
+            </li>
+        </ul>
+    </form>
+    <p id="ResultLogin" />
+</div>

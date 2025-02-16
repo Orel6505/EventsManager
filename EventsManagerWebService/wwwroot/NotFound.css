@@ -1,0 +1,25 @@
+﻿body {
+    font-family: 'Open-sans', sans-serif;
+    color: #888;
+}
+
+.NotFound {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    height: 70vh;
+    width: 99vw;
+}
+
+.NotFound h1{
+    display: block;
+    margin: 0.5rem;
+}
+
+
+.NotFound h2{
+    display: inline-block;
+    margin: 0.5rem;
+}

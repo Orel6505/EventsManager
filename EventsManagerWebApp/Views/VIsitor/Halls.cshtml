@@ -1,0 +1,30 @@
+﻿@using EventsManagerModels;
+
+@model List<Hall>
+@{
+    ViewBag.Title = "Menus";
+    Layout = "~/Views/Shared/MasterPage.cshtml";
+}
+
+@if (Model != null)
+{
+    <link rel="stylesheet" href="~/css/Halls.css" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/Halls.js"></script>
+    <div class="content">
+        <main class="products" id="HallsWrapper">
+        </main>
+    </div>
+    <script>
+        window.onload = function () {
+            GetHalls();
+            setInterval(GetHalls, 100000); // 100 seconds interval
+        };
+    </script>
+}
+else
+{
+    <section class="errorSection">
+        <h1 class="errorTitle">There was a connection issue. Please try later later</h1>
+    </section>
+}

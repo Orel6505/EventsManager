@@ -1,0 +1,17 @@
+﻿@using EventsManagerModels;
+
+@model Food
+@{
+    ViewBag.Title = "Food";
+    Layout = "~/Views/Shared/MasterPage.cshtml";
+}
+<div class="foodwraper">
+    <div class="foodImage">
+        <img class="foodImg" src="@Model.FoodImage" />
+    </div>
+    <div class="foodData">
+        <h1 class="foodName">@Model.FoodName</h1>
+        <p class="foodDescription">@Model.FoodDesc</p>
+    </div>
+</div>
+

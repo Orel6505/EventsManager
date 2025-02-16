@@ -1,0 +1,93 @@
+﻿@using EventsManagerModels;
+
+@model User
+@{
+    ViewBag.Title = "MyOrders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model == null)
+{
+    <section class="errorSection">
+        <h1 class="errorTitle">There was a connection issue. Please try later later</h1>
+    </section>
+}
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/js/UpdateUser.js"></script>
+<script src="~/js/UpdatePassword.js"></script>
+<link rel="stylesheet" href="~/css/Settings.css" />
+<div class="page">
+    <div class="profile-form">
+        <h1>User Information Update</h1><div class="update-image">
+            <form action="/Account/Update" method="post" enctype="multipart/form-data">
+                <h4>Profile Image</h4>
+                <input type="file" title="search image" class="file" for="img" name="file" id="file" onchange="form.submit()" accept=".jpg, .png, .gif | image/*" value="@Model.UserId" hidden />
+                <label class="lable" for="file">
+                    <img src="~/img/User/@(Context.Session.GetString("UserName")+ "" +".png")" alt="Profile Picture">
+                </label>
+            </form>
+        </div>
+        <form action="/Account/UpdateUser" method="post">
+            <ul>
+                <li class="item cName">
+                    <div class="halfName firstName">
+                        <label class="lable">First Name</label><br>
+                        <input class="text name half" required autocomplete="given-name" type="text" id="FirstName" name="FirstName" value="@Model.FirstName" />
+                    </div>
+                    <div class="halfName">
+                        <label class="lable">Last Name</label><br>
+                        <input class="text name half" required autocomplete="family-name" type="text" id="LastName" name="LastName" value="@Model.LastName" />
+                    </div>
+                </li>
+                <li class="item">
+                    <label class="lable">Username</label><br>
+                    <input class="text" required autocomplete="username" type="text" id="UserName" name="UserName" value="@Model.UserName" />
+                    <h5 id="UserName-Check">**Username is missing</h5>
+                </li>
+                <li class="item">
+                    <label class="lable">Email</label><br>
+                    <input class="text" required autocomplete="email" type="text" id="Email" name="Email" value="@Model.Email" />
+                    <h5 id="Email-Check">**Your email must be a valid email</h5>
+                </li>
+                <li class="item">
+                    <label class="lable">Address</label><br>
+                    <input class="text" required type="text" id="Address" name="Address" value="@Model.Address" />
+                    <h5 id="Email-Check">**Your email must be a valid email</h5>
+                </li>
+                <li class="item">
+                    <label class="lable">Phone Number</label><br>
+                    <input class="text" required autocomplete="tel-national" type="text" id="PhoneNum" name="PhoneNum" value="@Model.PhoneNum" />
+                    <h5 id="PhoneNum-Check">**Phone Number is invalid</h5>
+                </li>
+                <li class="item cButton">
+                    <button id="cButton" class="button" type="submit" value="Register">Register</button>
+                </li>
+            </ul>
+        </form>
+    </div>
+    <div class="profile-form">
+        <h1>Password Update</h1>
+        <form action="/Account/UpdatePassword" method="post" onsubmit="return validatePassword()">
+            <ul>
+                <li class="item">
+                    <label class="lable" for="userPassword">User Password</label><br>
+                    <input class="text" type="password" id="Password" name="Password" required>
+                    <h5 id="Password-Check">**Please Fill the password</h5>
+                </li>
+                <li class="item">
+                    <label class="lable" for="userPassword">New Password</label><br>
+                    <input class="text" type="password" id="NewPassword" name="NewPassword" required>
+                    <h5 id="NewPassword-Check">**Please Fill the password</h5>
+                </li>
+                <li class="item">
+                    <label class="lable" for="userPassword">Confirm New Password</label><br>
+                    <input class="text" type="password" id="PasswordConfirm" name="PasswordConfirm" required>
+                    <h5 id="PasswordConfirm-Check">**Passwords didn't match</h5>
+                </li>
+                <li class="item cButton">
+                    <button id="cButton1" class="button" type="submit" value="Register">Register</button>
+                </li>
+            </ul>
+        </form>
+    </div>
+</div>

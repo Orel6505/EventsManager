@@ -1,0 +1,113 @@
+﻿@using EventsManagerModels;
+
+@model OrderListVIewModel
+@{
+    ViewBag.Title = "MyOrders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model == null)
+{
+    <section class="errorSection">
+        <h1 class="errorTitle">There was a connection issue. Please try later later</h1>
+    </section>
+}
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<link rel="stylesheet" href="~/css/MyOrders.css" />
+<script src="~/js/Orders.js"></script>
+<div class="SortMenu" id="SortMenu">
+    <h1>היסטורית הזמנות</h1><hr>
+    @if (Model.Halls.Count > 0)
+    {
+        <div class="OptionItems" id="OptionsItems">
+            <select id="Halls">
+                <option value="None">לא נבחר</option>
+                @foreach (Hall hall in Model.Halls)
+                {
+                    <option value="@hall.HallId">@hall.HallName</option>
+                }
+            </select>
+        </div>
+    }
+    <table id="OrdersTable" class="rounded-table">
+        <thead class="OrdersTableHead">
+            <tr>
+                <th>מזהה הזמנה</th>
+                <th>תאריך ההזמנה</th>
+                <th class="hiddenonlow">תאריך האירוע</th>
+                <th class="hiddenonlow">האולם שהוזמן</th>
+                <th class="hiddenonlow">התפריט שהוזמן</th>
+                <th class="hiddenonlow">כמות המוזמנים</th>
+                <th>שולם</th>
+                <th class="shownonlow">פרטים נוספים</th>
+            </tr>
+        </thead>
+        <tbody id="Orders" class="OrdersTableBody"></tbody>
+    </table>
+</div>
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <span class="close">&times;</span>
+        <h3>Order Details</h3>
+        <table class="details-table">
+            <thead>
+                <tr>
+                    <th>Menu Selected</th>
+                    <th>Hall Selected</th>
+                    <th>Number of Invited People</th>
+                    <th>Is Paid</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="popup-order-number"></td>
+                    <td id="popup-menu"></td>
+                    <td id="popup-num-people"></td>
+                    <td id="popup-is-paid"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    const CheckBox = document.getElementById("Halls");
+    const Listener = document.getElementById("Halls");
+    CheckBox.addEventListener('change', LoadOrders);
+    Listener.addEventListener('input', LoadOrders);
+    window.onload = function () {
+        GetOrders();
+        setInterval(GetOrders, 100000); // 100 seconds interval
+    };
+
+    const popup = document.getElementById('popup');
+    const closePopup = document.querySelector('.close');
+    closePopup.addEventListener('click', function () {
+        popup.style.display = 'none';
+    });
+
+    window.addEventListener('click', function (event) {
+        if (event.target === popup) {
+            popup.style.display = 'none';
+        }
+
+        const showMoreButtons = document.querySelectorAll('.show-more-btn');
+        showMoreButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                const orderRow = button.closest('tr');
+                // Extract order details from table cells
+                const orderNumber = orderRow.cells[3].textContent;
+                const menuName = orderRow.cells[3].textContent;
+                const numOfPeople = parseInt(orderRow.cells[4].textContent);
+                const isPaid = orderRow.cells[6].textContent === 'true';
+
+                // Populate popup content
+                document.getElementById('popup-order-number').textContent = orderNumber;
+                document.getElementById('popup-menu').textContent = menuName;
+                document.getElementById('popup-num-people').textContent = numOfPeople;
+                document.getElementById('popup-is-paid').textContent = isPaid;
+
+                popup.style.display = 'flex';
+            });
+        });
+    })
+</script>
