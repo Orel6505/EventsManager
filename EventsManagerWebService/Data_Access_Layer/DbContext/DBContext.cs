@@ -1,91 +1,142 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
+using System.Threading.Tasks;
 
 namespace EventsManager.Data_Access_Layer
 {
-    public abstract class DbContext : IDbContext
-    {
-        protected IDbConnection connection; // צינור לDATABASE
-        protected IDbCommand command; // faucet
-        protected IDbTransaction transaction; // send all sql command at once
-        public void BeginTransaction()
-        {
-            this.transaction = this.connection.BeginTransaction();
-        }
+	public abstract class DbContext : IDbContext
+	{
+		protected IDbConnection connection;
+		protected IDbTransaction transaction;
 
-        public void CloseConnection()
-        {
-            this.connection.Close();
-            this.command.Parameters.Clear();
-            this.command.Dispose(); //removes from memory
-            this.transaction?.Dispose(); //removes from memory
-        }
+		public IDbCommand CreateCommand(string sql)
+		{
+			if (connection.State != ConnectionState.Open)
+				OpenConnection();
 
-        public int Create(string sql)
-        {
-            return ChangeDb(sql);
-        }
+			IDbCommand cmd = connection.CreateCommand();
+			cmd.CommandText = sql;
 
-        private int ChangeDb(string sql)
-        {
-            this.command.CommandText = sql;
-            return this.command.ExecuteNonQuery(); //Changes columms in the database, and returns the number of columms it changed
-        }
+			if (transaction != null)
+				cmd.Transaction = transaction;
 
-        public void CreateCommand()
-        {
-            this.command = this.connection.CreateCommand();
-        }
+			return cmd;
+		}
 
-        public int Delete(string sql)
-        {
-            return ChangeDb(sql);
-        }
+		public void BeginTransaction()
+		{
+			if (connection.State != ConnectionState.Open)
+				connection.Open();
 
-        public void DeleteCommand()
-        {
-            throw new NotImplementedException();
-        }
+			transaction = connection.BeginTransaction();
+		}
 
-        public void EndTransaction()
-        {
-            throw new NotImplementedException();
-        }
+		public void EndTransaction()
+		{
+			transaction?.Commit();
+			transaction?.Dispose();
+			transaction = null;
+		}
 
-        public void OpenConnection()
-        {
-            if (this.connection.State == ConnectionState.Closed)
-            {
-                this.connection.Open(); //if connection is closed, then open it
-            }
-            CreateCommand();
-        }
+		public void RollbackTransaction()
+		{
+			transaction?.Rollback();
+			transaction?.Dispose();
+			transaction = null;
+		}
 
-        public IDataReader Read(string sql)
-        {
-            this.command.CommandText = sql;
-            IDataReader datareader = this.command.ExecuteReader(); //collects the data
-            command.Parameters.Clear();
-            return datareader;
-        }
+		public void OpenConnection()
+		{
+			if (connection.State != ConnectionState.Open)
+				connection.Open();
+		}
 
-        public object ReadValue(string sql)
-        {
-            this.command.CommandText = sql;
-            return this.command.ExecuteScalar(); //collects the single "drop" of data
-        }
+		public async Task OpenConnectionAsync()
+		{
+			if (connection.State != ConnectionState.Open)
+				await Task.Run(() => connection.Open());
+		}
 
-        public int Update(string sql)
-        {
-            return ChangeDb(sql);
-        }
+		public void CloseConnection()
+		{
+			if (connection.State != ConnectionState.Closed)
+				connection.Close();
+		}
 
-        public void AddParameters(IDataParameter param)
-        {
-            this.command.Parameters.Add(param);
-        }
-    }
+		public async Task CloseConnectionAsync()
+		{
+			if (connection.State != ConnectionState.Closed)
+				await Task.Run(() => connection.Close());
+		}
+
+		// ===== CRUD =====
+
+		public int Create(string sql)
+		{
+			using IDbCommand cmd = CreateCommand(sql);
+			return cmd.ExecuteNonQuery();
+		}
+
+		public async Task<int> CreateAsync(string sql)
+		{
+			using IDbCommand cmd = CreateCommand(sql);
+			return await Task.Run(() => cmd.ExecuteNonQuery());
+		}
+
+		public int Update(string sql)
+		{
+			using IDbCommand cmd = CreateCommand(sql);
+			return cmd.ExecuteNonQuery();
+		}
+
+		public async Task<int> UpdateAsync(string sql)
+		{
+			using IDbCommand cmd = CreateCommand(sql);
+			return await Task.Run(() => cmd.ExecuteNonQuery());
+		}
+
+		public int Delete(string sql)
+		{
+			using IDbCommand cmd = CreateCommand(sql);
+			return cmd.ExecuteNonQuery();
+		}
+
+		public async Task<int> DeleteAsync(string sql)
+		{
+			using IDbCommand cmd = CreateCommand(sql);
+			return await Task.Run(() => cmd.ExecuteNonQuery());
+		}
+
+		public IDataReader Read(string sql)
+		{
+			IDbCommand cmd = CreateCommand(sql);
+			// Reader owns the connection lifetime
+			return cmd.ExecuteReader(CommandBehavior.CloseConnection);
+		}
+
+		public async Task<IDataReader> ReadAsync(string sql)
+		{
+			IDbCommand cmd = CreateCommand(sql);
+			return await Task.Run(() => cmd.ExecuteReader(CommandBehavior.CloseConnection));
+		}
+
+		public object ReadValue(string sql)
+		{
+			using IDbCommand cmd = CreateCommand(sql);
+			return cmd.ExecuteScalar();
+		}
+
+		public async Task<object> ReadValueAsync(string sql)
+		{
+			using IDbCommand cmd = CreateCommand(sql);
+			return await Task.Run(() => cmd.ExecuteScalar());
+		}
+
+		// ===== Parameters =====
+
+		public void AddParameters(IDbCommand cmd, IDataParameter param)
+		{
+			cmd.Parameters.Add(param);
+		}
+	}
 }

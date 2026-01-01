@@ -1,81 +1,267 @@
 ﻿using EventsManagerModels;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
+using System.Threading.Tasks;
 
 namespace EventsManager.Data_Access_Layer
 {
-    public class HallRepository : Repository, IRepository<Hall>
-    {
-        public HallRepository(DbContext dbContext) : base(dbContext) { }
+	public class HallRepository : Repository, IRepository<Hall>
+	{
+		public HallRepository(
+			DbContext dbContext,
+			ILogger<HallRepository> logger)
+			: base(dbContext, logger)
+		{
+		}
 
-        public bool Delete(int id)
-        {
-            string sql = $"DELETE FROM Halls WHERE HallId=@HallId";
-            this.AddParameters("HallId", id.ToString()); //prevents SQL Injection
-            return this.dbContext.Delete(sql) > 0;
-        }
+		public bool Insert(Hall model)
+		{
+			const string sql = """
+                INSERT INTO Halls (HallName, HallDesc, HallImage, MaxPeople)
+                VALUES (@HallName, @HallDesc, @HallImage, @MaxPeople)
+                """;
 
-        public bool Delete(string id)
-        {
-            return false;
-        }
+			try
+			{
+				using IDbCommand cmd = dbContext.CreateCommand(sql);
 
-        public bool Delete(Hall model)
-        {
-            string sql = $"DELETE FROM Halls WHERE HallId=@HallId";
-            this.AddParameters("HallId", model.HallId.ToString()); //prevents SQL Injection
-            return this.dbContext.Delete(sql) > 0;
-        }
+				AddParameter(cmd, "@HallName", model.HallName);
+				AddParameter(cmd, "@HallDesc", model.HallDesc);
+				AddParameter(cmd, "@HallImage", model.HallImage);
+				AddParameter(cmd, "@MaxPeople", model.MaxPeople);
 
-        public bool Insert(Hall model)
-        {
-            string sql = $"INSERT INTO Halls(HallName,HallDesc,HallImage,MaxPeople) VALUES(@HallName,@HallDesc,@HallImage,@MaxPeople)";
-            this.AddParameters("HallName", model.HallName); //prevents SQL Injection
-            this.AddParameters("HallDesc", model.HallDesc); //prevents SQL Injection
-            this.AddParameters("HallImage", model.HallImage); //prevents SQL Injection
-            this.AddParameters("HallImage", model.MaxPeople.ToString()); //prevents SQL Injection
-            return this.dbContext.Create(sql) > 0;
-        }
+				return cmd.ExecuteNonQuery() > 0;
+			}
+			catch (Exception ex)
+			{
+				logger.LogError(ex, "INSERT Hall failed {@Hall}", model);
+				throw;
+			}
+		}
 
-        public Hall Read(object id)
-        {
-            string sql = $"SELECT * FROM Halls WHERE HallId=@HallId";
-            this.AddParameters("HallId", id.ToString()); //prevents SQL Injection
-            using (IDataReader dataReader = this.dbContext.Read(sql))
-            {
-                dataReader.Read();
-                return this.modelFactory.HallModelCreator.CreateModel(dataReader);
-            }
-            //returns Hall
-        }
+		public async Task<bool> InsertAsync(Hall model)
+		{
+			const string sql = """
+                INSERT INTO Halls (HallName, HallDesc, HallImage, MaxPeople)
+                VALUES (@HallName, @HallDesc, @HallImage, @MaxPeople)
+                """;
 
-        public List<Hall> ReadAll()
-        {
-            List<Hall> Halls = new List<Hall>();
-            string sql = "SELECT * FROM Halls";
-            using (IDataReader dataReader = this.dbContext.Read(sql))
-                while (dataReader.Read() == true)
-                    Halls.Add(this.modelFactory.HallModelCreator.CreateModel(dataReader));
-            return Halls;
-        }
+			try
+			{
+				using IDbCommand cmd = dbContext.CreateCommand(sql);
 
-        public object ReadValue()
-        {
-            throw new NotImplementedException();
-        }
+				AddParameter(cmd, "@HallName", model.HallName);
+				AddParameter(cmd, "@HallDesc", model.HallDesc);
+				AddParameter(cmd, "@HallImage", model.HallImage);
+				AddParameter(cmd, "@MaxPeople", model.MaxPeople);
 
-        public bool Update(Hall model)
-        {
-            string sql = "UPDATE Halls SET HallName=@HallName, HallDesc=@HallDesc, HallImage=@HallImage, MaxPeople=@MaxPeople where HallId=@HallId";
-            this.AddParameters("HallId", model.HallId.ToString()); //prevents SQL Injection
-            this.AddParameters("HallName", model.HallName); //prevents SQL Injection
-            this.AddParameters("HallDesc", model.HallDesc); //prevents SQL Injection
-            this.AddParameters("HallImage", model.HallImage); //prevents SQL Injection
-            this.AddParameters("HallImage", model.MaxPeople.ToString()); //prevents SQL Injection
-            return this.dbContext.Update(sql) > 0;
-        }
-    }
+				int result = await Task.Run(() => cmd.ExecuteNonQuery());
+				return result > 0;
+			}
+			catch (Exception ex)
+			{
+				logger.LogError(ex, "INSERT Hall failed {@Hall}", model);
+				throw;
+			}
+		}
+
+		public Hall? Read(object id)
+		{
+			const string sql = "SELECT * FROM Halls WHERE HallId=@HallId";
+
+			try
+			{
+				using IDbCommand cmd = dbContext.CreateCommand(sql);
+				AddParameter(cmd, "@HallId", id);
+
+				using IDataReader reader = cmd.ExecuteReader();
+
+				if (!reader.Read())
+				{
+					logger.LogWarning("Hall with ID {Id} not found", id);
+					return null;
+				}
+
+				return modelFactory.HallModelCreator.CreateModel(reader);
+			}
+			catch (Exception ex)
+			{
+				logger.LogError(ex, "READ Hall failed for HallId={Id}", id);
+				throw;
+			}
+		}
+
+		public async Task<Hall?> ReadAsync(object id)
+		{
+			const string sql = "SELECT * FROM Halls WHERE HallId=@HallId";
+
+			try
+			{
+				using IDbCommand cmd = dbContext.CreateCommand(sql);
+				AddParameter(cmd, "@HallId", id);
+
+				using IDataReader reader = await Task.Run(() => cmd.ExecuteReader());
+
+				if (!reader.Read())
+				{
+					logger.LogWarning("Hall with ID {Id} not found", id);
+					return null;
+				}
+
+				return modelFactory.HallModelCreator.CreateModel(reader);
+			}
+			catch (Exception ex)
+			{
+				logger.LogError(ex, "READ Hall failed for HallId={Id}", id);
+				throw;
+			}
+		}
+
+		public List<Hall> ReadAll()
+		{
+			const string sql = "SELECT * FROM Halls";
+			List<Hall> halls = new();
+
+			using IDbCommand cmd = dbContext.CreateCommand(sql);
+			using IDataReader reader = cmd.ExecuteReader();
+
+			while (reader.Read())
+			{
+				halls.Add(modelFactory.HallModelCreator.CreateModel(reader));
+			}
+
+			return halls;
+		}
+
+		public async Task<List<Hall>> ReadAllAsync()
+		{
+			const string sql = "SELECT * FROM Halls";
+			List<Hall> halls = new();
+
+			using IDbCommand cmd = dbContext.CreateCommand(sql);
+			using IDataReader reader = await Task.Run(() => cmd.ExecuteReader());
+
+			while (reader.Read())
+			{
+				halls.Add(modelFactory.HallModelCreator.CreateModel(reader));
+			}
+
+			return halls;
+		}
+
+		public bool Update(Hall model)
+		{
+			const string sql = """
+                UPDATE Halls
+                SET HallName=@HallName,
+                    HallDesc=@HallDesc,
+                    HallImage=@HallImage,
+                    MaxPeople=@MaxPeople
+                WHERE HallId=@HallId
+                """;
+
+			try
+			{
+				using IDbCommand cmd = dbContext.CreateCommand(sql);
+
+				AddParameter(cmd, "@HallId", model.HallId);
+				AddParameter(cmd, "@HallName", model.HallName);
+				AddParameter(cmd, "@HallDesc", model.HallDesc);
+				AddParameter(cmd, "@HallImage", model.HallImage);
+				AddParameter(cmd, "@MaxPeople", model.MaxPeople);
+
+				return cmd.ExecuteNonQuery() > 0;
+			}
+			catch (Exception ex)
+			{
+				logger.LogError(ex, "UPDATE Hall failed {@Hall}", model);
+				throw;
+			}
+		}
+
+		public async Task<bool> UpdateAsync(Hall model)
+		{
+			const string sql = """
+                UPDATE Halls
+                SET HallName=@HallName,
+                    HallDesc=@HallDesc,
+                    HallImage=@HallImage,
+                    MaxPeople=@MaxPeople
+                WHERE HallId=@HallId
+                """;
+
+			try
+			{
+				using IDbCommand cmd = dbContext.CreateCommand(sql);
+
+				AddParameter(cmd, "@HallId", model.HallId);
+				AddParameter(cmd, "@HallName", model.HallName);
+				AddParameter(cmd, "@HallDesc", model.HallDesc);
+				AddParameter(cmd, "@HallImage", model.HallImage);
+				AddParameter(cmd, "@MaxPeople", model.MaxPeople);
+
+				int result = await Task.Run(() => cmd.ExecuteNonQuery());
+				return result > 0;
+			}
+			catch (Exception ex)
+			{
+				logger.LogError(ex, "UPDATE Hall failed {@Hall}", model);
+				throw;
+			}
+		}
+
+		public bool Delete(int id)
+		{
+			const string sql = "DELETE FROM Halls WHERE HallId=@HallId";
+
+			using IDbCommand cmd = dbContext.CreateCommand(sql);
+			AddParameter(cmd, "@HallId", id);
+
+			return cmd.ExecuteNonQuery() > 0;
+		}
+
+		public async Task<bool> DeleteAsync(int id)
+		{
+			const string sql = "DELETE FROM Halls WHERE HallId=@HallId";
+
+			using IDbCommand cmd = dbContext.CreateCommand(sql);
+			AddParameter(cmd, "@HallId", id);
+
+			int result = await Task.Run(() => cmd.ExecuteNonQuery());
+			return result > 0;
+		}
+
+		public bool Delete(string id)
+		{
+			return false;
+		}
+
+		public bool Delete(Hall model)
+		{
+			const string sql = "DELETE FROM Halls WHERE HallId=@HallId";
+
+			using IDbCommand cmd = dbContext.CreateCommand(sql);
+			AddParameter(cmd, "@HallId", model.HallId);
+
+			return cmd.ExecuteNonQuery() > 0;
+		}
+
+		public async Task<bool> DeleteAsync(Hall model)
+		{
+			const string sql = "DELETE FROM Halls WHERE HallId=@HallId";
+
+			using IDbCommand cmd = dbContext.CreateCommand(sql);
+			AddParameter(cmd, "@HallId", model.HallId);
+
+			int result = await Task.Run(() => cmd.ExecuteNonQuery());
+			return result > 0;
+		}
+
+		public object ReadValue()
+		{
+			throw new NotImplementedException();
+		}
+	}
 }

@@ -4,21 +4,166 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace EventsManager.Data_Access_Layer
 {
     public class FoodRepository : Repository, IRepository<Food>
     {
+        public FoodRepository(DbContext dbContext, ILogger<FoodRepository> logger) : base(dbContext, logger) { }
 
-        public FoodRepository(DbContext dbContext) : base(dbContext) { }
+        public bool Insert(Food model)
+        {
+            const string sql = """
+                INSERT INTO Foods(FoodName,FoodDesc,FoodImage,FoodPrice,FoodTypeId)
+                VALUES(@FoodName,@FoodDesc,@FoodImage,@FoodPrice,@FoodTypeId)
+                """;
+
+            try
+            {
+                using IDbCommand cmd = dbContext.CreateCommand(sql);
+
+                AddParameter(cmd, "@FoodName", model.FoodName);
+                AddParameter(cmd, "@FoodDesc", model.FoodDesc);
+                AddParameter(cmd, "@FoodImage", model.FoodImage);
+                AddParameter(cmd, "@FoodPrice", model.FoodPrice);
+                AddParameter(cmd, "@FoodTypeId", model.FoodTypeId);
+
+                return cmd.ExecuteNonQuery() > 0;
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "INSERT Food failed {@Food}", model);
+                throw;
+            }
+        }
+
+        public Task<bool> InsertAsync(Food model) => InsertAsyncDefault(model, Insert);
+
+        public Food? Read(object id)
+        {
+            const string sql = "SELECT * FROM Foods WHERE FoodId=@FoodId";
+
+            try
+            {
+                using IDbCommand cmd = dbContext.CreateCommand(sql);
+                AddParameter(cmd, "@FoodId", id);
+
+                using IDataReader reader = cmd.ExecuteReader();
+
+                if (!reader.Read())
+                {
+                    logger.LogWarning("Food with ID {Id} not found", id);
+                    return null;
+                }
+
+                return modelFactory.FoodModelCreator.CreateModel(reader);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "READ Food failed for FoodId={Id}", id);
+                throw;
+            }
+        }
+
+        public Task<Food> ReadAsync(object id) => ReadAsyncDefault(id, Read);
+
+        public List<Food> ReadAll()
+        {
+            const string sql = "SELECT * FROM Foods";
+            List<Food> foods = new();
+
+            using IDbCommand cmd = dbContext.CreateCommand(sql);
+            using IDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                foods.Add(modelFactory.FoodModelCreator.CreateModel(reader));
+            }
+
+            return foods;
+        }
+
+        public Task<List<Food>> ReadAllAsync() => ReadAllAsyncDefault(ReadAll);
+
+        public List<Food> GetFoodsByMenuId(object id)
+        {
+            const string sql = """
+                SELECT *
+                FROM Foods
+                INNER JOIN FoodMenu ON Foods.FoodId = FoodMenu.FoodId
+                WHERE FoodMenu.MenuId=@MenuId
+                """;
+
+            List<Food> foods = new();
+
+            try
+            {
+                using IDbCommand cmd = dbContext.CreateCommand(sql);
+                AddParameter(cmd, "@MenuId", id);
+
+                using IDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    foods.Add(modelFactory.FoodModelCreator.CreateModel(reader));
+                }
+
+                return foods;
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "GetFoodsByMenuId failed for MenuId={Id}", id);
+                throw;
+            }
+        }
+
+        public bool Update(Food model)
+        {
+            const string sql = """
+                UPDATE Foods
+                SET FoodName=@FoodName,
+                    FoodDesc=@FoodDesc,
+                    FoodImage=@FoodImage,
+                    FoodPrice=@FoodPrice,
+                    FoodTypeId=@FoodTypeId
+                WHERE FoodId=@FoodId
+                """;
+
+            try
+            {
+                using IDbCommand cmd = dbContext.CreateCommand(sql);
+
+                AddParameter(cmd, "@FoodId", model.FoodId);
+                AddParameter(cmd, "@FoodName", model.FoodName);
+                AddParameter(cmd, "@FoodDesc", model.FoodDesc);
+                AddParameter(cmd, "@FoodImage", model.FoodImage);
+                AddParameter(cmd, "@FoodPrice", model.FoodPrice);
+                AddParameter(cmd, "@FoodTypeId", model.FoodTypeId);
+
+                return cmd.ExecuteNonQuery() > 0;
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "UPDATE Food failed {@Food}", model);
+                throw;
+            }
+        }
+
+        public Task<bool> UpdateAsync(Food model) => UpdateAsyncDefault(model, Update);
 
         public bool Delete(int id)
         {
-            string sql = $"DELETE FROM Foods WHERE FoodId=@FoodId";
-            this.AddParameters("FoodId", id.ToString()); //prevents SQL Injection
-            return this.dbContext.Delete(sql) > 0;
+            const string sql = "DELETE FROM Foods WHERE FoodId=@FoodId";
+
+            using IDbCommand cmd = dbContext.CreateCommand(sql);
+            AddParameter(cmd, "@FoodId", id);
+
+            return cmd.ExecuteNonQuery() > 0;
         }
+
+        public Task<bool> DeleteAsync(int id) => DeleteAsyncDefault(id, Delete);
 
         public bool Delete(string id)
         {
@@ -27,70 +172,19 @@ namespace EventsManager.Data_Access_Layer
 
         public bool Delete(Food model)
         {
-            string sql = $"DELETE FROM Foods WHERE FoodId=@FoodId";
-            this.AddParameters("FoodId", model.FoodId.ToString()); //prevents SQL Injection
-            return this.dbContext.Delete(sql) > 0;
+            const string sql = "DELETE FROM Foods WHERE FoodId=@FoodId";
+
+            using IDbCommand cmd = dbContext.CreateCommand(sql);
+            AddParameter(cmd, "@FoodId", model.FoodId);
+
+            return cmd.ExecuteNonQuery() > 0;
         }
 
-        public List<Food> ReadAll()
-        {
-            List<Food> Foods = new List<Food>();
-            string sql = "SELECT * FROM Foods";
-            using (IDataReader dataReader = this.dbContext.Read(sql))
-                while (dataReader.Read() == true)
-                    Foods.Add(this.modelFactory.FoodModelCreator.CreateModel(dataReader));
-            return Foods;
-        }
-
-        public bool Insert(Food model)
-        {
-            string sql = $"INSERT INTO Foods(FoodName,FoodDesc,FoodImage,FoodPrice,FoodTypeId) VALUES(@FoodName,@FoodDesc,@FoodImage,@FoodPrice,@FoodTypeId)";
-            this.AddParameters("FoodName", model.FoodName); //prevents SQL Injection
-            this.AddParameters("FoodDesc", model.FoodDesc); //prevents SQL Injection
-            this.AddParameters("FoodImage", model.FoodImage); //prevents SQL Injection
-            this.AddParameters("FoodPrice", model.FoodPrice.ToString()); //prevents SQL Injection
-            this.AddParameters("FoodTypeId", model.FoodPrice.ToString()); //prevents SQL Injection
-            return this.dbContext.Create(sql) > 0;
-        }
-
-        public Food Read(object id)
-        {
-            string sql = $"SELECT * FROM Foods WHERE FoodId=@FoodId";
-            this.AddParameters("FoodId", id.ToString()); //prevents SQL Injection
-            using (IDataReader dataReader = this.dbContext.Read(sql))
-            {
-                dataReader.Read();
-                return this.modelFactory.FoodModelCreator.CreateModel(dataReader);
-            }
-            //returns food
-        }
-
-        public List<Food> GetFoodsByMenuId(object id)
-        {
-            List<Food> Foods = new List<Food>();
-            string sql = $"SELECT * FROM Foods INNER JOIN FoodMenu ON Foods.FoodId = FoodMenu.FoodId WHERE FoodMenu.MenuId=@MenuId;";
-            this.AddParameters("MenuId", id.ToString()); //prevents SQL Injection
-            using (IDataReader dataReader = this.dbContext.Read(sql))
-                while (dataReader.Read() == true)
-                    Foods.Add(this.modelFactory.FoodModelCreator.CreateModel(dataReader));
-            return Foods;
-            //returns food
-        }
+        public Task<bool> DeleteAsync(Food model) => DeleteAsyncDefault(model, Delete);
 
         public object ReadValue()
         {
             throw new NotImplementedException();
-        }
-
-        public bool Update(Food model)
-        {
-            string sql = "UPDATE Foods SET FoodName=@FoodName, FoodDesc=@FoodDesc, FoodImage=@FoodId, FoodTypeId=@FoodTypeId where FoodId=@FoodId";
-            this.AddParameters("FoodId", model.FoodId.ToString()); //prevents SQL Injection
-            this.AddParameters("FoodName", model.FoodName); //prevents SQL Injection
-            this.AddParameters("FoodDesc", model.FoodDesc); //prevents SQL Injection
-            this.AddParameters("FoodImage", model.FoodImage); //prevents SQL Injection
-            this.AddParameters("FoodTypeId", model.FoodPrice.ToString()); //prevents SQL Injection
-            return this.dbContext.Update(sql) > 0;
         }
     }
 }

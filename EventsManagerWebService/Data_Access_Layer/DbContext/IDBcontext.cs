@@ -15,28 +15,31 @@ namespace EventsManager.Data_Access_Layer
         //CRUD = Create Read Update Delete
 
         //Create
-        int Create(string sql); 
+        int Create(string sql);
+        Task<int> CreateAsync(string sql);
 
         //Read
         IDataReader Read(string sql);
+        Task<IDataReader> ReadAsync(string sql);
         object ReadValue(string sql);
+        Task<object> ReadValueAsync(string sql);
 
         //Update
         int Update(string sql);
+        Task<int> UpdateAsync(string sql);
 
         //Delete
         int Delete(string sql);
+        Task<int> DeleteAsync(string sql);
 
         //
         void OpenConnection();
+        Task OpenConnectionAsync();
         void CloseConnection();
-
-        void CreateCommand();
+        Task CloseConnectionAsync();
 
         void BeginTransaction();
         void EndTransaction();
-
-        void DeleteCommand();
-
+        void RollbackTransaction();
     }
 }

@@ -1,148 +1,79 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Microsoft.Extensions.Logging;
 
 namespace EventsManager.Data_Access_Layer
 {
-    public class LibraryUnitOfWork
-    {
-        EventTypeRepository eventTypeRepository;
-        FoodRepository foodRepository;
-        FoodTypeRepository foodTypeRepository;
-        HallRepository hallRepository;
-        MenuRepository menuRepository;
-        OrderRepository orderRepository;
-        RatingRepository ratingRepository;
-        RatingImageRepository ratingImageRepository;
-        UserRepository userRepository;
-        UserTypeRepository userTypeRepository;
+	public class LibraryUnitOfWork
+	{
+		private readonly DbContext dbContext;
+		private readonly ILoggerFactory loggerFactory;
 
-        private readonly DbContext dbContext;
-        public LibraryUnitOfWork(DbContext dbContext)
-        {
-            this.dbContext = dbContext;
-        }
+		private EventTypeRepository eventTypeRepository;
+		private FoodRepository foodRepository;
+		private FoodTypeRepository foodTypeRepository;
+		private HallRepository hallRepository;
+		private MenuRepository menuRepository;
+		private OrderRepository orderRepository;
+		private RatingRepository ratingRepository;
+		private RatingImageRepository ratingImageRepository;
+		private UserRepository userRepository;
+		private UserTypeRepository userTypeRepository;
 
-        public EventTypeRepository EventTypeRepository
-        {
-            get
-            {
-                if (eventTypeRepository == null)
-                {
-                    this.eventTypeRepository = new EventTypeRepository(dbContext);
-                }
-                return eventTypeRepository;
-            }
-        }
+		public LibraryUnitOfWork(
+			DbContext dbContext,
+			ILoggerFactory loggerFactory)
+		{
+			this.dbContext = dbContext;
+			this.loggerFactory = loggerFactory;
+		}
 
-        public FoodRepository FoodRepository
-        {
-            get
-            {
-                if (foodRepository == null)
-                {
-                    this.foodRepository = new FoodRepository(dbContext);
-                }
-                return foodRepository;
-            }
-        }
+		public EventTypeRepository EventTypeRepository =>
+			eventTypeRepository ??= new EventTypeRepository(
+				dbContext,
+				loggerFactory.CreateLogger<EventTypeRepository>());
 
-        public FoodTypeRepository FoodTypeRepository
-        {
-            get
-            {
-                if (foodTypeRepository == null)
-                {
-                    this.foodTypeRepository = new FoodTypeRepository(dbContext);
-                }
-                return foodTypeRepository;
-            }
-        }
+		public FoodRepository FoodRepository =>
+			foodRepository ??= new FoodRepository(
+				dbContext,
+				loggerFactory.CreateLogger<FoodRepository>());
 
-        public HallRepository HallRepository
-        {
-            get
-            {
-                if (hallRepository == null)
-                {
-                    this.hallRepository = new HallRepository(dbContext);
-                }
-                return hallRepository;
-            }
-        }
+		public FoodTypeRepository FoodTypeRepository =>
+			foodTypeRepository ??= new FoodTypeRepository(
+				dbContext,
+				loggerFactory.CreateLogger<FoodTypeRepository>());
 
-        public MenuRepository MenuRepository
-        {
-            get
-            {
-                if (menuRepository == null)
-                {
-                    this.menuRepository = new MenuRepository(dbContext);
-                }
-                return menuRepository;
-            }
-        }
+		public HallRepository HallRepository =>
+			hallRepository ??= new HallRepository(
+				dbContext,
+				loggerFactory.CreateLogger<HallRepository>());
 
-        
-        public OrderRepository OrderRepository
-        {
-            get
-            {
-                if (orderRepository == null)
-                {
-                    this.orderRepository = new OrderRepository(dbContext);
-                }
-                return orderRepository;
-            }
-        }
+		public MenuRepository MenuRepository =>
+			menuRepository ??= new MenuRepository(
+				dbContext,
+				loggerFactory.CreateLogger<MenuRepository>());
 
-        public RatingRepository RatingRepository
-        {
-            get
-            {
-                if (ratingRepository == null)
-                {
-                    this.ratingRepository = new RatingRepository(dbContext);
-                }
-                return ratingRepository;
-            }
-        }
+		public OrderRepository OrderRepository =>
+			orderRepository ??= new OrderRepository(
+				dbContext,
+				loggerFactory.CreateLogger<OrderRepository>());
 
-        public RatingImageRepository RatingImageRepository
-        {
-            get
-            {
-                if (ratingImageRepository == null)
-                {
-                    this.ratingImageRepository = new RatingImageRepository(dbContext);
-                }
-                return ratingImageRepository;
-            }
-        }
+		public RatingRepository RatingRepository =>
+			ratingRepository ??= new RatingRepository(
+				dbContext,
+				loggerFactory.CreateLogger<RatingRepository>());
 
-        public UserRepository UserRepository
-        {
-            get
-            {
-                if (userRepository == null)
-                {
-                    this.userRepository = new UserRepository(dbContext);
-                }
-                return userRepository;
-            }
-        }
+		public RatingImageRepository RatingImageRepository =>
+			ratingImageRepository ??= new RatingImageRepository(
+				dbContext,
+				loggerFactory.CreateLogger<RatingImageRepository>());
 
-        public UserTypeRepository UserTypeRepository
-        {
-            get
-            {
-                if (userTypeRepository == null)
-                {
-                    this.userTypeRepository = new UserTypeRepository(dbContext);
-                }
-                return userTypeRepository;
-            }
-        }
-    }
+		public UserRepository UserRepository =>
+			userRepository ??= new UserRepository(
+				dbContext,
+				loggerFactory.CreateLogger<UserRepository>());
+
+		public UserTypeRepository UserTypeRepository =>
+			userTypeRepository ??= new UserTypeRepository(
+				dbContext,
+				loggerFactory.CreateLogger<UserTypeRepository>());
+	}
 }
